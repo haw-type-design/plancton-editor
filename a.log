@@ -1,4 +1,4 @@
-This is MetaPost, version 2.00 (TeX Live 2018/Arch Linux) (kpathsea version 6.3.0)  21 MAR 2019 21:49
+This is MetaPost, version 2.00 (TeX Live 2018/Arch Linux) (kpathsea version 6.3.0)  22 MAR 2019 18:31
 **a.mp
 (/usr/share/texmf-dist/metapost/base/mpost.mp
 (/usr/share/texmf-dist/metapost/base/plain.mp
@@ -26,29 +26,19 @@ everything up to the next `;'. Please insert a semicolon
 now in front of anything that you don't want me to delete.
 (See Chapter 27 of The METAFONTbook for an example.)
 
-! Inconsistent equation (off by 6).
+>> x0
+! Undefined x coordinate has been replaced by 0.
 <to be read again> 
-                   ;
-l.11     y0 = 11.0uy;
-                     
-The equation I just read contradicts what was said before.
-But don't worry; continue and I'll just ignore it.
-
-! Inconsistent equation (off by -2).
-<to be read again> 
-                   ;
-l.12     x1 = 13.0ux;
-                     
-The equation I just read contradicts what was said before.
-But don't worry; continue and I'll just ignore it.
-
-! Inconsistent equation (off by -13).
-<to be read again> 
-                   ;
-l.13     y1 = 9.0uy;
-                    
-The equation I just read contradicts what was said before.
-But don't worry; continue and I'll just ignore it.
+                   {
+--->{
+     curl1}..{curl1}
+l.84     draw z0 --
+                    z1; 
+I need a `known' x value for this part of the path.
+The value I found (see above) was no good;
+so I'll try to keep going by using zero instead.
+(Chapter 27 of The METAFONTbook explains that
+you might want to type `I ???' now.)
 
  [1] )
 1 output file written: a1.svg
