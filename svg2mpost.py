@@ -1,17 +1,16 @@
 import glob
 import sys
+import os
 import lxml.etree as ElementTree
 from svg.path import parse_path
 
 Template = '''
-outputtemplate := "%j%c.svg";
-ux = 20;
-uy = 20;
-beginfig({keycode});
-    pickup pencircle xscaled 50pt yscaled 50pt rotated 45;
+% {char}
+input ../global;
+beginchar({keycode}, {width});
     {cordonates} 
     {draws}
-endfig;
+endchar({lenpoints});
 end;
 '''
 
@@ -26,8 +25,8 @@ def parsePath(path):
     for point in dparse:
         if str(point)[0:4] == 'Move':
             if incD > 0:
-                cordonates.append('x' + str(inc) + ' = ' + str(dparse[inc - 1].end.real) + 'ux;')
-                cordonates.append('y' + str(inc) + ' = ' + str(y - dparse[inc - 1].end.imag + y) + 'uy;')
+                cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
+                cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
                 draws.append(j)
                 draws.append(' z' + str(inc))
                 draws.append('; \n')
@@ -39,8 +38,8 @@ def parsePath(path):
 
         elif str(point)[0:4] == 'Line': 
 
-            cordonates.append('x' + str(inc) + ' = ' + str(point.start.real) + 'ux;')
-            cordonates.append('y' + str(inc)+ ' = ' + str(y - point.start.imag + y) + 'uy;')
+            cordonates.append('x' + str(inc) + ' := ' + str(point.start.real) + ' * ux;')
+            cordonates.append('y' + str(inc)+ ' := ' + str(y - point.start.imag + y) + ' * uy;')
  
             if ii > 0:
                 draws.append(j)
@@ -52,13 +51,13 @@ def parsePath(path):
         elif str(point)[0:4] == 'Close': 
             draws.append(';')
 
-    cordonates.append('x' + str(inc) + ' = ' + str(dparse[inc - 1].end.real) + 'ux;')
-    cordonates.append('y' + str(inc) + ' = ' + str(y - dparse[inc - 1].end.imag + y) + 'uy;')
+    cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
+    cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
     draws.append(j)
     draws.append(' z' + str(inc))
     draws.append('; \n')
 
-    return [cordonates, draws]
+    return [cordonates, draws, inc]
 
 def svg2mpost():
     dirFiles = 'input-svg/*.svg'
@@ -78,16 +77,26 @@ def svg2mpost():
             if d:
                 letterD = d
                 valueP = parsePath(d)  # [0] ) cordonates; [1] draws
-                buildFig = Template.format(keycode= lDec, cordonates='\n    '.join(valueP[0]), draws=''.join(valueP[1]) )
 
-                f = open('mpost-files/' + lDec + '.mp', 'w')
-                f.write(buildFig)  # python will convert \n to os.linesep
+                buildFig = Template.format(
+                char       = chr(int(lDec)),
+                keycode    = lDec,
+                width      = lWidth,
+                cordonates = '\n    '.join(valueP[0]),
+                draws      = ''.join(valueP[1]),
+                lenpoints  = valueP[2]
+                )
+
+                f = open('mpost/mpost-files/' + lDec + '.mp', 'w')
+                f.write(buildFig) 
                 f.close()
                 print(buildFig)
 
 
 def mp2svg():
-    print('ss')
+    dirMP = 'mpost/mpost-files/*.mp'
+    for mp in glob.glob(dirMP):
+        print(os.path.basename(mp))
 
 if sys.argv[1] == '-mp':
     svg2mpost()
