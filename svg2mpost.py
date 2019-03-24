@@ -1,21 +1,34 @@
+import glob
+import sys
+import lxml.etree as ElementTree
 from svg.path import parse_path
 
-d = 'M 4,1 V 22 M 5,1 v 21 m 5,-21 3,1 2,2 1,2 v 2 l -1,2 -2,1 -3,1 m -5,0 h 5 l 4,-1 2,-1 1,-2 V 6 L 16,4 14,2 10,1 H 2 3 L 4,2 M 4,21 3,22 H 2 7 6 L 5,21 m 6,-9 1,3 1,2 2,3 2,2 -3,-2 -2,-3 -1,-2 -1,-3'
+Template = '''
+outputtemplate := "%j%c.svg";
+ux = 20;
+uy = 20;
+beginfig({keycode});
+    pickup pencircle xscaled 50pt yscaled 50pt rotated 45;
+    {cordonates} 
+    {draws}
+endfig;
+end;
+'''
 
-y = 40
 def parsePath(path):
     dparse = parse_path(path)
-    print(dparse)
     cordonates = []
     draws = []
-    inc = 0
+    inc = 1
     incD = 0 
+    y = 20
+    j = ' --'
     for point in dparse:
         if str(point)[0:4] == 'Move':
             if incD > 0:
-                cordonates.append('x' + str(inc) + ' = ' + str(dparse[inc].end.real) + 'ux;')
-                cordonates.append('y' + str(inc) + ' = ' + str(dparse[inc].end.imag) + 'uy;')
-                draws.append(' --')
+                cordonates.append('x' + str(inc) + ' = ' + str(dparse[inc - 1].end.real) + 'ux;')
+                cordonates.append('y' + str(inc) + ' = ' + str(y - dparse[inc - 1].end.imag + y) + 'uy;')
+                draws.append(j)
                 draws.append(' z' + str(inc))
                 draws.append('; \n')
                 inc = inc + 1
@@ -27,46 +40,59 @@ def parsePath(path):
         elif str(point)[0:4] == 'Line': 
 
             cordonates.append('x' + str(inc) + ' = ' + str(point.start.real) + 'ux;')
-            cordonates.append('y' + str(inc)+ ' = ' + str(point.start.imag) + 'uy;')
-            # cordonates.append('x' + str(inc + 1) + ' = ' + str(point.end.real) + 'ux;')
-            # cordonates.append('y' + str(inc + 1)+ ' = ' + str(point.end.imag) + 'uy;')
+            cordonates.append('y' + str(inc)+ ' = ' + str(y - point.start.imag + y) + 'uy;')
  
             if ii > 0:
-                draws.append(' --')
+                draws.append(j)
 
             draws.append(' z' + str(inc))
             inc = inc + 1
-            # draws.append(' --')
-            # draws.append(' z' + str(inc + 1))
-            
-            # inc = inc + 1
             ii = 1
+
         elif str(point)[0:4] == 'Close': 
             draws.append(';')
-    cordonates.append('x' + str(inc) + ' = ' + str(dparse[inc].end.real) + 'ux;')
-    cordonates.append('y' + str(inc) + ' = ' + str(dparse[inc].end.imag) + 'uy;')
-    draws.append(' --')
+
+    cordonates.append('x' + str(inc) + ' = ' + str(dparse[inc - 1].end.real) + 'ux;')
+    cordonates.append('y' + str(inc) + ' = ' + str(y - dparse[inc - 1].end.imag + y) + 'uy;')
+    draws.append(j)
     draws.append(' z' + str(inc))
     draws.append('; \n')
 
     return [cordonates, draws]
 
-valueP = parsePath(d)  # [0] ) cordonates; [1] draws
+def svg2mpost():
+    dirFiles = 'input-svg/*.svg'
+
+    for files in glob.glob(dirFiles):
+        with open(files, 'rt') as f:
+            tree = ElementTree.parse(f)
+
+        root = tree.getroot()
+
+        lDec = root.attrib['data-dec']
+        lWidth = root.attrib['width']
+        lHeight = root.attrib['height']
+
+        for path in root.iter():
+            d = path.attrib.get('d')
+            if d:
+                letterD = d
+                valueP = parsePath(d)  # [0] ) cordonates; [1] draws
+                buildFig = Template.format(keycode= lDec, cordonates='\n    '.join(valueP[0]), draws=''.join(valueP[1]) )
+
+                f = open('mpost-files/' + lDec + '.mp', 'w')
+                f.write(buildFig)  # python will convert \n to os.linesep
+                f.close()
+                print(buildFig)
 
 
-buildFig = '''
-outputtemplate := "%j%c.svg";
-ux = 1;
-uy = 1;
-beginfig({keycode}):
-    {cordonates} 
-    {draws}
-endfig;
+def mp2svg():
+    print('ss')
 
-end;
-'''.format(keycode= 1, cordonates='\n    '.join(valueP[0]), draws=''.join(valueP[1]) )
+if sys.argv[1] == '-mp':
+    svg2mpost()
+elif sys.argv[1] == '-mp2svg':
+    mp2svg()
+else:
+    print('no arguments')
 
-f = open('a.mp', 'w')
-f.write(buildFig)  # python will convert \n to os.linesep
-f.close()
-print(buildFig)
