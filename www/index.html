@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<style type="text/css" media="all">
+body {
+	background: coral;
+}
+
+@media print {
+	@page {
+		size: A2;
+	}
+}
+</style>
+<body>
+	<section id="content">
+		
+	</section>
+</body>
+<script charset="utf-8">
+	// let sentence = 'Les fesses sont du software, alors que les organes genitaux releveraient du hardware.'
+	// let sentence = 'ALTHOUGH TYPOGRAPHY HAS ALWAYS REFLECTED THE CULTURAK PATTERN OF ITS PERIOD.'
+	// let sentence = "Although typography has always reflected the cultural pattern of its period, today's typefaces and  typographic design are a reflection of the past, not of contemporary society. We must think in terms of our electronic media and contemporary forms of expression. A suggested approach for designing today's typography-based on a cell or unit system-is discussed and illustrated."
+	let sentence = 'a'
+	// let sentence = 'Ni Dieu-esse, Ni Maitre-esse'
+	let section = document.getElementById('content')
+	sentence = sentence.split('')
+	sentence.forEach(function(entry) {
+		code = entry.charCodeAt(0)
+		svg = document.createElement('IMG')
+		svg.setAttribute('src', '../output-svg/' + code + '.svg')
+		svg.className = 'letter'
+		section.innerHTML += svg.outerHTML
+		console.log(svg.outerHTML)
+	});
+</script>
+</html>

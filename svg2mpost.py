@@ -1,6 +1,7 @@
 import glob
 import sys
 import os
+import subprocess
 import lxml.etree as ElementTree
 from svg.path import parse_path
 
@@ -16,18 +17,22 @@ end;
 
 def parsePath(path):
     dparse = parse_path(path)
+    print(dparse)
+    print('----------------------------------------------')
     cordonates = []
     draws = []
     inc = 1
     incD = 0 
     y = 20
-    j = ' --'
+    line = ' --'
+    curve = ' ..'
     for point in dparse:
-        if str(point)[0:4] == 'Move':
+        type = str(point)[0:4]
+        if type == 'Move':
             if incD > 0:
                 cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
                 cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
-                draws.append(j)
+                # draws.append(line)
                 draws.append(' z' + str(inc))
                 draws.append('; \n')
                 inc = inc + 1
@@ -36,24 +41,27 @@ def parsePath(path):
             incD = 1
             ii = 0
 
-        elif str(point)[0:4] == 'Line': 
+        elif type == 'Line' or type == 'Cubi': 
 
             cordonates.append('x' + str(inc) + ' := ' + str(point.start.real) + ' * ux;')
             cordonates.append('y' + str(inc)+ ' := ' + str(y - point.start.imag + y) + ' * uy;')
  
-            if ii > 0:
-                draws.append(j)
+
 
             draws.append(' z' + str(inc))
+            if type == 'Line':
+                draws.append(line)
+            elif type == 'Cubi':
+                draws.append(curve)
             inc = inc + 1
             ii = 1
 
-        elif str(point)[0:4] == 'Close': 
+        elif type == 'Close': 
             draws.append(';')
 
     cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
     cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
-    draws.append(j)
+    # draws.append(line)
     draws.append(' z' + str(inc))
     draws.append('; \n')
 
@@ -91,17 +99,20 @@ def svg2mpost():
                 f.write(buildFig) 
                 f.close()
                 print(buildFig)
-
-
+            
 def mp2svg():
     dirMP = 'mpost/mpost-files/*.mp'
     for mp in glob.glob(dirMP):
-        print(os.path.basename(mp))
+        mpFile = os.path.basename(mp)
+        key = os.path.splitext(mpFile)[0]
+        subprocess.call(["mpost", "-interaction=batchmode", mp])
+    subprocess.call(["rm", "-rf", "*.log"])
 
 if sys.argv[1] == '-mp':
     svg2mpost()
 elif sys.argv[1] == '-mp2svg':
     mp2svg()
-else:
-    print('no arguments')
+elif sys.argv[1] == '-all':
+    svg2mpost()
+    mp2svg()
 
