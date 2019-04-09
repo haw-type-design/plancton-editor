@@ -6,7 +6,10 @@
 </head>
 <style type="text/css" media="all">
 body {
-	background: coral;
+	background: #F0F0F0;
+	font-family: monospace;
+	font-size: 10pt;
+	margin: 0px;
 }
 
 @media print {
@@ -14,27 +17,95 @@ body {
 		size: A2;
 	}
 }
+
+nav {
+	position: fixed;
+	right: 0px;
+	height: 100%;
+	width: 300px;
+	outline: 1px solid red;
+	margin: 0px;
+	z-index: 2;
+}
+
+section {
+	z-index: 1;
+	transform: scale(2);
+	transform-origin: 0 0;
+}
+text {
+	fill: blue; 
+}
+
+path:hover {
+	stroke: tomato !important;
+}
+[style^="stroke:rgb(0.000000%,0.000000%,100.000000%);"] {
+	stroke: grey !important;
+}
+
 </style>
 <body>
+	<nav>
+		<div id="interface_nav">
+			<input type="text" name="" id="editor" value="Abc">
+		</div>
+		<div id="global_nav">
+
+		</div>
+	</nav>
 	<section id="content">
 		
 	</section>
 </body>
 <script charset="utf-8">
-	// let sentence = 'Les fesses sont du software, alors que les organes genitaux releveraient du hardware.'
-	// let sentence = 'ALTHOUGH TYPOGRAPHY HAS ALWAYS REFLECTED THE CULTURAK PATTERN OF ITS PERIOD.'
-	// let sentence = "Although typography has always reflected the cultural pattern of its period, today's typefaces and  typographic design are a reflection of the past, not of contemporary society. We must think in terms of our electronic media and contemporary forms of expression. A suggested approach for designing today's typography-based on a cell or unit system-is discussed and illustrated."
-	let sentence = 'a'
-	// let sentence = 'Ni Dieu-esse, Ni Maitre-esse'
+
 	let section = document.getElementById('content')
-	sentence = sentence.split('')
-	sentence.forEach(function(entry) {
-		code = entry.charCodeAt(0)
-		svg = document.createElement('IMG')
-		svg.setAttribute('src', '../output-svg/' + code + '.svg')
-		svg.className = 'letter'
-		section.innerHTML += svg.outerHTML
-		console.log(svg.outerHTML)
-	});
+	let editor = document.getElementById('editor')
+	let global = document.getElementById('global_nav')
+	let sentence = 'MetaPost'
+
+	function readJson(file, callback) {
+		var rawFile = new XMLHttpRequest();
+		rawFile.overrideMimeType("application/json");
+		rawFile.open("GET", file, true);
+		rawFile.onreadystatechange = function() {
+			if (rawFile.readyState === 4 && rawFile.status == "200") {
+				callback(rawFile.responseText);
+			}
+		}
+		rawFile.send(null);
+	}
+
+
+	function loadSvg(key) {
+		xhr = new XMLHttpRequest()
+		xhr.open("GET", "../output-svg/" + key +".svg",false)
+		xhr.overrideMimeType("image/svg+xml")
+		xhr.send("")	
+		section.appendChild(xhr.responseXML.documentElement)	
+	}
+
+	readJson("../global.json", function(text){
+		var data = JSON.parse(text)
+		return data
+	})
+
+
+	function writeValue(stn) {
+		section.innerHTML = ""
+		stn = sentence.split('')
+		stn.forEach(function(entry) {
+			code = entry.charCodeAt(0)
+			loadSvg(code)
+		});
+	}
+
+	writeValue(sentence);		
+	editor.addEventListener('input', function() {
+		sentence = this.value
+	 	writeValue(sentence)		
+	}) 
+
 </script>
 </html>

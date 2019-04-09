@@ -1,44 +1,26 @@
-outputtemplate := "output-svg/%c.svg"; outputformat := "svg";
+outputtemplate := "output-svg/%c.svg";
+outputformat := "svg";
 
-u = 7pt;
-ux = 1*u; 
-uy = 1*u;
-sx = 1*u; 
-sy = 1*u;
-rot = 45;
+% global unity
+u := 7pt;
 
-height = 40;
-grid = 1;
+% X Unity
+ux := 1u;
 
-vardef cadratin(expr width)=
-	draw (0 * ux, 0 * uy)--(width * ux, 0 * uy)--(width * ux, height * uy)--(0 * ux, height * uy);
-enddef;
+% Y Unity
+uy := 1u;
 
-def beginchar(expr keycode, width)=
-  beginfig(keycode);
-	pickup pencircle scaled .2;
+% X Stroke Unity
+sx := 1u;
 
-	draw (0 * ux, 0 * uy) -- (width * ux, 0 * uy) -- (width * ux, height * uy) -- (0 * ux, height * uy) -- cycle scaled 0 withcolor red;
-	height = 40;
-	if grid = 1:
-		defaultscale :=.2;
-		for i=0 upto width:
-			draw (i*ux, height*uy) -- (i*ux, 0*uy) withcolor blue;
-		endfor;
-		for i=0 upto height:
-			draw (width*ux, i*uy) -- (0*ux, i*uy) withcolor blue;
-		endfor;
-	fi;
+% Y Stroke Unity
+sy := 1u;
 
-	pickup pencircle xscaled sx yscaled sy rotated rot;
-enddef;
+% Stroke rotation
+rot := 0;
 
-def endchar(expr lenDots)=
-    defaultscale :=.5;
-	for i=1 upto lenDots:
-	  dotlabels.urt([i]) withcolor magenta;
-	endfor;
-	endfig;
-enddef;
+% Display grid | 0 = off, 1 = on
+grid := 0;
 
-
+% Display dot label | 0 = off, 1 = on
+dot_label := 0;

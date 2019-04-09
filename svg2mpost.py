@@ -4,10 +4,11 @@ import os
 import subprocess
 import lxml.etree as ElementTree
 from svg.path import parse_path
+from lib.writeGlobal import writeGlobal
 
 Template = '''
 % {char}
-input ../global;
+input ../def;
 beginchar({keycode}, {width});
     {cordonates} 
     {draws}
@@ -46,8 +47,6 @@ def parsePath(path):
             cordonates.append('x' + str(inc) + ' := ' + str(point.start.real) + ' * ux;')
             cordonates.append('y' + str(inc)+ ' := ' + str(y - point.start.imag + y) + ' * uy;')
  
-
-
             draws.append(' z' + str(inc))
             if type == 'Line':
                 draws.append(line)
@@ -87,12 +86,12 @@ def svg2mpost():
                 valueP = parsePath(d)  # [0] ) cordonates; [1] draws
 
                 buildFig = Template.format(
-                char       = chr(int(lDec)),
-                keycode    = lDec,
-                width      = lWidth,
-                cordonates = '\n    '.join(valueP[0]),
-                draws      = ''.join(valueP[1]),
-                lenpoints  = valueP[2]
+                    char       = chr(int(lDec)),
+                    keycode    = lDec,
+                    width      = lWidth,
+                    cordonates = '\n    '.join(valueP[0]),
+                    draws      = ''.join(valueP[1]),
+                    lenpoints  = valueP[2]
                 )
 
                 f = open('mpost/mpost-files/' + lDec + '.mp', 'w')
@@ -105,14 +104,18 @@ def mp2svg():
     for mp in glob.glob(dirMP):
         mpFile = os.path.basename(mp)
         key = os.path.splitext(mpFile)[0]
+        # print(key)
         subprocess.call(["mpost", "-interaction=batchmode", mp])
-    subprocess.call(["rm", "-rf", "*.log"])
+    subprocess.call(["rm", "-f", "*.log"])
 
 if sys.argv[1] == '-mp':
     svg2mpost()
 elif sys.argv[1] == '-mp2svg':
+    writeGlobal()
     mp2svg()
 elif sys.argv[1] == '-all':
     svg2mpost()
     mp2svg()
+elif sys.argv[1] == '-g':
+    writeGlobal()
 
