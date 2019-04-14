@@ -5,51 +5,67 @@
 		"outputtemplate": "\"output-svg/%c.svg\"",
 		"outputformat": "\"svg\"",
 		"u" : {
+			"type" : "range",
+			"range" : [0, 10],
 			"description" : "global unity",
 			"name" : "u",
 			"value": "7",
 			"unity": "pt"
 		},
 		"ux" : {
+			"type" : "range",
+			"range" : [0, 10],
 			"description" : "X Unity",
 			"name" : "ux",
 			"value": "1",
 			"unity": "u"
 		},
 		"uy" : {
+			"type" : "range",
+			"range" : [0, 10],
 			"description" : "Y Unity",
 			"name" : "uy",
 			"value": "1",
 			"unity": "u"
 		},
 		"sx" : {
+			"type" : "range",
+			"range" : [0, 10],
 			"description" : "X Stroke Unity",
 			"name" : "sx",
-			"value": "1",
+			"value": ".5",
 			"unity": "u"
 		},
 		"sy" : {
+			"type" : "range",
+			"range" : [0, 10],
 			"description" : "Y Stroke Unity",
 			"name" : "sy",
-			"value": "1",
+			"value": ".5",
 			"unity": "u"
 		},
 		"rot" : {
+			"type" : "range",
+			"range" : [0, 360],
 			"description" : "Stroke rotation",
 			"name" : "rot",
 			"value": "0",
 			"unity": ""
 		},
 		"grid" : {
-			"description" : "Display grid | 0 = off, 1 = on",
+			"type" : "range",
+			"range" : [0, 1],
+			"description" : "Display grid",
 			"name" : "grid",
 			"value": "0",
 			"unity": ""
 		},
 		"dot_label" : {
-			"description" : "Display dot label | 0 = off, 1 = on",
+			"type" : "range",
+			"range" : [0, 1],
+			"description" : "Display dot label",
 			"name" : "dot_label",
-			"value": "0",
+			"value": "1",
 			"unity": ""
 		}
 	}

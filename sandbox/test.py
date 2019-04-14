@@ -1,33 +1,8 @@
-import json
-from pprint import pprint
-
-out = []
-Tmp = '''{In} := {Out};'''
-
-with open('data.json') as f:
-    data = json.load(f)
-
-global_variables = data['global_variables']
+#!/usr/bin/python
 
 
-for gv in global_variables :
-    item = global_variables[gv]
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
-    if type(item) == dict:
-        IN = '\n% ' +item['description']+ '\n' +item['name']
-        OUT = item['value'] + item['unity']
-    else:
-        IN = gv
-        OUT = global_variables[gv]
-
-    Line = Tmp.format(
-               In = IN,
-               Out = OUT,
-            )
-    out.append(Line)
-
-f = open('global.mp', 'w')
-f.write('\n'.join(out)) 
+f = open('test.txt', 'w')
+f.write('Succeeded')
 f.close()
-
-print('\n'.join(out))

@@ -11,16 +11,16 @@ ux := 1u;
 uy := 1u;
 
 % X Stroke Unity
-sx := 1u;
+sx := .5u;
 
 % Y Stroke Unity
-sy := 1u;
+sy := .5u;
 
 % Stroke rotation
 rot := 0;
 
-% Display grid | 0 = off, 1 = on
+% Display grid
 grid := 0;
 
-% Display dot label | 0 = off, 1 = on
-dot_label := 0;
+% Display dot label
+dot_label := 1;
