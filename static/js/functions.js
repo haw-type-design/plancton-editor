@@ -48,6 +48,24 @@ function buildNav(data) {
 	}
 }
 
+function writeJson(){
+	section.className = "loading"
+	section.innerHTML = "<span class=\"load\" >loading</span>"
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if (xmlhttp.readyState == 4)
+		{
+			console.log(xmlhttp.responseText);
+			var sentence = editor.value
+			writeValue(sentence)	
+			section.classList.remove("loading")
+		}
+	}
+	xmlhttp.open('GET', 'http://localhost:8080/writejson', true);
+	xmlhttp.send('json=yoyoyo');
+
+}
 
 readJson("files/global.json", function(text){
 	var data = JSON.parse(text)
@@ -63,9 +81,9 @@ function writeValue(stn) {
 	});
 }
 
-writeValue(sentence);		
+writeValue(sentence);
 editor.addEventListener('input', function() {
 	sentence = this.value
-	writeValue(sentence)		
+	writeValue(sentence)	
 }) 
 

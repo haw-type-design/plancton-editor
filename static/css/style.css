@@ -32,8 +32,21 @@ nav label {
 
 section {
 	z-index: 1;
-	transform: scale(2);
+	transform: scale(1);
 	transform-origin: 0 0;
+	height: 100%;
+	min-width: 100%;
+	position: absolute;
+}
+
+section.loading{
+	background: black;
+}
+section.loading span.load {
+	color: white;
+	position: fixed;
+	width: 100%;
+	text-align: center;
 }
 
 svg:hover path {

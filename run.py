@@ -20,10 +20,12 @@ def files(filepath):
 def index():
     return template('templates/index.tpl')
 
-@app.route('/write/json')
+@app.route('/writejson', method='POST')
 def writeJson():
+    s2m.buildGlobalMp('files/global.json') 
     s2m.buildSvg('files/mpost/mpost-files/') 
     return 'yess';
+
 
 run(app, host="localhost", port=8080, reloader=True, debug=True)
 

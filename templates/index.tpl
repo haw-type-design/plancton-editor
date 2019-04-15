@@ -9,6 +9,8 @@
 	<nav>
 		<div id="interface_nav">
 			<input type="text" name="" id="editor" value="Ramen">
+			<input type="button" onclick="writeJson('salut');" name="" id="test" value="test">
+			<input type="button" onclick="location.reload();" name="" id="test" value="reload">
 		</div>
 		<div id="global_nav">
 

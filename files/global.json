@@ -6,10 +6,10 @@
 		"outputformat": "\"svg\"",
 		"u" : {
 			"type" : "range",
-			"range" : [0, 10],
+			"range" : [0, 20],
 			"description" : "global unity",
 			"name" : "u",
-			"value": "5",
+			"value": "12",
 			"unity": "pt"
 		},
 		"ux" : {
@@ -33,7 +33,7 @@
 			"range" : [0, 10],
 			"description" : "X Stroke Unity",
 			"name" : "sx",
-			"value": ".5",
+			"value": "1",
 			"unity": "u"
 		},
 		"sy" : {
@@ -41,7 +41,7 @@
 			"range" : [0, 10],
 			"description" : "Y Stroke Unity",
 			"name" : "sy",
-			"value": ".5",
+			"value": "1",
 			"unity": "u"
 		},
 		"rot" : {
@@ -49,7 +49,7 @@
 			"range" : [0, 360],
 			"description" : "Stroke rotation",
 			"name" : "rot",
-			"value": "0",
+			"value": "30",
 			"unity": ""
 		},
 		"grid" : {
@@ -65,7 +65,7 @@
 			"range" : [0, 1],
 			"description" : "Display dot label",
 			"name" : "dot_label",
-			"value": "1",
+			"value": "0",
 			"unity": ""
 		}
 	}
