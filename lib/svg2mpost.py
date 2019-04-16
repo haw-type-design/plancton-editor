@@ -18,8 +18,6 @@ end;
 
 def parsePath(path):
     dparse = parse_path(path)
-    # print(dparse)
-    # print('----------------------------------------------')
     cordonates = []
     draws = []
     inc = 1
@@ -33,7 +31,6 @@ def parsePath(path):
             if incD > 0:
                 cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
                 cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
-                # draws.append(line)
                 draws.append(' z' + str(inc))
                 draws.append('; \n')
                 inc = inc + 1
@@ -65,7 +62,8 @@ def parsePath(path):
 
     return [cordonates, draws, inc]
 
-def buildMp(dirFiles_svg, dirFiles_mp ):
+def buildMp(dirFiles_svg, dirFiles_mp):
+
 
     for files in glob.glob(dirFiles_svg + '*.svg'):
         with open(files, 'rt') as f:
@@ -95,15 +93,19 @@ def buildMp(dirFiles_svg, dirFiles_mp ):
                 f = open( dirFiles_mp + lDec + '.mp', 'w')
                 f.write(buildFig) 
                 f.close()
-                print(buildFig)
  
-def buildSvg(dirMP):
+def buildSvg(dirMP, setfig):
     dirOut = 'files/output-svg/' 
-    for mp in glob.glob(dirMP + '*.mp'):
+    if setfig != '-all':
+        SET = glob.glob(dirMP + str(setfig) + '.mp')
+    else:
+        SET = glob.glob(dirMP + '*.mp')
+
+    for mp in SET:
         mpFile = os.path.basename(mp)
         key = os.path.splitext(mpFile)[0]
         subprocess.call(["mpost", "-interaction=batchmode", mp])
-    subprocess.call(["rm", "*.log"])
+        subprocess.call(["rm", key + ".log"])
 
 def buildGlobalMp(dirFiles) :
     out = []

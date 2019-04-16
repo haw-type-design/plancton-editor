@@ -1,5 +1,6 @@
-from bottle import Bottle, run, template, route, static_file, get 
+from bottle import Bottle, run, template, route, static_file, get, request
 import lib.svg2mpost as s2m
+import subprocess
 import os
 
 app = Bottle()
@@ -20,11 +21,25 @@ def files(filepath):
 def index():
     return template('templates/index.tpl')
 
-@app.route('/writejson', method='POST')
-def writeJson():
-    s2m.buildGlobalMp('files/global.json') 
-    s2m.buildSvg('files/mpost/mpost-files/') 
-    return 'yess';
+@app.route('/write', method='post')
+def traitement():
+    json = request.forms.json
+    sett = request.forms.set
+    file = open('files/global-1.json','w') 
+    file.write(json)
+    file.close() 
+    
+    s2m.buildGlobalMp('files/global-1.json') 
+    for n in sett:
+        s2m.buildSvg('files/mpost/mpost-files/', ord(n)) 
+        print(ord(n))
+    return json
+
+@app.route('/inkscape')
+def inkscape():
+    subprocess.call(["inkscape"])
+    
+    return 'yess'
 
 
 run(app, host="localhost", port=8080, reloader=True, debug=True)

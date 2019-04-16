@@ -1,7 +1,9 @@
 
 let section = document.getElementById('content')
 let editor = document.getElementById('editor')
+let inputsRange = document.getElementsByClassName('input_range')
 let globalNav = document.getElementById('global_nav')
+let btn_inkscapce = document.getElementsByClassName('cadratin'); 
 var sentence = editor.value
 
 function readJson(file, callback) {
@@ -19,10 +21,12 @@ function readJson(file, callback) {
 
 function loadSvg(key) {
 	xhr = new XMLHttpRequest()
-	xhr.open("GET", "files/output-svg/" + key +".svg",false)
+	xhr.open("GET", "files/output-svg/" + key + ".svg", false)
 	xhr.overrideMimeType("image/svg+xml")
-	xhr.send("")	
-	section.appendChild(xhr.responseXML.documentElement)	
+	xhr.send("")
+	p = '<span data-key="' + key + '" class="cadratin" >' + xhr.responseXML.documentElement.outerHTML + '</span>'
+	console.log(p)
+	section.innerHTML += p	
 }
 
 function inputBuild(glob, i) {
@@ -32,12 +36,14 @@ function inputBuild(glob, i) {
 		input.className = "input_" + glob[i].type 
 		input.id = "input_" + i
 		input.setAttribute('title', glob[i].description)
+		input.setAttribute('data-var', i)
 		if (glob[i].type == 'range') {
 			input.setAttribute('min', glob[i].range[0])
 			input.setAttribute('max', glob[i].range[1])
+			input.setAttribute('step', glob[i].range[2])
 			input.setAttribute('value', glob[i].value)
 		}
-		globalNav.innerHTML += '<div class="block_input" ><label>' + glob[i].description + ' | <span class="valueBox">' + glob[i].value + '</span></label>' + input.outerHTML + '</div>'
+		globalNav.innerHTML += '<div class="block_input" ><label>' + glob[i].description + ' | <span id="span_' + i + '" class="valueBox">' + glob[i].value + '</span></label>' + input.outerHTML + '</div>'
 	}
 }
 
@@ -48,29 +54,36 @@ function buildNav(data) {
 	}
 }
 
-function writeJson(){
+function writeJson(data){
 	section.className = "loading"
-	section.innerHTML = "<span class=\"load\" >loading</span>"
 	var xmlhttp = new XMLHttpRequest();
+	var sentence = editor.value
 	xmlhttp.onreadystatechange = function()
 	{
 		if (xmlhttp.readyState == 4)
 		{
-			console.log(xmlhttp.responseText);
 			var sentence = editor.value
 			writeValue(sentence)	
 			section.classList.remove("loading")
 		}
 	}
-	xmlhttp.open('GET', 'http://localhost:8080/writejson', true);
-	xmlhttp.send('json=yoyoyo');
-
+	xmlhttp.open('POST', 'http://localhost:8080/write', true);
+	xmlhttp.send('json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
 }
 
-readJson("files/global.json", function(text){
-	var data = JSON.parse(text)
-	buildNav(data)
-})
+
+function changeValue(data){
+	for(i in inputsRange) {
+		inputsRange[i].addEventListener('change', function(evt) {
+			var val = this.value
+			var vari = this.getAttribute('data-var')
+			sp = document.getElementById('span_' + vari)
+			sp.innerHTML = val
+			data.global_variables[vari].value = val
+			writeJson(data)
+		});
+	}
+}
 
 function writeValue(stn) {
 	section.innerHTML = ""
@@ -81,9 +94,23 @@ function writeValue(stn) {
 	});
 }
 
-writeValue(sentence);
-editor.addEventListener('input', function() {
-	sentence = this.value
-	writeValue(sentence)	
-}) 
+window.addEventListener('DOMContentLoaded', function(){
+	readJson("files/global-1.json", function(text){
+		var data = JSON.parse(text)
+		buildNav(data)
+		changeValue(data)
+	})
+
+	writeValue(sentence);
+	editor.addEventListener('input', function() {
+		sentence = this.value
+		writeValue(sentence)	
+	}) 
+	
+	btn_inkscapce.addEventListener('click', function(evt) {
+		alert('saut')	
+	})
+
+
+})
 

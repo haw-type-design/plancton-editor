@@ -1,0 +1,96 @@
+{
+	"font-name": "Help-me",
+	"authors": "Luuse",
+	"global_variables": {
+		"outputtemplate": "\"files/output-svg/%c.svg\"",
+		"outputformat": "\"svg\"",
+		"u": {
+			"type": "range",
+			"range": [
+				0,
+				20
+			],
+			"description": "global unity",
+			"name": "u",
+			"value": "12",
+			"unity": "pt"
+		},
+		"ux": {
+			"type": "range",
+			"range": [
+				0,
+				10
+			],
+			"description": "X Unity",
+			"name": "ux",
+			"value": "2",
+			"unity": "u"
+		},
+		"uy": {
+			"type": "range",
+			"range": [
+				0,
+				10
+			],
+			"description": "Y Unity",
+			"name": "uy",
+			"value": "1",
+			"unity": "u"
+		},
+		"sx": {
+			"type": "range",
+			"range": [
+				0,
+				10
+			],
+			"description": "X Stroke Unity",
+			"name": "sx",
+			"value": "1",
+			"unity": "u"
+		},
+		"sy": {
+			"type": "range",
+			"range": [
+				0,
+				10
+			],
+			"description": "Y Stroke Unity",
+			"name": "sy",
+			"value": "1",
+			"unity": "u"
+		},
+		"rot": {
+			"type": "range",
+			"range": [
+				0,
+				360
+			],
+			"description": "Stroke rotation",
+			"name": "rot",
+			"value": "30",
+			"unity": ""
+		},
+		"grid": {
+			"type": "range",
+			"range": [
+				0,
+				1
+			],
+			"description": "Display grid",
+			"name": "grid",
+			"value": "0",
+			"unity": ""
+		},
+		"dot_label": {
+			"type": "range",
+			"range": [
+				0,
+				1
+			],
+			"description": "Display dot label",
+			"name": "dot_label",
+			"value": "0",
+			"unity": ""
+		}
+	}
+}

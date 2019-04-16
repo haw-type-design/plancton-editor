@@ -32,15 +32,23 @@ nav label {
 
 section {
 	z-index: 1;
-	transform: scale(1);
+	transform: scale(2);
 	transform-origin: 0 0;
+	background: bisque;
 	height: 100%;
 	min-width: 100%;
 	position: absolute;
 }
 
 section.loading{
-	background: black;
+	/* background: grey; */
+}
+section.loading:before {
+	content: 'loading...';
+	font-size: 5px;
+	position: fixed;
+	left: 10px;
+	top: 10px;
 }
 section.loading span.load {
 	color: white;
@@ -50,7 +58,7 @@ section.loading span.load {
 }
 
 svg:hover path {
-	stroke: red !important;
+	/* stroke: red !important; */
 	stroke-width: 0.6 !important;
 }
 [style^="stroke:rgb(0.000000%,0.000000%,100.000000%);"] {
@@ -61,6 +69,14 @@ svg text {
 	fill: blue; 
 	display: none;
 }
+
+.cadratin:hover:before {
+	content: 'inkscape';
+	font-size: 6px;
+	position: absolute;
+	cursor: pointer
+}
+
 
 svg:hover text {
 	display: block;

@@ -8,9 +8,8 @@
 <body>
 	<nav>
 		<div id="interface_nav">
-			<input type="text" name="" id="editor" value="Ramen">
-			<input type="button" onclick="writeJson('salut');" name="" id="test" value="test">
-			<input type="button" onclick="location.reload();" name="" id="test" value="reload">
+			<input type="text" name="" id="editor" value="Aa">
+			<input type="button" onclick="location.reload();" name="" id="test" value="all">
 		</div>
 		<div id="global_nav">
 
