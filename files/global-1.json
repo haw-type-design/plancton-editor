@@ -8,12 +8,12 @@
             "type": "range",
             "range": [
                 0,
-                20,
-                0.1
+                40,
+                1
             ],
             "description": "global unity",
             "name": "u",
-            "value": "11",
+            "value": "31",
             "unity": "pt"
         },
         "ux": {
@@ -21,11 +21,11 @@
             "range": [
                 0,
                 3,
-                0.1
+                0.05
             ],
             "description": "X Unity",
             "name": "ux",
-            "value": "0.9",
+            "value": "1.4",
             "unity": "u"
         },
         "uy": {
@@ -33,11 +33,11 @@
             "range": [
                 0,
                 3,
-                0.1
+                0.05
             ],
             "description": "Y Unity",
             "name": "uy",
-            "value": "1",
+            "value": "1.3",
             "unity": "u"
         },
         "s": {
@@ -45,11 +45,11 @@
             "range": [
                 0,
                 3,
-                0.1
+                0.05
             ],
             "description": "Stroke Unity",
             "name": "s",
-            "value": "1.3",
+            "value": "0.75",
             "unity": "u"
         },
         "sx": {
@@ -57,11 +57,11 @@
             "range": [
                 0,
                 3,
-                0.1
+                0.05
             ],
             "description": "X Stroke Unity",
             "name": "sx",
-            "value": "1",
+            "value": "0.95",
             "unity": "s"
         },
         "sy": {
@@ -69,11 +69,11 @@
             "range": [
                 0,
                 3,
-                0.1
+                0.05
             ],
             "description": "Y Stroke Unity",
             "name": "sy",
-            "value": "1",
+            "value": "0.95",
             "unity": "s"
         },
         "rot": {
@@ -85,7 +85,7 @@
             ],
             "description": "Stroke rotation",
             "name": "rot",
-            "value": "129",
+            "value": "121",
             "unity": ""
         },
         "grid": {

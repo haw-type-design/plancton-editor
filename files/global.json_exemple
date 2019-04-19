@@ -6,7 +6,7 @@
 		"outputformat": "\"svg\"",
 		"u" : {
 			"type" : "range",
-			"range" : [0, 20, 0.1],
+			"range" : [0, 20, 0.05],
 			"description" : "global unity",
 			"name" : "u",
 			"value": "12",
@@ -14,7 +14,7 @@
 		},
 		"ux" : {
 			"type" : "range",
-			"range" : [0, 3, 0.1],
+			"range" : [0, 3, 0.05],
 			"description" : "X Unity",
 			"name" : "ux",
 			"value": "1",
@@ -22,7 +22,7 @@
 		},
 		"uy" : {
 			"type" : "range",
-			"range" : [0, 3, 0.1],
+			"range" : [0, 3, 0.05],
 			"description" : "Y Unity",
 			"name" : "uy",
 			"value": "1",
@@ -30,7 +30,7 @@
 		},
 		"s" : {
 			"type" : "range",
-			"range" : [0, 3, 0.1],
+			"range" : [0, 3, 0.05],
 			"description" : "Stroke Unity",
 			"name" : "s",
 			"value": "1",
@@ -38,7 +38,7 @@
 		},
 		"sx" : {
 			"type" : "range",
-			"range" : [0, 3, 0.1],
+			"range" : [0, 3, 0.05],
 			"description" : "X Stroke Unity",
 			"name" : "sx",
 			"value": "1",
@@ -46,7 +46,7 @@
 		},
 		"sy" : {
 			"type" : "range",
-			"range" : [0, 3, 0.1],
+			"range" : [0, 3, 0.05],
 			"description" : "Y Stroke Unity",
 			"name" : "sy",
 			"value": "1",

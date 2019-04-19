@@ -25,22 +25,35 @@ def index():
 def traitement():
     json = request.forms.json
     sett = request.forms.set
-    file = open('files/global-1.json','w') 
-    file.write(json)
-    file.close() 
-    
-    s2m.buildGlobalMp('files/global-1.json') 
-    for n in sett:
-        s2m.buildSvg('files/mpost/mpost-files/', ord(n)) 
-        print(ord(n))
+
+    if sett != '-all':
+        file = open('files/global-1.json','w') 
+        file.write(json)
+        file.close()     
+        s2m.buildGlobalMp('files/global-1.json') 
+        for n in sett:
+            s2m.buildSvg('files/mpost/mpost-files/', ord(n)) 
+            print(ord(n))
+    else:
+        s2m.buildSvg('files/mpost/mpost-files/', '-all') 
+        print('all')
+    sett = ''
     return json
 
-@app.route('/inkscape')
+@app.route('/inkscape', method="post")
 def inkscape():
-    subprocess.call(["inkscape"])
+    key = request.forms.key
+    subprocess.Popen(["inkscape", "files/input-svg/" + key + ".svg"])
     
-    return 'yess'
+    return '<<<<<<< I N K S C A P E !' 
 
+@app.route('/updateMp', method="post")
+def editeSvg():
+    key = request.forms.key
+    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ' + key)
+    s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key)
+    s2m.buildSvg('files/mpost/mpost-files/', key) 
+    return '! ! ! ! ! ! !' 
 
 run(app, host="localhost", port=8080, reloader=True, debug=True)
 

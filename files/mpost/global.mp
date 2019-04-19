@@ -2,25 +2,25 @@ outputtemplate := "files/output-svg/%c.svg";
 outputformat := "svg";
 
 % global unity
-u := 11pt;
+u := 31pt;
 
 % X Unity
-ux := 0.9u;
+ux := 1.4u;
 
 % Y Unity
-uy := 1u;
+uy := 1.3u;
 
 % Stroke Unity
-s := 1.3u;
+s := 0.75u;
 
 % X Stroke Unity
-sx := 1s;
+sx := 0.95s;
 
 % Y Stroke Unity
-sy := 1s;
+sy := 0.95s;
 
 % Stroke rotation
-rot := 129;
+rot := 121;
 
 % Display grid
 grid := 1;

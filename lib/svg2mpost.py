@@ -62,10 +62,14 @@ def parsePath(path):
 
     return [cordonates, draws, inc]
 
-def buildMp(dirFiles_svg, dirFiles_mp):
+def buildMp(dirFiles_svg, dirFiles_mp, setfig):
+    print('salut')
+    if setfig != '-all':
+        SET = glob.glob(dirFiles_svg + str(setfig) + '.svg')
+    else:
+        SET = glob.glob(dirFiles_svg + '*.svg')
 
-
-    for files in glob.glob(dirFiles_svg + '*.svg'):
+    for files in SET:
         with open(files, 'rt') as f:
             tree = ElementTree.parse(f)
 

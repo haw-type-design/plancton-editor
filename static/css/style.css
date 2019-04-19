@@ -3,14 +3,16 @@ body {
 	font-family: monospace;
 	font-size: 8pt;
 	margin: 0px;
+	display: grid;
+	grid-template-columns: 300px 300px auto;
+
 }
 
 nav {
-	background: bisque;
+	background: #F0F0F0;
 	height: 100%;
 	margin: 0px;
 	padding: 5px;
-	position: fixed;
 	right: 0px;
 	width: 300px;
 	z-index: 2;
@@ -30,54 +32,63 @@ nav label {
 	display: block;
 }
 
-section {
+section#content {
 	z-index: 1;
-	transform: scale(2);
+	transform: scale(1);
 	transform-origin: 0 0;
-	background: bisque;
 	height: 100%;
-	min-width: 100%;
-	position: absolute;
 }
 
-section.loading{
-	/* background: grey; */
-}
 section.loading:before {
 	content: 'loading...';
-	font-size: 5px;
+	font-size: 12px;
 	position: fixed;
 	left: 10px;
 	top: 10px;
 }
-section.loading span.load {
-	color: white;
-	position: fixed;
-	width: 100%;
-	text-align: center;
-}
 
-svg:hover path {
-	/* stroke: red !important; */
-	stroke-width: 0.6 !important;
-}
 [style^="stroke:rgb(0.000000%,0.000000%,100.000000%);"] {
-	stroke: grey !important;
+	/* stroke: red !important; */
+}
+.cadratin:hover  [style^="stroke:rgb(0.000000%,0.000000%,0.000000%);"] {
+	/* stroke: red !important; */
+	stroke-width: .6 !important;
 }
 
 svg text {
 	fill: blue; 
+}
+
+.cadratin .tools_bar {
+	font-size: 12px;
+    position: absolute;
+    cursor: pointer;
+    display: none;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.cadratin:hover .tools_bar {
+	display: initial;
+}
+
+.cadratin .refresh {
 	display: none;
 }
 
-.cadratin:hover:before {
-	content: 'inkscape';
-	font-size: 6px;
-	position: absolute;
-	cursor: pointer
+.activeInks .refresh {
+	display: initial;
+}
+
+.activeInks svg {
+	background: white;
 }
 
 
 svg:hover text {
 	display: block;
+}
+
+#editor_mp {
+	/* position: absolute; */
+	height: 300px;
 }
