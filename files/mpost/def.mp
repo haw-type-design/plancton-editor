@@ -39,7 +39,7 @@ enddef;
 
 def endchar(expr lenDots)=
 	if dot_label = 1:
-		defaultscale :=.5;
+		defaultscale := 1;
 		for i=1 upto lenDots:
 		  dotlabels.urt([i]) withcolor magenta;
 		endfor;

@@ -5,9 +5,6 @@
 	<title></title>
 </head>
 <body>
-	<form action="resultat.php" method="post">
-		<input type="text" name="prenom" />
-		<input type="submit" value="valider" />
-	</form>
+	salut
 </body>
 </html>

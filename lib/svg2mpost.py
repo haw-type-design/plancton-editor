@@ -63,7 +63,6 @@ def parsePath(path):
     return [cordonates, draws, inc]
 
 def buildMp(dirFiles_svg, dirFiles_mp, setfig):
-    print('salut')
     if setfig != '-all':
         SET = glob.glob(dirFiles_svg + str(setfig) + '.svg')
     else:
@@ -118,28 +117,28 @@ def buildGlobalMp(dirFiles) :
     with open(dirFiles) as f:
         data = json.load(f)
 
-    global_variables = data['global_variables']
+    CATEGORIES = data['variables']
 
+    for gvs in CATEGORIES:
 
-    for gv in global_variables :
-        item = global_variables[gv]
+        for gv in CATEGORIES[gvs]:
+            item = CATEGORIES[gvs][gv]
+            if type(item) == dict:
+                IN = '\n% ' +item['description']+ '\n' +item['name']
+                OUT = item['value'] + item['unity']
+            else:
+                IN = gv
+                OUT = item 
 
-        if type(item) == dict:
-            IN = '\n% ' +item['description']+ '\n' +item['name']
-            OUT = item['value'] + item['unity']
-        else:
-            IN = gv
-            OUT = global_variables[gv]
+            Line = Tmp.format(
+                       In = IN,
+                       Out = OUT,
+                    )
+            out.append(Line)
 
-        Line = Tmp.format(
-                   In = IN,
-                   Out = OUT,
-                )
-        out.append(Line)
+        f = open('files/mpost/global.mp', 'w')
+        f.write('\n'.join(out)) 
+        f.close()
 
-    f = open('files/mpost/global.mp', 'w')
-    f.write('\n'.join(out)) 
-    f.close()
-
-    print('\n'.join(out))
+        print('\n'.join(out))
 

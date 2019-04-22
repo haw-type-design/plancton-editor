@@ -1,26 +1,29 @@
+@import 'fonts.css';
+
 body {
 	background: #F0F0F0;
-	font-family: monospace;
-	font-size: 8pt;
-	margin: 0px;
 	display: grid;
-	grid-template-columns: 300px 300px auto;
-
+	font-family: 'NotoSans';
+	font-size: 12px;
+	margin: 0px;
 }
 
 nav {
-	background: #F0F0F0;
+    background: aquamarine;
 	height: 100%;
 	margin: 0px;
 	padding: 5px;
-	right: 0px;
+	position: fixed;
 	width: 300px;
 	z-index: 2;
 }
 
+nav h1 {
+	font-size: inherit;
+	text-transform: uppercase;
+}
+
 nav .block_input {
-	border-top: 1px solid black;
-	margin-top: 10px;
 	padding: 5px 0;
 }
 
@@ -29,22 +32,99 @@ nav .block_input span.valueBox {
 }
 
 nav label {
-	display: block;
+	float: left;
+	width: 50%;
+	/* display: block; */
+}
+
+#typewriter {
+	grid-area: typewriter;
+	height: 100%;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	padding: 10px;
+}
+#typewriter #svgContainer {
+	width: auto;
+	height: 100%;
+	display: table;
+}
+
+#typewriter #svgContainer .cadratin {
+	display: table-cell;
+	vertical-align: middle;
+}
+#editor_mp {
+	grid-area: edition;
+}
+
+#setchart {
+	grid-area: setchart;
+	overflow-y: scroll;
+}
+#setchart .imgBox {
+	margin-top: 10%;
+	height: 80%;
+	cursor: pointer;
+	width: 100%;
+}
+#setchart img {
+	margin-top: 10%;
+	height: 80%;
+	cursor: pointer;
+	/* width: 100%; */
 }
 
 section#content {
-	z-index: 1;
-	transform: scale(1);
-	transform-origin: 0 0;
+	display: grid;
 	height: 100%;
+	left: 310px;
+	position: fixed;
+	width: calc(100% - 310px);
+	z-index: 1;
 }
+
+section#content.set {
+	grid-template-columns: 100%;
+	grid-template-rows: 100%;
+	grid-template-areas: "setchart";
+}
+section#content.type {
+	grid-template-columns: 25% 25% 25% 25%;
+	grid-template-rows: 50% 50%;
+	grid-template-areas: "typewriter typewriter typewriter edition"
+	"typewriter typewriter typewriter setchart";
+}
+
 
 section.loading:before {
 	content: 'loading...';
 	font-size: 12px;
-	position: fixed;
 	left: 10px;
+	position: fixed;
 	top: 10px;
+}
+
+.chart {
+    width: 10%;
+    height: 10%;
+    box-shadow: 1px 0 0 0 #7fffd4, 0 1px 0 0 #7fffd4, 1px 1px 0 0 #7fffd4, 1px 0 0 0 #7fffd4 inset, 0 1px 0 0 #7fffd4 inset;
+    float: left;
+    text-align: center;
+    font-size: 25px;
+    display: table;
+}
+
+.chart:hover {
+	background: white;
+}
+.chart .info {
+    color: black;
+    font-size: 12px;
+    position: relative;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    background: aquamarine;
 }
 
 [style^="stroke:rgb(0.000000%,0.000000%,100.000000%);"] {
@@ -73,6 +153,7 @@ svg text {
 
 .cadratin .refresh {
 	display: none;
+	color: purple;
 }
 
 .activeInks .refresh {
@@ -88,7 +169,4 @@ svg:hover text {
 	display: block;
 }
 
-#editor_mp {
-	/* position: absolute; */
-	height: 300px;
-}
+

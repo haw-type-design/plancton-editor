@@ -2,6 +2,8 @@ from bottle import Bottle, run, template, route, static_file, get, request
 import lib.svg2mpost as s2m
 import subprocess
 import os
+import glob
+import random
 
 app = Bottle()
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -19,13 +21,22 @@ def files(filepath):
 @app.route('/')
 @app.route('/index')
 def index():
-    return template('templates/index.tpl')
+    SETFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+    SET = []
+    for CHAR in SETFOLDER:
+        mpFile = os.path.basename(str(CHAR))
+        key = os.path.splitext(mpFile)[0]
+        SET.append(int(key))
+    rand = random.randint(1, 300)
+    print(SET.sort())
+    return template('templates/index.tpl', setchart=SET, rand=rand)
+
+
 
 @app.route('/write', method='post')
 def traitement():
     json = request.forms.json
     sett = request.forms.set
-
     if sett != '-all':
         file = open('files/global-1.json','w') 
         file.write(json)
@@ -33,10 +44,8 @@ def traitement():
         s2m.buildGlobalMp('files/global-1.json') 
         for n in sett:
             s2m.buildSvg('files/mpost/mpost-files/', ord(n)) 
-            print(ord(n))
     else:
         s2m.buildSvg('files/mpost/mpost-files/', '-all') 
-        print('all')
     sett = ''
     return json
 
