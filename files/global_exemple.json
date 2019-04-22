@@ -6,7 +6,7 @@
 			"grid" : {
 				"type" : "range",
 				"range" : [0, 1, 1],
-				"description" : "Display grid",
+				"description" : "grid",
 				"name" : "grid",
 				"value": "0",
 				"unity": ""
@@ -14,8 +14,16 @@
 			"dot_label" : {
 				"type" : "range",
 				"range" : [0, 1, 1],
-				"description" : "Display dot label",
+				"description" : "dot label",
 				"name" : "dot_label",
+				"value": "0",
+				"unity": ""
+			},
+			"hints" : {
+				"type" : "range",
+				"range" : [0, 1, 1],
+				"description" : "hints",
+				"name" : "hints",
 				"value": "0",
 				"unity": ""
 			}
@@ -26,7 +34,7 @@
 			"outputformat": "\"svg\"",
 			"u" : {
 				"type" : "range",
-				"range" : [0, 20, 0.05],
+				"range" : [0, 50, 0.05],
 				"description" : "global unity",
 				"name" : "u",
 				"value": "12",

@@ -4,6 +4,7 @@ import subprocess
 import os
 import glob
 import random
+import urllib
 
 app = Bottle()
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -21,6 +22,7 @@ def files(filepath):
 @app.route('/')
 @app.route('/index')
 def index():
+    # s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     SETFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
     SET = []
     for CHAR in SETFOLDER:
@@ -29,12 +31,25 @@ def index():
         SET.append(int(key))
     rand = random.randint(1, 300)
     print(SET.sort())
-    return template('templates/index.tpl', setchart=SET, rand=rand)
+    return template('templates/index.tpl', setchart=SET, rand=rand, mode="set", key="none")
+
+@app.route('/type')
+@app.route('/type/<keycode>')
+def type(keycode):
+    SETFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+    SET = []
+    for CHAR in SETFOLDER:
+        mpFile = os.path.basename(str(CHAR))
+        key = os.path.splitext(mpFile)[0]
+        SET.append(int(key))
+    rand = random.randint(1, 300)
+    print(SET.sort())
+    return template('templates/index.tpl', setchart=SET, rand=rand, mode="type", key=[keycode, chr(int(keycode))])
 
 
 
 @app.route('/write', method='post')
-def traitement():
+def traitementJson():
     json = request.forms.json
     sett = request.forms.set
     if sett != '-all':
@@ -48,6 +63,16 @@ def traitement():
         s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     sett = ''
     return json
+
+@app.route('/writeMp', method='post')
+def writeMp():
+    mp = request.forms.mp
+    mp = mp.replace('#59', ';')
+    file = open('files/test.mp','w') 
+    file.write(mp)
+    file.close()     
+    print(mp)
+    return mp
 
 @app.route('/inkscape', method="post")
 def inkscape():

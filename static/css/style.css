@@ -1,25 +1,29 @@
 @import 'fonts.css';
 
+:root {
+  --main-bg-color: oldlace;
+}
+
 body {
 	background: #F0F0F0;
 	display: grid;
 	font-family: 'NotoSans';
-	font-size: 12px;
+	font-size: 10px;
 	margin: 0px;
 }
 
 nav {
-    background: aquamarine;
+	grid-area: nav;
+    background: var(--main-bg-color);
 	height: 100%;
 	margin: 0px;
 	padding: 5px;
-	position: fixed;
-	width: 300px;
 	z-index: 2;
 }
 
 nav h1 {
 	font-size: inherit;
+	font-weight: normal;
 	text-transform: uppercase;
 }
 
@@ -39,80 +43,108 @@ nav label {
 
 #typewriter {
 	grid-area: typewriter;
-	height: 100%;
 	overflow-x: scroll;
 	overflow-y: hidden;
 	padding: 10px;
+	border-right: 5px solid var(--main-bg-color);
 }
+
 #typewriter #svgContainer {
 	width: auto;
 	height: 100%;
 	display: table;
+	margin: 0 auto;
 }
 
 #typewriter #svgContainer .cadratin {
 	display: table-cell;
 	vertical-align: middle;
 }
-#editor_mp {
+
+#editorBox {
 	grid-area: edition;
+	background:var(--main-bg-color);
+}
+
+
+
+#editorBox .options h1 {
+	margin: 0;
+	font-size: inherit;
+}
+#editor_mp {
+	width: 100%;
+    height: 100%;
 }
 
 #setchart {
 	grid-area: setchart;
 	overflow-y: scroll;
+	padding: 10px;
+	padding-top: 20px;
 }
 #setchart .imgBox {
-	margin-top: 10%;
+	margin-top: 0%;
 	height: 80%;
 	cursor: pointer;
-	width: 100%;
+
 }
 #setchart img {
 	margin-top: 10%;
-	height: 80%;
-	cursor: pointer;
+    height: 100%;
+    cursor: pointer;
 	/* width: 100%; */
+}
+
+#btn_all {
+	    position: absolute;
+    display: block;
+    bottom: 20px;
+    margin-left: 20px;
+    z-index: 2;
 }
 
 section#content {
 	display: grid;
 	height: 100%;
-	left: 310px;
 	position: fixed;
-	width: calc(100% - 310px);
+	width: 100%;
 	z-index: 1;
 }
 
 section#content.set {
-	grid-template-columns: 100%;
+	grid-template-columns: 15% 85%;
 	grid-template-rows: 100%;
-	grid-template-areas: "setchart";
+	grid-template-areas: "nav setchart";
 }
 section#content.type {
-	grid-template-columns: 25% 25% 25% 25%;
-	grid-template-rows: 50% 50%;
-	grid-template-areas: "typewriter typewriter typewriter edition"
-	"typewriter typewriter typewriter setchart";
+	grid-template-columns: 15% 60% 25%;
+	grid-template-rows: 70%;
+	grid-template-areas: "nav typewriter edition"
+	"setchart typewriter  edition";
 }
 
 
 section.loading:before {
 	content: 'loading...';
-	font-size: 12px;
 	left: 10px;
 	position: fixed;
 	top: 10px;
 }
 
-.chart {
-    width: 10%;
+.set .chart {
+	width: 10%;
     height: 10%;
-    box-shadow: 1px 0 0 0 #7fffd4, 0 1px 0 0 #7fffd4, 1px 1px 0 0 #7fffd4, 1px 0 0 0 #7fffd4 inset, 0 1px 0 0 #7fffd4 inset;
+}
+.type .chart {
+	width: 20%;
+    height: 20%;
+}
+.chart {
+    box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
     float: left;
     text-align: center;
-    font-size: 25px;
-    display: table;
+    font-size: 10px;
 }
 
 .chart:hover {
@@ -124,7 +156,11 @@ section.loading:before {
     position: relative;
     margin-left: 0px;
     margin-bottom: 0px;
-    background: aquamarine;
+    background: var(--main-bg-color);
+}
+
+.addChart {
+    background: var(--main-bg-color);
 }
 
 [style^="stroke:rgb(0.000000%,0.000000%,100.000000%);"] {
@@ -139,31 +175,41 @@ svg text {
 	fill: blue; 
 }
 
-.cadratin .tools_bar {
-	font-size: 12px;
-    position: absolute;
-    cursor: pointer;
-    display: none;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-.cadratin:hover .tools_bar {
-	display: initial;
+.btn {	
+	padding: 2px 3px;
+	border: 1px solid black;
+	border-radius: 5px;
 }
 
-.cadratin .refresh {
+.options .tools_bar {
+	font-size: 12px;
+	text-transform: uppercase;
+    cursor: pointer;
+	margin: 20px 1px;
+}
+
+
+.options .btn:hover {	
+	background: black;
+	color: white;
+}
+.options .inks {
+	right: 10px;
+	position: absolute;
+}
+
+.options #refresh {
 	display: none;
 	color: purple;
 }
 
-.activeInks .refresh {
+.activeInks #refresh {
 	display: initial;
 }
 
 .activeInks svg {
 	background: white;
 }
-
 
 svg:hover text {
 	display: block;

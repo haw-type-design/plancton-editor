@@ -27,12 +27,15 @@ def beginchar(expr keycode, width)=
 		endfor;
 	fi;
 	pickup pencircle scaled .4;
-	
-	draw (0 * ux, xHeight * uy) -- (width * ux, xHeight * uy)  withcolor (green + blue);
-	draw (0 * ux, capHeight * uy) -- (width * ux, capHeight * uy)  withcolor (green + blue);
-	draw (0 * ux, ascHeight * uy) -- (width * ux, ascHeight * uy)  withcolor (green + blue);
-	draw (0 * ux, descHeight * uy) -- (width * ux, descHeight * uy)  withcolor (green + blue);
-	draw (0 * ux, baseline * uy) -- (width * ux, baseline * uy)  withcolor green;
+
+	if hints = 1:
+		draw (0 * ux, xHeight * uy) -- (width * ux, xHeight * uy)  withcolor (green + blue);
+		draw (0 * ux, capHeight * uy) -- (width * ux, capHeight * uy)  withcolor (green + blue);
+		draw (0 * ux, ascHeight * uy) -- (width * ux, ascHeight * uy)  withcolor (green + blue);
+		draw (0 * ux, descHeight * uy) -- (width * ux, descHeight * uy)  withcolor (green + blue);
+		draw (0 * ux, baseline * uy) -- (width * ux, baseline * uy)  withcolor green;
+	fi;
+
 
 	pickup pencircle xscaled sx yscaled sy rotated rot;
 enddef;

@@ -10,7 +10,7 @@
                     1,
                     1
                 ],
-                "description": "Display grid",
+                "description": "grid",
                 "name": "grid",
                 "value": "1",
                 "unity": ""
@@ -22,9 +22,21 @@
                     1,
                     1
                 ],
-                "description": "Display dot label",
+                "description": "dot label",
                 "name": "dot_label",
                 "value": "0",
+                "unity": ""
+            },
+            "hints": {
+                "type": "range",
+                "range": [
+                    0,
+                    1,
+                    1
+                ],
+                "description": "hints",
+                "name": "hints",
+                "value": "1",
                 "unity": ""
             }
         },
@@ -35,12 +47,12 @@
                 "type": "range",
                 "range": [
                     0,
-                    20,
+                    50,
                     0.05
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "17",
+                "value": "13.75",
                 "unity": "pt"
             },
             "ux": {
@@ -52,7 +64,7 @@
                 ],
                 "description": "X Unity",
                 "name": "ux",
-                "value": "1",
+                "value": "0.65",
                 "unity": "u"
             },
             "uy": {
@@ -76,7 +88,7 @@
                 ],
                 "description": "Stroke Unity",
                 "name": "s",
-                "value": "1.1",
+                "value": "1.2",
                 "unity": "u"
             },
             "sx": {
@@ -112,7 +124,7 @@
                 ],
                 "description": "Stroke rotation",
                 "name": "rot",
-                "value": "30",
+                "value": "139",
                 "unity": ""
             }
         }

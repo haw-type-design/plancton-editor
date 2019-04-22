@@ -1,21 +1,14 @@
-let content = document.getElementById('content')
 let typewriter = document.getElementById('svgContainer')
-let editor_mp = document.getElementById('editor_mp')
-let run = document.getElementById('run')
+// let editor = document.getElementById('editor')
 let inputWrite= document.getElementById('inputWrite')
 let inputsRange = document.getElementsByClassName('input_range')
 let globalNav = document.getElementById('global_nav')
 let btn_inkscape = document.getElementById('inkscape'); 
-let btn_refresh = document.getElementById('refresh'); 
+let btn_refresh = document.getElementsByClassName('refresh'); 
 let btn_all = document.getElementById('btn_all'); 
 let imgs = document.getElementsByClassName('imgChar')	
 
-
-if (content.className == 'type') {
-	var sentence = inputWrite.value
-} else {
-	var sentence = 'Plancton'
-}
+var sentence = inputWrite.value
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -128,6 +121,7 @@ function writeValue(stn) {
 		loadSvg(code)
 	});
 
+	refreshInks()
 }
 
 function activeInks() {
@@ -148,8 +142,9 @@ function activeInks() {
 }
 
 function refreshInks() {
+	for (var i = 0, len = btn_refresh.length; i < len; i++) {
 		btn_refresh.addEventListener('click', function(){
-
+			alert('salut:')
 			var key = this.closest('.tools_bar').getAttribute('data-key')
 			var xmlhttp = new XMLHttpRequest()
 			xmlhttp.onreadystatechange = function()
@@ -163,55 +158,16 @@ function refreshInks() {
 			xmlhttp.open('POST', '/updateMp', true)
 			xmlhttp.send('key=' + key)
 		}, false)
-}
-
-
-function loadMp(editor) {
-	var key = editor_mp.getAttribute('data-key')
-	xhr = new XMLHttpRequest()
-	xhr.open("GET", "/files/mpost/mpost-files/" + key + ".mp?random=" + getRandomInt(3000), false)
-	// xhr.overrideMimeType("image/svg+xml")
-	xhr.send("")
-	console.log(xhr)
-	editor.setValue(xhr.responseText)
-}
-
-function writeMp(editor, key) {
-	var contentMp = editor.getValue()
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function()
-	{
-		if (xmlhttp.readyState == 4)
-		{
-			console.log('finish')
-		}
 	}
-	xmlhttp.open('POST', '/writeMp', true);
-	// xmlhttp.send('mp=' + contentMp.stringify(data,  null, 4) + '&key=' + key);
-	
-
-	contentMp = contentMp.replace(/;/g, '#59');
-
-	xmlhttp.send('mp=' + contentMp + '&key=' + key);
 }
-
 
 window.addEventListener('DOMContentLoaded', function(){
-	let editor = ace.edit("editor_mp");
-	editor.getSession().setMode("ace/mode/javascript");	
-	loadMp(editor)
 	readJson("/files/global-1.json", function(text){
 		var data = JSON.parse(text)
 		buildNav(data)
 		changeValue(data)
 	})
-	
-	run.addEventListener('click', function() {
-		var key = this.parentElement.getAttribute('data-key')
-		writeMp(editor, key)
 
-	})
-	
 	inputWrite.addEventListener('input', function() {
 		sentence = this.value
 		writeValue(sentence)
