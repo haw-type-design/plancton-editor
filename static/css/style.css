@@ -66,8 +66,6 @@ nav label {
 	background:var(--main-bg-color);
 }
 
-
-
 #editorBox .options h1 {
 	margin: 0;
 	font-size: inherit;
@@ -80,8 +78,8 @@ nav label {
 #setchart {
 	grid-area: setchart;
 	overflow-y: scroll;
-	padding: 10px;
-	padding-top: 20px;
+	/* padding: 10px; */
+	/* padding-top: 20px; */
 }
 #setchart .imgBox {
 	margin-top: 0%;
@@ -113,12 +111,12 @@ section#content {
 }
 
 section#content.set {
-	grid-template-columns: 15% 85%;
+	grid-template-columns: 280px calc(100% - 280px);
 	grid-template-rows: 100%;
 	grid-template-areas: "nav setchart";
 }
 section#content.type {
-	grid-template-columns: 15% 60% 25%;
+	grid-template-columns: 280px auto 280px;
 	grid-template-rows: 70%;
 	grid-template-areas: "nav typewriter edition"
 	"setchart typewriter  edition";
