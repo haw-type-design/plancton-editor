@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 import glob
 import os
 import subprocess
@@ -114,15 +115,18 @@ def buildGlobalMp(dirFiles) :
     Tmp = '''{In} := {Out};'''
 
     with open(dirFiles) as f:
-        data = json.load(f)
+        # customdecoder = JSONDecoder(object_pairs_hook=OrderedDict)
+        data = json.load(f, object_pairs_hook=OrderedDict)
 
     CATEGORIES = data['variables']
+    # print(data)
 
     for gvs in CATEGORIES:
 
         for gv in CATEGORIES[gvs]:
             item = CATEGORIES[gvs][gv]
-            if type(item) == dict:
+            if type(item) == OrderedDict:
+                # print(item['name'])
                 IN = '\n% ' +item['description']+ '\n' +item['name']
                 OUT = item['value'] + item['unity']
             else:
@@ -134,7 +138,7 @@ def buildGlobalMp(dirFiles) :
                        Out = OUT,
                     )
             out.append(Line)
-
+        # print('\n'.join(out))
         f = open('files/mpost/global.mp', 'w')
         f.write('\n'.join(out)) 
         f.close()
