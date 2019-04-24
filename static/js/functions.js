@@ -75,7 +75,6 @@ function buildNav(data) {
 
 function writeJson(data){
 
-
 	if (data == false) {
 		var sentence = '-all'
 	}else {
@@ -90,22 +89,21 @@ function writeJson(data){
 	{
 		if (xmlhttp.readyState == 4)
 		{
-			var sentence = inputWrite.value
-			writeValue(sentence)	
 			if (data == false) {
+				console.log('test')
 				for(img in imgs) {
 					var re = imgs[img].src
 					imgs[img].src = re + '2'
 				}
 			} else {	
+				var sentence = inputWrite.value
+				writeValue(sentence)	
 				writeJson(false)
 			}
 			typewriter.classList.remove("loading")
 		}
 	}
 
-	// data = JSON.stringify(data,  null, 4)
-	// data = data.replace(/\+/g, '#43');
 	xmlhttp.open('POST', '/write', true);
 	xmlhttp.send('json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
 }

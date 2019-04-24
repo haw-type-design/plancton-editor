@@ -2,11 +2,11 @@ input ../global;
 
 height = 40;
 
-% baseline := 18;
-% xHeight := 14 + baseline;
+baseline := 18;
+xHeight := 14 + baseline;
 ascHeight := 21 + baseline;
 descHeight := -9 + baseline;
-% capHeight := 21 + baseline;
+capHeight := 21 + baseline;
 
 vardef cadratin(expr width)=
 	draw (0 * ux, 0 * uy)--(width * ux, 0 * uy)--(width * ux, height * uy)--(0 * ux, height * uy);
