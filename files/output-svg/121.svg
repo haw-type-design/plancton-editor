@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<!-- Created by MetaPost 2.00 on 2019.04.24:2329 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="445.977249" height="938.678406" viewBox="0 0 445.977249 938.678406">
+<!-- Original BoundingBox: -0.100006 -0.100006 445.877243 938.578400 -->
+  <path d="M0.000000 938.000000L445.777237 938.000000L445.777237 -0.478394L0.000000 -0.478394Z" style="stroke:rgb(100.000000%,0.000000%,0.000000%); stroke-width: 0.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M0.000000 -0.478394L0.000000 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M23.461960 -0.478394L23.461960 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M46.923920 -0.478394L46.923920 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M70.385880 -0.478394L70.385880 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M93.847839 -0.478394L93.847839 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M117.309799 -0.478394L117.309799 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M140.771759 -0.478394L140.771759 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M164.233719 -0.478394L164.233719 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M187.695679 -0.478394L187.695679 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M211.157639 -0.478394L211.157639 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M234.619598 -0.478394L234.619598 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M258.081558 -0.478394L258.081558 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M281.543518 -0.478394L281.543518 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M305.005478 -0.478394L305.005478 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M328.467438 -0.478394L328.467438 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M351.929398 -0.478394L351.929398 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M375.391357 -0.478394L375.391357 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M398.853317 -0.478394L398.853317 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M422.315277 -0.478394L422.315277 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 -0.478394L445.777237 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 938.000000L0.000000 938.000000" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 914.538040L0.000000 914.538040" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 891.076080L0.000000 891.076080" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 867.614120L0.000000 867.614120" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 844.152161L0.000000 844.152161" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 820.690201L0.000000 820.690201" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 797.228241L0.000000 797.228241" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 773.766281L0.000000 773.766281" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 750.304321L0.000000 750.304321" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 726.842361L0.000000 726.842361" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 703.380402L0.000000 703.380402" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 679.918442L0.000000 679.918442" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 656.456482L0.000000 656.456482" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 632.994522L0.000000 632.994522" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 609.532562L0.000000 609.532562" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 586.070602L0.000000 586.070602" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 562.608643L0.000000 562.608643" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 539.146683L0.000000 539.146683" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 515.684723L0.000000 515.684723" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 492.222763L0.000000 492.222763" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 468.760803L0.000000 468.760803" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 445.298843L0.000000 445.298843" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 421.836884L0.000000 421.836884" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 398.374924L0.000000 398.374924" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 374.912964L0.000000 374.912964" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 351.451004L0.000000 351.451004" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 327.989044L0.000000 327.989044" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 304.527084L0.000000 304.527084" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 281.065125L0.000000 281.065125" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 257.603165L0.000000 257.603165" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 234.141205L0.000000 234.141205" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 210.679245L0.000000 210.679245" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 187.217285L0.000000 187.217285" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 163.755325L0.000000 163.755325" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 140.293365L0.000000 140.293365" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 116.831406L0.000000 116.831406" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 93.369446L0.000000 93.369446" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 69.907486L0.000000 69.907486" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 46.445526L0.000000 46.445526" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 22.983566L0.000000 22.983566" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <path d="M445.777237 -0.478394L0.000000 -0.478394" style="stroke:rgb(30.000305%,30.000305%,30.000305%); stroke-width: 0.199997;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="matrix(-0.656052,-0.754716,0.754716,-0.656052,0.000000,0.000000)">
+    <path d="M-543.117973 -161.245019L-618.576070 -289.012848L-638.598012 -337.504493L-625.520579 -388.310974L-610.128309 -406.018080L-561.636664 -426.040022L-528.537289 -428.354859L-510.830183 -412.962589L-526.222453 -395.255483L-577.028934 -408.332917L-610.128309 -406.018080" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 23.461942;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.656052,-0.754716,0.754716,-0.656052,0.000000,0.000000)">
+    <path d="M-543.117973 -161.245019L-372.179839 142.782283" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 23.461942;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.656052,-0.754716,0.754716,-0.656052,0.000000,0.000000)">
+    <path d="M-543.117973 -161.245019L-202.864874 -51.995881" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 23.461942;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.656052,-0.754716,0.754716,-0.656052,0.000000,0.000000)">
+    <path d="M-507.703762 -130.460480L-218.257144 -34.288776" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 23.461942;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.656052,-0.754716,0.754716,-0.656052,0.000000,0.000000)">
+    <path d="M-389.886945 127.390014L-387.572108 160.489389L-402.964378 178.196495L-341.395300 107.368072L-356.787569 125.075177L-389.886945 127.390014L-409.908887 78.898369" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 23.461942;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.656052,-0.754716,0.754716,-0.656052,0.000000,0.000000)">
+    <path d="M-286.770731 -62.758478L-220.571980 -67.388151L-187.472605 -69.702987L-172.080335 -87.410093L-249.041683 1.125436L-233.649413 -16.581670L-235.964249 -49.681045" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 23.461942;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="translate(236.719589 513.584732)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">1</text>
+  </g>
+  <path d="M234.619598 515.684723l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(189.795670 654.356491)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">2</text>
+  </g>
+  <path d="M187.695679 656.456482l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(166.333710 701.280411)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">3</text>
+  </g>
+  <path d="M164.233719 703.380402l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(119.409790 724.742371)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">4</text>
+  </g>
+  <path d="M117.309799 726.842361l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(95.947830 724.742371)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">5</text>
+  </g>
+  <path d="M93.847839 726.842361l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(49.023911 701.280411)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">6</text>
+  </g>
+  <path d="M46.923920 703.380402l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(25.561951 677.818451)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">7</text>
+  </g>
+  <path d="M23.461960 679.918442l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(25.561951 654.356491)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">8</text>
+  </g>
+  <path d="M23.461960 656.456482l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(49.023911 654.356491)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">9</text>
+  </g>
+  <path d="M46.923920 656.456482l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(72.485870 701.280411)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">10</text>
+  </g>
+  <path d="M70.385880 703.380402l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(95.947830 724.742371)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">11</text>
+  </g>
+  <path d="M93.847839 726.842361l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(236.719589 513.584732)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">12</text>
+  </g>
+  <path d="M234.619598 515.684723l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(354.029388 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">13</text>
+  </g>
+  <path d="M351.929398 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(236.719589 513.584732)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">14</text>
+  </g>
+  <path d="M234.619598 515.684723l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(95.947830 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">15</text>
+  </g>
+  <path d="M93.847839 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(236.719589 466.660812)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">16</text>
+  </g>
+  <path d="M234.619598 468.760803l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(119.409790 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">17</text>
+  </g>
+  <path d="M117.309799 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(354.029388 208.579254)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">18</text>
+  </g>
+  <path d="M351.929398 210.679245l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(377.491348 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">19</text>
+  </g>
+  <path d="M375.391357 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(400.953308 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">20</text>
+  </g>
+  <path d="M398.853317 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(307.105469 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">21</text>
+  </g>
+  <path d="M305.005478 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(330.567429 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">22</text>
+  </g>
+  <path d="M328.467438 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(354.029388 208.579254)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">23</text>
+  </g>
+  <path d="M351.929398 210.679245l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(330.567429 255.503174)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">24</text>
+  </g>
+  <path d="M328.467438 257.603165l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(142.871750 255.503174)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">25</text>
+  </g>
+  <path d="M140.771759 257.603165l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(95.947830 208.579254)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">26</text>
+  </g>
+  <path d="M93.847839 210.679245l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(72.485870 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">27</text>
+  </g>
+  <path d="M70.385880 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(49.023911 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">28</text>
+  </g>
+  <path d="M46.923920 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(166.333710 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">29</text>
+  </g>
+  <path d="M164.233719 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(142.871750 185.117294)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">30</text>
+  </g>
+  <path d="M140.771759 187.217285l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="translate(119.409790 208.579254)" style="fill: rgb(0.000000%,0.000000%,0.000000%);">
+    <text font-size="9.962646">31</text>
+  </g>
+  <path d="M117.309799 210.679245l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 3.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+</svg>
