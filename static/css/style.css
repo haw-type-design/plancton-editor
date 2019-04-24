@@ -2,6 +2,7 @@
 
 :root {
   --main-bg-color: oldlace;
+  --main-active-color: blue;
 }
 
 input[type='range'] {
@@ -11,7 +12,7 @@ input[type='range'] {
 }
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none !important;
-    background: blue;
+    background: var(--main-active-color);
     height: 7px;
     width: 7px;
 }
@@ -46,7 +47,7 @@ nav .block_input {
 }
 
 nav .block_input span.valueBox {
-	color: blue;
+	color: var(--main-active-color);
 }
 
 nav label {
@@ -162,7 +163,7 @@ section .loading:before {
 	position: absolute;
 	/* top: 10px; */
 	left: calc(50% - 25px);
-	background: blue;
+	background: var(--main-active-color);
 	top: calc(50% - 50px);
 	width: 50px;
 	padding: 2px;
@@ -195,6 +196,10 @@ section .loading:before {
     margin-bottom: 0px;
     background: var(--main-bg-color);
 }
+.chart:hover .info {
+    background: var(--main-active-color);
+	color: white;
+}
 
 .addChart {
     background: var(--main-bg-color);
@@ -209,7 +214,7 @@ section .loading:before {
 }
 
 svg text {
-	fill: blue; 
+	fill: var(--main-active-color); 
 }
 
 .btn {	
@@ -228,7 +233,7 @@ svg text {
 
 .btn_file.active {	
 	border: none;
-	background: blue;
+	background: var(--main-active-color);
 	color: white;
 }
 

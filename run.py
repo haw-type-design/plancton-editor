@@ -22,15 +22,24 @@ def files(filepath):
 @app.route('/')
 @app.route('/index')
 def index():
-    # s2m.buildSvg('files/mpost/mpost-files/', '-all') 
-    SETFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+    INFOLDER = glob.glob('files/input-svg/*.svg')
+    MPFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+    OUTFOLDER = glob.glob('files/output-svg/*.svg')
+    if not INFOLDER:
+        return 'Il n\'y pas de fichiers'
+    else:
+        if not MPFOLDER: 
+            s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', '-all')
+            MPFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+        if not OUTFOLDER: 
+            s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     SET = []
-    for CHAR in SETFOLDER:
+    for CHAR in MPFOLDER:
         mpFile = os.path.basename(str(CHAR))
         key = os.path.splitext(mpFile)[0]
         SET.append(int(key))
     rand = random.randint(1, 300)
-    print(SET.sort())
+    SET.sort()
     return template('templates/index.tpl', setchart=SET, rand=rand, mode="set", key="none")
 
 @app.route('/type')

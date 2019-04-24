@@ -176,7 +176,6 @@ function loadMp(editor) {
 	var key = editor_mp.getAttribute('data-key')
 	xhr = new XMLHttpRequest()
 	xhr.open("GET", "/files/mpost/mpost-files/" + key + ".mp?random=" + getRandomInt(3000), false)
-	// xhr.overrideMimeType("image/svg+xml")
 	xhr.send("")
 	console.log(xhr)
 	editor.setValue(xhr.responseText)
@@ -204,7 +203,7 @@ window.addEventListener('DOMContentLoaded', function(){
 	let editor = ace.edit("editor_mp");
 	editor.getSession().setMode("ace/mode/javascript");	
 	loadMp(editor)
-	readJson("/files/global-1.json", function(text){
+	readJson("/files/global.json", function(text){
 		var data = JSON.parse(text)
 
 
