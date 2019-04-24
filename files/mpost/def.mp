@@ -2,11 +2,11 @@ input ../global;
 
 height = 40;
 
-baseline := 18;
-xHeight := 14 + baseline;
+% baseline := 18;
+% xHeight := 14 + baseline;
 ascHeight := 21 + baseline;
 descHeight := -9 + baseline;
-capHeight := 21 + baseline;
+% capHeight := 21 + baseline;
 
 vardef cadratin(expr width)=
 	draw (0 * ux, 0 * uy)--(width * ux, 0 * uy)--(width * ux, height * uy)--(0 * ux, height * uy);
@@ -20,13 +20,13 @@ def beginchar(expr keycode, width)=
 	if grid = 1:
 		defaultscale :=.2;
 		for i=0 upto width:
-			draw (i*ux, height*uy) -- (i*ux, 0*uy) withcolor .6white;
+			draw (i*ux, height*uy) -- (i*ux, 0*uy) withcolor .3white;
 		endfor;
 		for i=0 upto height:
-			draw (width*ux, i*uy) -- (0*ux, i*uy) withcolor .6white;
+			draw (width*ux, i*uy) -- (0*ux, i*uy) withcolor .3white;
 		endfor;
 	fi;
-	pickup pencircle scaled .4;
+	pickup pencircle scaled 1;
 
 	if hints = 1:
 		draw (0 * ux, xHeight * uy) -- (width * ux, xHeight * uy)  withcolor (green + blue);

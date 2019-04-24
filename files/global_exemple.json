@@ -88,7 +88,32 @@
 				"value": "30",
 				"unity": ""
 			}
-
+		},
+		"heights": {
+			"baseline" : {
+				"type" : "range",
+				"range" : [0, 40, 1],
+				"description" : "baseline",
+				"name" : "baseline",
+				"value": "18",
+				"unity": ""
+			},
+			"xHeight" : {
+				"type" : "range",
+				"range" : [0, 40, 1],
+				"description" : "xHeight",
+				"name" : "xHeight",
+				"value": "14",
+				"unity": " + baseline"
+			},
+			"capHeight" : {
+				"type" : "range",
+				"range" : [0, 40, 1],
+				"description" : "capHeight",
+				"name" : "capHeight",
+				"value": "21",
+				"unity": "+ us"
+			}
 		}
 	}
 }

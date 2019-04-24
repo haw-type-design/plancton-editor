@@ -35,7 +35,7 @@ def index():
 
 @app.route('/type')
 @app.route('/type/<keycode>')
-def type(keycode):
+def type(keycode='free'):
     SETFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
     SET = []
     for CHAR in SETFOLDER:
@@ -43,8 +43,12 @@ def type(keycode):
         key = os.path.splitext(mpFile)[0]
         SET.append(int(key))
     rand = random.randint(1, 300)
+    if keycode == 'free':
+    	chartKey = [keycode, 'Ab']
+    else:
+    	chartKey = [keycode, chr(int(keycode))]
     print(SET.sort())
-    return template('templates/index.tpl', setchart=SET, rand=rand, mode="type", key=[keycode, chr(int(keycode))])
+    return template('templates/index.tpl', setchart=SET, rand=rand, mode="type", key=chartKey)
 
 
 
@@ -62,16 +66,19 @@ def traitementJson():
     else:
         s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     sett = ''
+    print(json)
     return json
 
 @app.route('/writeMp', method='post')
 def writeMp():
     mp = request.forms.mp
+    key = request.forms.key
     mp = mp.replace('#59', ';')
-    file = open('files/test.mp','w') 
-    file.write(mp)
+    file = open('files/mpost/mpost-files/' + key + '.mp','w') 
+    file.write(str(mp))
     file.close()     
     print(mp)
+    s2m.buildSvg('files/mpost/mpost-files/', key) 
     return mp
 
 @app.route('/inkscape', method="post")
@@ -84,7 +91,6 @@ def inkscape():
 @app.route('/updateMp', method="post")
 def editeSvg():
     key = request.forms.key
-    print('<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ' + key)
     s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key)
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return '! ! ! ! ! ! !' 

@@ -4,6 +4,18 @@
   --main-bg-color: oldlace;
 }
 
+input[type='range'] {
+    -webkit-appearance: none !important;
+    background: white;
+    height:7px;
+}
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background: blue;
+    height: 7px;
+    width: 7px;
+}
+
 body {
 	background: #F0F0F0;
 	display: grid;
@@ -25,20 +37,31 @@ nav h1 {
 	font-size: inherit;
 	font-weight: normal;
 	text-transform: uppercase;
+	margin: 0px;
+	margin-top: 12px;
 }
 
 nav .block_input {
-	padding: 5px 0;
+	padding: 3px 0;
 }
 
 nav .block_input span.valueBox {
-	color: grey;
+	color: blue;
 }
 
 nav label {
 	float: left;
 	width: 50%;
 	/* display: block; */
+}
+
+nav .tabs {
+	margin-bottom: 0px;
+	position: absolute;
+	bottom: 10px;
+	font-size: 12px;
+	width: 200px;
+	text-transform: uppercase;
 }
 
 #typewriter {
@@ -115,19 +138,35 @@ section#content.set {
 	grid-template-rows: 100%;
 	grid-template-areas: "nav setchart";
 }
-section#content.type {
-	grid-template-columns: 280px auto 280px;
+section#content.type:not(.free) {
+	grid-template-columns: 280px auto 400px;
 	grid-template-rows: 70%;
 	grid-template-areas: "nav typewriter edition"
 	"setchart typewriter  edition";
 }
+section#content.type.free {
+	/* background: red; */
+	grid-template-columns: 280px auto;
+	grid-template-rows: 70%;
+	grid-template-areas: "nav typewriter"
+	"setchart typewriter";
+}
+section#content.type.free #editorBox {
+	display: none;
+}
 
 
-section.loading:before {
+section .loading:before {
 	content: 'loading...';
-	left: 10px;
-	position: fixed;
-	top: 10px;
+	/* left: 10px; */
+	position: absolute;
+	/* top: 10px; */
+	left: calc(50% - 25px);
+	background: blue;
+	top: calc(50% - 50px);
+	width: 50px;
+	padding: 2px;
+	color: white;
 }
 
 .set .chart {
@@ -177,6 +216,31 @@ svg text {
 	padding: 2px 3px;
 	border: 1px solid black;
 	border-radius: 5px;
+}
+
+.btn_file {	
+	padding: 2px 3px;
+	border: 1px solid black;
+	cursor: pointer;
+	background: #dddddd;
+	/* border-radius: 5px; */
+}
+
+.btn_file.active {	
+	border: none;
+	background: blue;
+	color: white;
+}
+
+
+.tabs {
+	display: grid;
+	grid-template-columns: auto auto 10%;
+}
+
+.tabs a {
+	text-align: center;
+	text-decoration: none;
 }
 
 .options .tools_bar {

@@ -6,21 +6,38 @@
 	<link rel="stylesheet" href="/static/css/style.css" title="" type="text/css">
 </head>
 <body>
+		%if key[0] == 'free':
+			%status = 'free'
+		%else:
+			%status = ''
+		%end 
+	
 
-	<section id="content" class="{{ mode }}">
+	<section id="content" class="{{mode}} {{status}}">
 		<nav>
 			<h1>P L A N C T O N</h1>
 			<hr>
 			
-			<div id="interface_nav">
-			</div>
-			<div id="global_nav">
+			<div id="interface_nav"></div>
+			<div id="global_nav"></div>
+			<div class="tabs">
+			%if mode == 'type':
+				<a href="/index" class="btn_file" >set</a>
+				<a class="btn_file active" >type</a>
+			%else:
+				<a class="btn_file active" >set</a>
+				<a href="/type" class="btn_file" >type</a>
+			%end
 			</div>
 		</nav>
 		%if mode == 'type':
 		<div id="editorBox">
 			<div class="options">
-				<h1>char : {{ key[1] }} | key : {{key[0] }}</h1>
+				<div class="tabs">
+					<input type="button" class="btn_file active" value="char : {{ key[1] }} | key : {{key[0] }}" >
+					<input type="button" class="btn_file" value="def.json" >
+					<a href="/type" class="btn_file">X</a>
+				</div>
 			    <div class="tools_bar"  data-key="{{key[0]}}" >
 					<input type="button" class="btn" id="run" value="<<< Run Mpost" >
 					<span class="inks" >
@@ -29,7 +46,7 @@
 					</span>
 				</div>
 			</div>
-			<div id="editor_mp" data-key="{{ key[0] }}">test</div>
+			<div id="editor_mp" data-key="{{ key[0] }}"></div>
 		</div>
 		%end
 		<div id="typewriter">
@@ -39,7 +56,7 @@
 			<div id="svgContainer"></div>
 		</div>
 		<div id="setchart">
-			<input type="button" onclick="writeJson(false);" class="btn" name="" id="btn_all" value="refresh all">
+			<!-- <input type="button" onclick="writeJson(false);" class="btn" name="" id="btn_all" value="refresh all"> -->
 		% for chart in setchart:
 		<a href="/type/{{ chart }}">
 			<div class="chart">	

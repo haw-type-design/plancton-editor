@@ -46,8 +46,6 @@ draw z8 -- z9;
 draw z10 -- z11; 
 draw z12 -- z13; 
 draw z14 -- z15; 
-draw z16 -- z17; 
-draw z18 -- z19; 
 
 endchar(19);
 end;

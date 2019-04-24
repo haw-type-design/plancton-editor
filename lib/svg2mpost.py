@@ -1,6 +1,5 @@
 import json
 import glob
-from pprint import pprint
 import os
 import subprocess
 import lxml.etree as ElementTree
@@ -107,7 +106,7 @@ def buildSvg(dirMP, setfig):
     for mp in SET:
         mpFile = os.path.basename(mp)
         key = os.path.splitext(mpFile)[0]
-        subprocess.call(["mpost", "-interaction=batchmode", mp])
+        subprocess.Popen(["mpost", "-interaction=batchmode", mp])
         subprocess.call(["rm", key + ".log"])
 
 def buildGlobalMp(dirFiles) :

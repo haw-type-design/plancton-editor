@@ -1,5 +1,6 @@
 let content = document.getElementById('content')
 let typewriter = document.getElementById('svgContainer')
+let setchart = document.getElementById('setchart')
 let editor_mp = document.getElementById('editor_mp')
 let run = document.getElementById('run')
 let inputWrite= document.getElementById('inputWrite')
@@ -11,10 +12,8 @@ let btn_all = document.getElementById('btn_all');
 let imgs = document.getElementsByClassName('imgChar')	
 
 
-if (content.className == 'type') {
+if (content.className !== 'set') {
 	var sentence = inputWrite.value
-} else {
-	var sentence = 'Plancton'
 }
 
 function getRandomInt(max) {
@@ -75,17 +74,18 @@ function buildNav(data) {
 }
 
 function writeJson(data){
-	typewriter.innerHTML = ''
-	typewriter.className = "loading"
+
 
 	if (data == false) {
-		data = false
 		var sentence = '-all'
 	}else {
 		var sentence = inputWrite.value
+		typewriter.innerHTML = ''
+		typewriter.className = "loading"
 	}
 	
 	var xmlhttp = new XMLHttpRequest();
+
 	xmlhttp.onreadystatechange = function()
 	{
 		if (xmlhttp.readyState == 4)
@@ -97,10 +97,15 @@ function writeJson(data){
 					var re = imgs[img].src
 					imgs[img].src = re + '2'
 				}
+			} else {	
+				writeJson(false)
 			}
 			typewriter.classList.remove("loading")
 		}
 	}
+
+	// data = JSON.stringify(data,  null, 4)
+	// data = data.replace(/\+/g, '#43');
 	xmlhttp.open('POST', '/write', true);
 	xmlhttp.send('json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
 }
@@ -147,7 +152,7 @@ function activeInks() {
 		}, false)
 }
 
-function refreshInks() {
+function refreshInks(editor) {
 		btn_refresh.addEventListener('click', function(){
 
 			var key = this.closest('.tools_bar').getAttribute('data-key')
@@ -158,6 +163,7 @@ function refreshInks() {
 				{
 					sentence = inputWrite.value
 					writeValue(sentence)
+					loadMp(editor)
 				}
 			}
 			xmlhttp.open('POST', '/updateMp', true)
@@ -183,15 +189,13 @@ function writeMp(editor, key) {
 	{
 		if (xmlhttp.readyState == 4)
 		{
+			sentence = inputWrite.value
+			writeValue(sentence)
 			console.log('finish')
 		}
 	}
 	xmlhttp.open('POST', '/writeMp', true);
-	// xmlhttp.send('mp=' + contentMp.stringify(data,  null, 4) + '&key=' + key);
-	
-
 	contentMp = contentMp.replace(/;/g, '#59');
-
 	xmlhttp.send('mp=' + contentMp + '&key=' + key);
 }
 
@@ -202,6 +206,9 @@ window.addEventListener('DOMContentLoaded', function(){
 	loadMp(editor)
 	readJson("/files/global-1.json", function(text){
 		var data = JSON.parse(text)
+
+
+		console.log(data)
 		buildNav(data)
 		changeValue(data)
 	})
@@ -219,7 +226,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	writeValue(sentence);
 	activeInks()
-	refreshInks()
+	refreshInks(editor)
 	btn_all.addEventListener('click',function(e){	
 		writeJson(data, true)
 	})
