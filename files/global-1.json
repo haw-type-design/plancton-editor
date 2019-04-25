@@ -12,7 +12,7 @@
                 ],
                 "description": "grid",
                 "name": "grid",
-                "value": "1",
+                "value": "0",
                 "unity": ""
             },
             "dot_label": {
@@ -52,7 +52,7 @@
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "28.05",
+                "value": "20.7",
                 "unity": "pt"
             },
             "ux": {

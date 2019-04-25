@@ -9,13 +9,11 @@ import urllib
 app = Bottle()
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-print(ROOT_PATH)
-
-@app.route("/static/<filepath:path>")
+@app.route('/static/<filepath:path>')
 def asset(filepath):
     return static_file(filepath, root=os.path.join(ROOT_PATH, 'static'))
 
-@app.route("/files/<filepath:path>")
+@app.route('/files/<filepath:path>')
 def files(filepath):
     return static_file(filepath, root=os.path.join(ROOT_PATH, 'files'))
 
@@ -57,19 +55,17 @@ def type(keycode='free'):
     else:
     	chartKey = [keycode, chr(int(keycode))]
     print(SET.sort())
-    return template('templates/index.tpl', setchart=SET, rand=rand, mode="type", key=chartKey)
-
-
+    return template('templates/index.tpl', setchart=SET, rand=rand, mode='type', key=chartKey)
 
 @app.route('/write', method='post')
 def traitementJson():
     json = request.forms.json
     sett = request.forms.set
     if sett != '-all':
-        file = open('files/global-1.json','w') 
+        file = open('files/global.json','w') 
         file.write(json)
         file.close()     
-        s2m.buildGlobalMp('files/global-1.json') 
+        s2m.buildGlobalMp('files/global.json') 
         for n in sett:
             s2m.buildSvg('files/mpost/mpost-files/', ord(n)) 
     else:
@@ -83,21 +79,20 @@ def writeMp():
     mp = request.forms.mp
     key = request.forms.key
     mp = mp.replace('#59', ';')
-    file = open('files/mpost/mpost-files/' + key + '.mp','w') 
+    file = open('files/mpost/mpost-files/' + key + '.mp','w')
     file.write(str(mp))
-    file.close()     
+    file.close()
     print(mp)
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return mp
 
-@app.route('/inkscape', method="post")
+@app.route('/inkscape', method='post')
 def inkscape():
     key = request.forms.key
-    subprocess.Popen(["inkscape", "files/input-svg/" + key + ".svg"])
-    
+    subprocess.Popen(['inkscape', 'files/input-svg/' + key + '.svg']) 
     return '<<<<<<< I N K S C A P E !' 
 
-@app.route('/updateMp', method="post")
+@app.route('/updateMp', method='post')
 def editeSvg():
     key = request.forms.key
     s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key)
@@ -105,5 +100,3 @@ def editeSvg():
     return '! ! ! ! ! ! !' 
 
 run(app, host="localhost", port=8080, reloader=True, debug=True)
-
-
