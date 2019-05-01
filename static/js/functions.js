@@ -6,13 +6,13 @@ let run = document.getElementById('run')
 let inputWrite= document.getElementById('inputWrite')
 let inputsRange = document.getElementsByClassName('input_range')
 let globalNav = document.getElementById('global_nav')
+let infoNav = document.getElementById('info_nav')
 let btn_inkscape = document.getElementById('inkscape'); 
 let btn_refresh = document.getElementById('refresh'); 
 let btn_all = document.getElementById('btn_all'); 
 let imgs = document.getElementsByClassName('imgChar')	
 
-
-if (content.className !== 'set') {
+if (content.className !== 'set ') {
 	var sentence = inputWrite.value
 }
 
@@ -71,6 +71,14 @@ function buildNav(data) {
 	for (i in glob){
 		inputBuild(glob, i)
 	}
+
+	// var info = data.font_info
+	// var p = []
+	// for (i in info){
+	// 	p += info[i]
+	// }
+	// var p += '<li>';
+
 }
 
 function writeJson(data){
@@ -90,7 +98,6 @@ function writeJson(data){
 		if (xmlhttp.readyState == 4)
 		{
 			if (data == false) {
-				console.log('test')
 				for(img in imgs) {
 					var re = imgs[img].src
 					imgs[img].src = re + '2'
@@ -117,7 +124,6 @@ function changeValue(data){
 			sp = document.getElementById('span_' + vari)
 			sp.innerHTML = val
 			data.variables[cat][vari].value = val
-			console.log(data)
 			writeJson(data, false)
 		});
 	}
@@ -175,7 +181,6 @@ function loadMp(editor) {
 	xhr = new XMLHttpRequest()
 	xhr.open("GET", "/files/mpost/mpost-files/" + key + ".mp?random=" + getRandomInt(3000), false)
 	xhr.send("")
-	console.log(xhr)
 	editor.setValue(xhr.responseText)
 }
 
@@ -188,7 +193,7 @@ function writeMp(editor, key) {
 		{
 			sentence = inputWrite.value
 			writeValue(sentence)
-			console.log('finish')
+
 		}
 	}
 	xmlhttp.open('POST', '/writeMp', true);
@@ -198,24 +203,25 @@ function writeMp(editor, key) {
 
 
 window.addEventListener('DOMContentLoaded', function(){
-	let editor = ace.edit("editor_mp");
-	editor.getSession().setMode("ace/mode/javascript");	
-	loadMp(editor)
+
+	if (content.className !== 'set ') {
+		let editor = ace.edit("editor_mp");
+		editor.getSession().setMode("ace/mode/javascript");	
+		loadMp(editor)
+	}
+
 	readJson("/files/global.json", function(text){
 		var data = JSON.parse(text)
-
-
-		console.log(data)
 		buildNav(data)
 		changeValue(data)
 	})
-	
+
 	run.addEventListener('click', function() {
 		var key = this.parentElement.getAttribute('data-key')
 		writeMp(editor, key)
 
 	})
-	
+
 	inputWrite.addEventListener('input', function() {
 		sentence = this.value
 		writeValue(sentence)

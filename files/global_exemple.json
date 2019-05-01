@@ -1,6 +1,8 @@
 {
-	"font-name": "Help-me",
-	"authors": "Luuse",	
+	"font_info": {
+		"font-name": "Help-me",
+		"authors": "Luuse"
+	},
 	"variables": {
 		"guide": {
 			"grid" : {

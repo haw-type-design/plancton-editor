@@ -19,6 +19,7 @@
 			<hr>
 			
 			<div id="interface_nav"></div>
+			<div id="info_nav"></div>
 			<div id="global_nav"></div>
 			<div class="tabs">
 			%if mode == 'type':

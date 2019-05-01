@@ -16,7 +16,7 @@ endchar({lenpoints});
 end;
 '''
 
-def parsePath(path):
+def parsePath(path, OX, OY):
     dparse = parse_path(path)
     cordonates = []
     draws = []
@@ -29,8 +29,8 @@ def parsePath(path):
         type = str(point)[0:4]
         if type == 'Move':
             if incD > 0:
-                cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
-                cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
+                cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real - OX) + ' * ox;')
+                cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y - OY) + ' * oy;')
                 draws.append(' z' + str(inc))
                 draws.append('; \n')
                 inc = inc + 1
@@ -41,8 +41,8 @@ def parsePath(path):
 
         elif type == 'Line' or type == 'Cubi': 
 
-            cordonates.append('x' + str(inc) + ' := ' + str(point.start.real) + ' * ux;')
-            cordonates.append('y' + str(inc)+ ' := ' + str(y - point.start.imag + y) + ' * uy;')
+            cordonates.append('x' + str(inc) + ' := ' + str(point.start.real - OX) + ' * ox;')
+            cordonates.append('y' + str(inc)+ ' := ' + str(y - point.start.imag + y - OY) + ' * oy;')
  
             draws.append(' z' + str(inc))
             if type == 'Line':
@@ -55,14 +55,22 @@ def parsePath(path):
         elif type == 'Close': 
             draws.append(';')
 
-    cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real) + ' * ux;')
-    cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y) + ' * uy;')
+    cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real - OX) + ' * ox;')
+    cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y - OY) + ' * oy;')
     draws.append(' z' + str(inc))
     draws.append('; \n')
 
+    # print([cordonates, draws, inc])
     return [cordonates, draws, inc]
 
-def buildMp(dirFiles_svg, dirFiles_mp, setfig):
+def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
+    if origin == None:
+        OX = 0
+        OY = 0
+    else: 
+        OX = origin[0]
+        OY = origin[1]
+
     if setfig != '-all':
         SET = glob.glob(dirFiles_svg + str(setfig) + '.svg')
     else:
@@ -82,7 +90,7 @@ def buildMp(dirFiles_svg, dirFiles_mp, setfig):
             d = path.attrib.get('d')
             if d:
                 letterD = d
-                valueP = parsePath(d)  # [0] ) cordonates; [1] draws
+                valueP = parsePath(d, OX, OY)  
 
                 buildFig = Template.format(
                     char       = chr(int(lDec)),
@@ -92,7 +100,6 @@ def buildMp(dirFiles_svg, dirFiles_mp, setfig):
                     draws      = ''.join(valueP[1]),
                     lenpoints  = valueP[2]
                 )
-
                 f = open( dirFiles_mp + lDec + '.mp', 'w')
                 f.write(buildFig) 
                 f.close()
@@ -115,18 +122,15 @@ def buildGlobalMp(dirFiles) :
     Tmp = '''{In} := {Out};'''
 
     with open(dirFiles) as f:
-        # customdecoder = JSONDecoder(object_pairs_hook=OrderedDict)
         data = json.load(f, object_pairs_hook=OrderedDict)
 
     CATEGORIES = data['variables']
-    # print(data)
 
     for gvs in CATEGORIES:
 
         for gv in CATEGORIES[gvs]:
             item = CATEGORIES[gvs][gv]
             if type(item) == OrderedDict:
-                # print(item['name'])
                 IN = '\n% ' +item['description']+ '\n' +item['name']
                 OUT = item['value'] + item['unity']
             else:
@@ -138,7 +142,6 @@ def buildGlobalMp(dirFiles) :
                        Out = OUT,
                     )
             out.append(Line)
-        # print('\n'.join(out))
         f = open('files/mpost/global.mp', 'w')
         f.write('\n'.join(out)) 
         f.close()

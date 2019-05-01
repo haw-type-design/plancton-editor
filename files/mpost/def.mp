@@ -8,6 +8,16 @@ ascHeight := 21 + baseline;
 descHeight := -9 + baseline;
 capHeight := 21 + baseline;
 
+def ox=
+	ux;
+enddef;
+
+def oy=
+	uy + baseline * uy);
+enddef;
+
+
+
 vardef cadratin(expr width)=
 	draw (0 * ux, 0 * uy)--(width * ux, 0 * uy)--(width * ux, height * uy)--(0 * ux, height * uy);
 enddef;
@@ -18,7 +28,7 @@ def beginchar(expr keycode, width)=
 
 	draw (0 * ux, 0 * uy) -- (width * ux, 0 * uy) -- (width * ux, height * uy) -- (0 * ux, height * uy) -- cycle scaled 0 withcolor red;
 	if grid = 1:
-		defaultscale :=.2;
+		defaultscale := .2;
 		for i=0 upto width:
 			draw (i*ux, height*uy) -- (i*ux, 0*uy) withcolor .3white;
 		endfor;
@@ -35,7 +45,6 @@ def beginchar(expr keycode, width)=
 		draw (0 * ux, descHeight * uy) -- (width * ux, descHeight * uy)  withcolor (green + blue);
 		draw (0 * ux, baseline * uy) -- (width * ux, baseline * uy)  withcolor green;
 	fi;
-
 
 	pickup pencircle xscaled sx yscaled sy rotated rot;
 enddef;

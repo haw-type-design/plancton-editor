@@ -9,6 +9,8 @@ import urllib
 app = Bottle()
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+origin = [0, 18]
+
 @app.route('/static/<filepath:path>')
 def asset(filepath):
     return static_file(filepath, root=os.path.join(ROOT_PATH, 'static'))
@@ -27,7 +29,7 @@ def index():
         return 'Il n\'y pas de fichiers'
     else:
         if not MPFOLDER: 
-            s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', '-all')
+            s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
             MPFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
         if not OUTFOLDER: 
             s2m.buildSvg('files/mpost/mpost-files/', '-all') 
@@ -95,7 +97,7 @@ def inkscape():
 @app.route('/updateMp', method='post')
 def editeSvg():
     key = request.forms.key
-    s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key)
+    s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key, origin)
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return '! ! ! ! ! ! !' 
 
