@@ -35,8 +35,8 @@
 		<div id="editorBox">
 			<div class="options">
 				<div class="tabs">
-					<input type="button" class="btn_file active" value="char : {{ key[1] }} | key : {{key[0] }}" >
-					<input type="button" class="btn_file" value="def.json" >
+					<input type="button" class="btn_file tab active" data-btn="{{ key[0] }}" value="char : {{ key[1] }} | key : {{key[0] }}" >
+					<input type="button" class="btn_file tab" data-btn="def.mp" value="def.mp" >
 					<a href="/type" class="btn_file">X</a>
 				</div>
 			    <div class="tools_bar"  data-key="{{key[0]}}" >
@@ -47,7 +47,8 @@
 					</span>
 				</div>
 			</div>
-			<div id="editor_mp" data-key="{{ key[0] }}"></div>
+			<div class="editor" id="editor_mp" data-key="mpost-files/{{ key[0] }}"></div>
+			<div class="editor" id="editor_def" data-key="def"></div>
 		</div>
 		%end
 		<div id="typewriter">

@@ -11,6 +11,11 @@ ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 origin = [0, 18]
 
+def write(loc, content):
+    file = open(loc, 'w')
+    file.write(str(content))
+    file.close()
+
 @app.route('/static/<filepath:path>')
 def asset(filepath):
     return static_file(filepath, root=os.path.join(ROOT_PATH, 'static'))
@@ -76,16 +81,23 @@ def traitementJson():
     print(json)
     return json
 
-@app.route('/writeMp', method='post')
+@app.route('/write-mp', method='post')
 def writeMp():
     mp = request.forms.mp
     key = request.forms.key
     mp = mp.replace('#59', ';')
-    file = open('files/mpost/mpost-files/' + key + '.mp','w')
-    file.write(str(mp))
-    file.close()
+    mp = mp.replace('#45', '+')
+    write('files/mpost/mpost-files/' + key + '.mp', mp)
+    # s2m.buildSvg('files/mpost/mpost-files/', key) 
+    return mp
+
+@app.route('/write-file', method='post')
+def writeF():
+    mp = request.forms.mp
+    mp = mp.replace('#59', ';')
+    mp = mp.replace('#45', '+')
     print(mp)
-    s2m.buildSvg('files/mpost/mpost-files/', key) 
+    write('files/mpost/def.mp', mp)
     return mp
 
 @app.route('/inkscape', method='post')

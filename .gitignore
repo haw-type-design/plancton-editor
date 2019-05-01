@@ -3,3 +3,4 @@ files/output-svg/*.svg
 mpost/mpost-files/
 sandbox/
 plancton-env/
+lib/__pycache__/

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- Created by MetaPost 2.00 on 2019.05.01:1820 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="239.102783" height="485.507278" viewBox="0 0 239.102783 485.507278">
+<!-- Original BoundingBox: 0.000000 0.000000 239.102783 485.507278 -->
+  <path d="M0.000000 485.000000L239.102783 485.000000L239.102783 6.794434L0.000000 6.794434Z" style="stroke:rgb(100.000000%,0.000000%,0.000000%); stroke-width: 0.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  <g transform="matrix(-0.052394,0.999703,-0.464979,-0.024369,0.000000,0.000000)">
+    <path d="M267.273266 -107.249715L12.453451 -258.514431L258.522823 -466.219360" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 38.513711;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.052394,0.999703,-0.464979,-0.024369,0.000000,0.000000)">
+    <path d="M36.305317 -261.202060L259.147854 -440.578671" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 38.513711;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.052394,0.999703,-0.464979,-0.024369,0.000000,0.000000)">
+    <path d="M194.467605 -150.468205L188.842319 -381.234406" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 38.513711;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.052394,0.999703,-0.464979,-0.024369,0.000000,0.000000)">
+    <path d="M255.347333 -105.905901L267.898298 -81.609026L268.523330 -55.968337L266.023203 -158.531093L266.648235 -132.890404L255.347333 -105.905901L230.870436 -128.858960" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 38.513711;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+  <g transform="matrix(-0.052394,0.999703,-0.464979,-0.024369,0.000000,0.000000)">
+    <path d="M223.370055 -436.547228L246.596890 -464.875546L257.897791 -491.860049L257.272759 -517.500738L260.397918 -389.297294L259.772886 -414.937983L247.221921 -439.234857" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 38.513711;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"></path>
+  </g>
+</svg>

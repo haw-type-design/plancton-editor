@@ -1,16 +1,19 @@
 let content = document.getElementById('content')
 let typewriter = document.getElementById('svgContainer')
 let setchart = document.getElementById('setchart')
+let editors = document.getElementsByClassName('editor')
 let editor_mp = document.getElementById('editor_mp')
 let run = document.getElementById('run')
 let inputWrite= document.getElementById('inputWrite')
 let inputsRange = document.getElementsByClassName('input_range')
 let globalNav = document.getElementById('global_nav')
 let infoNav = document.getElementById('info_nav')
-let btn_inkscape = document.getElementById('inkscape'); 
-let btn_refresh = document.getElementById('refresh'); 
-let btn_all = document.getElementById('btn_all'); 
+let btn_inkscape = document.getElementById('inkscape')
+let btn_refresh = document.getElementById('refresh')
+let btn_all = document.getElementById('btn_all')
+let btn_tab = document.getElementsByClassName('tab')
 let imgs = document.getElementsByClassName('imgChar')	
+let aceEditor = []
 
 if (content.className !== 'set ') {
 	var sentence = inputWrite.value
@@ -38,6 +41,7 @@ function loadSvg(key) {
 	xhr.overrideMimeType("image/svg+xml")
 	xhr.send("")
 	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + key + '" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
+	console.log()
 	typewriter.innerHTML += p	
 }
 
@@ -72,12 +76,13 @@ function buildNav(data) {
 		inputBuild(glob, i)
 	}
 
-	// var info = data.font_info
-	// var p = []
-	// for (i in info){
-	// 	p += info[i]
-	// }
-	// var p += '<li>';
+	var info = data.font_info
+	var p = []
+	for (i in info){
+		p += '<label>' + i + '| <span class="valueBox" >' + info[i] + '</span></label>'
+	}
+	infoNav.innerHTML += p
+
 
 }
 
@@ -167,6 +172,7 @@ function refreshInks(editor) {
 				{
 					sentence = inputWrite.value
 					writeValue(sentence)
+					console.log(editor)
 					loadMp(editor)
 				}
 			}
@@ -176,16 +182,17 @@ function refreshInks(editor) {
 }
 
 
-function loadMp(editor) {
-	var key = editor_mp.getAttribute('data-key')
+function loadMp(editor, edi) {
+	var key = edi.getAttribute('data-key')
 	xhr = new XMLHttpRequest()
-	xhr.open("GET", "/files/mpost/mpost-files/" + key + ".mp?random=" + getRandomInt(3000), false)
+	xhr.open("GET", "/files/mpost/" + key + ".mp?random=" + getRandomInt(3000), false)
 	xhr.send("")
 	editor.setValue(xhr.responseText)
 }
 
-function writeMp(editor, key) {
+function write(type, editor, key) {
 	var contentMp = editor.getValue()
+	console.log(contentMp)
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
 	{
@@ -196,43 +203,10 @@ function writeMp(editor, key) {
 
 		}
 	}
-	xmlhttp.open('POST', '/writeMp', true);
+	xmlhttp.open('POST', '/' + type, true);
 	contentMp = contentMp.replace(/;/g, '#59');
+	contentMp = contentMp.replace(/\+/g, '#45');
 	xmlhttp.send('mp=' + contentMp + '&key=' + key);
 }
 
-
-window.addEventListener('DOMContentLoaded', function(){
-
-	if (content.className !== 'set ') {
-		let editor = ace.edit("editor_mp");
-		editor.getSession().setMode("ace/mode/javascript");	
-		loadMp(editor)
-	}
-
-	readJson("/files/global.json", function(text){
-		var data = JSON.parse(text)
-		buildNav(data)
-		changeValue(data)
-	})
-
-	run.addEventListener('click', function() {
-		var key = this.parentElement.getAttribute('data-key')
-		writeMp(editor, key)
-
-	})
-
-	inputWrite.addEventListener('input', function() {
-		sentence = this.value
-		writeValue(sentence)
-	})
-
-	writeValue(sentence);
-	activeInks()
-	refreshInks(editor)
-	btn_all.addEventListener('click',function(e){	
-		writeJson(data, true)
-	})
-
-})
 

@@ -46,14 +46,18 @@ nav .block_input {
 	padding: 3px 0;
 }
 
-nav .block_input span.valueBox {
+span.valueBox {
 	color: var(--main-active-color);
 }
 
-nav label {
+#global_nav label {
 	float: left;
 	width: 50%;
 	/* display: block; */
+}
+#info_nav label {
+	width: 100%;
+	display: block;
 }
 
 nav .tabs {
@@ -94,9 +98,9 @@ nav .tabs {
 	margin: 0;
 	font-size: inherit;
 }
-#editor_mp {
+.editor {
 	width: 100%;
-    height: 100%;
+    height: 30%;
 }
 
 #setchart {
