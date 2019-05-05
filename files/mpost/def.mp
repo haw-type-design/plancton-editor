@@ -6,7 +6,7 @@ baseline := 18;
 xHeight := 14 + baseline;
 ascHeight := 21 + baseline;
 descHeight := -9 + baseline;
-capHeight := 20 + baseline;
+capHeight := 21 + baseline;
 
 def ox=
 	ux;

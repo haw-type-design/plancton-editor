@@ -125,6 +125,7 @@ def buildGlobalMp(dirFiles) :
         data = json.load(f, object_pairs_hook=OrderedDict)
 
     CATEGORIES = data['variables']
+    # print(data)
 
     for gvs in CATEGORIES:
 
