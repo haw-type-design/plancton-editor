@@ -113,4 +113,9 @@ def editeSvg():
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return '! ! ! ! ! ! !' 
 
+@app.route('/test')
+def test():
+    return template('templates/test.tpl')
+
+
 run(app, host="localhost", port=8080, reloader=True, debug=True)

@@ -26,7 +26,7 @@
                 ],
                 "description": "dot label",
                 "name": "dot_label",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             },
             "hints": {
@@ -54,7 +54,7 @@
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "9.45",
+                "value": "19.1",
                 "unity": "pt"
             },
             "ux": {

@@ -3,7 +3,7 @@
 grid := 1;
 
 % dot label
-dot_label := 0;
+dot_label := 1;
 
 % hints
 hints := 1;
@@ -11,7 +11,7 @@ outputtemplate := "files/output-svg/%c.svg";
 outputformat := "svg";
 
 % global unity
-u := 9.45pt;
+u := 19.1pt;
 
 % X Unity
 ux := 1u;
