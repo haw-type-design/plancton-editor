@@ -14,7 +14,7 @@
                 ],
                 "description": "grid",
                 "name": "grid",
-                "value": "1",
+                "value": "0",
                 "unity": ""
             },
             "dot_label": {
@@ -26,7 +26,7 @@
                 ],
                 "description": "dot label",
                 "name": "dot_label",
-                "value": "1",
+                "value": "0",
                 "unity": ""
             },
             "hints": {
@@ -54,7 +54,7 @@
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "19.1",
+                "value": "22.75",
                 "unity": "pt"
             },
             "ux": {
@@ -90,7 +90,7 @@
                 ],
                 "description": "Stroke Unity",
                 "name": "s",
-                "value": "1.5",
+                "value": "0.15",
                 "unity": "u"
             },
             "sx": {
@@ -126,7 +126,7 @@
                 ],
                 "description": "Stroke rotation",
                 "name": "rot",
-                "value": "267",
+                "value": "81",
                 "unity": ""
             }
         },

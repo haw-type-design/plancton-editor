@@ -1,7 +1,6 @@
 input ../global;
 
 height = 40;
-
 baseline := 18;
 xHeight := 14 + baseline;
 ascHeight := 21 + baseline;

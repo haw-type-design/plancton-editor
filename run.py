@@ -88,7 +88,7 @@ def writeMp():
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
     write('files/mpost/mpost-files/' + key + '.mp', mp)
-    # s2m.buildSvg('files/mpost/mpost-files/', key) 
+    s2m.buildSvg('files/mpost/mpost-files/', key) 
     return mp
 
 @app.route('/write-file', method='post')

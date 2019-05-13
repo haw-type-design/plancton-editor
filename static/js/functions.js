@@ -13,6 +13,7 @@ let btn_refresh = document.getElementById('refresh')
 let btn_all = document.getElementById('btn_all')
 let btn_tab = document.getElementsByClassName('tab')
 let imgs = document.getElementsByClassName('imgChar')	
+let toggleNav = document.getElementsByClassName('toggleNav')	
 let aceEditor = []
 
 if (content.className !== 'set ') {
@@ -41,7 +42,6 @@ function loadSvg(key) {
 	xhr.overrideMimeType("image/svg+xml")
 	xhr.send("")
 	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + key + '" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
-	console.log()
 	typewriter.innerHTML += p	
 }
 
@@ -172,7 +172,6 @@ function refreshInks(editor) {
 				{
 					sentence = inputWrite.value
 					writeValue(sentence)
-					console.log(editor)
 					loadMp(editor)
 				}
 			}
@@ -192,7 +191,6 @@ function loadMp(editor, edi) {
 
 function write(type, editor, key) {
 	var contentMp = editor.getValue()
-	console.log(contentMp)
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
 	{
@@ -200,7 +198,7 @@ function write(type, editor, key) {
 		{
 			sentence = inputWrite.value
 			writeValue(sentence)
-
+			
 		}
 	}
 	xmlhttp.open('POST', '/' + type, true);
@@ -208,5 +206,22 @@ function write(type, editor, key) {
 	contentMp = contentMp.replace(/\+/g, '#45');
 	xmlhttp.send('mp=' + contentMp + '&key=' + key);
 }
+
+/* INTERFACE */
+
+function toogle(elem, classN) {
+	let elems = document.querySelectorAll(elem)
+
+	for (var i = 0, len = elems.length; i < len; i++) {
+		elems[i].addEventListener('click', function(){
+			var e = document.querySelector(elem + '.' + classN[0])
+			e.classList.remove(classN[0])
+			e.classList.add(classN[1])
+			console.log(e)
+			this.classList.add(classN[0])
+		})
+	}
+} 
+
 
 

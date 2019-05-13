@@ -98,7 +98,7 @@ beginchar(66, 20);
     y47 := 11.0 * oy; 
     draw z1 -- z2; 
 draw z3 -- z4; 
-draw z5 -- z6 -- z7 -- z8 -- z9 -- z10 -- z11 -- z12; 
+draw z5 .. z6 -- z7 -- z8 -- z9 -- z10 -- z11 -- z12; 
 draw z13 -- z14 -- z15 -- z16 -- z17 -- z18 -- z19 -- z20 -- z21 -- z22 -- z23 -- z24; 
 draw z25 -- z26 -- z27 -- z28; 
 draw z29 -- z30 -- z31 -- z32 -- z33 -- z34 -- z35 -- z36; 

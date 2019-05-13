@@ -1,4 +1,3 @@
-
 % 6
 input ../def;
 beginchar(54, 17);

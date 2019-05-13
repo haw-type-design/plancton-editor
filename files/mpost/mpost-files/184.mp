@@ -14,7 +14,7 @@ beginchar(184, 18);
     y5 := -1.0 * oy;
     x6 := 11.0 * ox;
     y6 := 0.0 * oy; 
-    draw z1 -- z2 -- z3 -- z4 -- z5 -- z6; 
+    draw z1 .. z2 .. z3 -- z4 -- z5 -- z6; 
 
 endchar(6);
 end;

@@ -114,8 +114,10 @@ def buildSvg(dirMP, setfig):
     for mp in SET:
         mpFile = os.path.basename(mp)
         key = os.path.splitext(mpFile)[0]
-        subprocess.Popen(["mpost", "-interaction=batchmode", mp])
-        subprocess.call(["rm", key + ".log"])
+        subprocess.call(["mpost", "-interaction=batchmode", mp])
+        subprocess.call(["rm", "-f", "*.log"])
+
+    subprocess.call(["rm", "wesggggggghhhhhhh"])
 
 def buildGlobalMp(dirFiles) :
     out = []

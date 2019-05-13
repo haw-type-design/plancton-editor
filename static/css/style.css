@@ -100,7 +100,13 @@ nav .tabs {
 }
 .editor {
 	width: 100%;
-    height: 30%;
+	height: 100%;
+	bottom: 0px;
+	display: none;
+}
+
+.editor:target {
+	display: block;
 }
 
 #setchart {
@@ -117,17 +123,17 @@ nav .tabs {
 }
 #setchart img {
 	margin-top: 10%;
-    height: 100%;
-    cursor: pointer;
+	height: 100%;
+	cursor: pointer;
 	/* width: 100%; */
 }
 
 #btn_all {
-	    position: absolute;
-    display: block;
-    bottom: 20px;
-    margin-left: 20px;
-    z-index: 2;
+	position: absolute;
+	display: block;
+	bottom: 20px;
+	margin-left: 20px;
+	z-index: 2;
 }
 
 section#content {
@@ -143,29 +149,38 @@ section#content.set {
 	grid-template-rows: 100%;
 	grid-template-areas: "nav setchart";
 }
-section#content.type:not(.free) {
+section#content.type.trip {
 	grid-template-columns: 280px auto 400px;
-	grid-template-rows: 70%;
+	grid-template-rows: 100%;
 	grid-template-areas: "nav typewriter edition"
-	"setchart typewriter  edition";
+	"nav typewriter  edition";
 }
+section#content.type.dip {
+	grid-template-columns: 20px auto calc(40% - 20px);
+	grid-template-rows: 100%;
+	grid-template-areas: "nav typewriter edition"
+	"nav typewriter  edition";
+}
+.dip #interface_nav,
+.dip #info_nav,
+.dip #global_nav {
+	display: none;
+}
+
+
 section#content.type.free {
-	/* background: red; */
 	grid-template-columns: 280px auto;
-	grid-template-rows: 70%;
+	grid-template-rows: 100%;
 	grid-template-areas: "nav typewriter"
-	"setchart typewriter";
+	"nav typewriter";
 }
 section#content.type.free #editorBox {
 	display: none;
 }
 
-
 section .loading:before {
 	content: 'loading...';
-	/* left: 10px; */
 	position: absolute;
-	/* top: 10px; */
 	left: calc(50% - 25px);
 	background: var(--main-active-color);
 	top: calc(50% - 50px);
@@ -178,10 +193,12 @@ section .loading:before {
 	width: 10%;
     height: 10%;
 }
+
 .type .chart {
 	width: 20%;
     height: 20%;
 }
+
 .chart {
     box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
     float: left;
@@ -192,6 +209,7 @@ section .loading:before {
 .chart:hover {
 	background: white;
 }
+
 .chart .info {
     color: black;
     font-size: 12px;
@@ -209,11 +227,7 @@ section .loading:before {
     background: var(--main-bg-color);
 }
 
-[style^="stroke:rgb(0.000000%,0.000000%,100.000000%);"] {
-	/* stroke: red !important; */
-}
-.cadratin:hover  [style^="stroke:rgb(0.000000%,0.000000%,0.000000%);"] {
-	/* stroke: red !important; */
+.cadratin:hover [style^="stroke:rgb(0.000000%,0.000000%,0.000000%);"] {
 	stroke-width: .6 !important;
 }
 
@@ -232,15 +246,11 @@ svg text {
 	border: 1px solid black;
 	cursor: pointer;
 	background: #dddddd;
-	/* border-radius: 5px; */
 }
-
-.btn_file.active {	
-	border: none;
+.btn_file.active, .btn_file[data-active='true'] {
 	background: var(--main-active-color);
 	color: white;
 }
-
 
 .tabs {
 	display: grid;
@@ -255,10 +265,9 @@ svg text {
 .options .tools_bar {
 	font-size: 12px;
 	text-transform: uppercase;
-    cursor: pointer;
+	cursor: pointer;
 	margin: 20px 1px;
 }
-
 
 .options .btn:hover {	
 	background: black;
