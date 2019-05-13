@@ -1,10 +1,10 @@
 % rebase('templates/base.tpl')
 
-%if key[0] == 'free':
-	%status = 'free'
-%else:
-	%status = 'trip'
-%end 
+% if key[0] == 'free':
+	% status = 'free'
+% else:
+	% status = 'trip'
+% end 
 
 <section id="content" class="{{mode}} {{status}}">
 	<nav>
@@ -14,19 +14,19 @@
 		<div id="info_nav"></div>
 		<div id="global_nav"></div>
 		<div class="tabs">
-		%if mode == 'type':
+		% if mode == 'type':
 			<a id="dip" title="Ctrl+left" class="btn_file toggleNav">dip</a>
 			<a id="trip" title="Ctrl+right" class="btn_file toggleNav active">trip</a>
 			<br>
 			<a href="/index" class="btn_file" >set</a>
 			<a class="btn_file active" >type</a>
-		%else:
+		% else:
 			<a class="btn_file active" >set</a>
 			<a href="/type" class="btn_file" >type</a>
-		%end
+		% end
 		</div>
 	</nav>
-	%if mode == 'type':
+	% if mode == 'type':
 	<div id="editorBox">
 		<div class="options">
 			<div class="tabs">
@@ -45,24 +45,24 @@
 		<div class="editor" id="editor_mp" data-key="mpost-files/{{key[0]}}"></div>
 		<div class="editor" id="editor_def" data-key="def"></div>
 	</div>
-	%end
+	% end
 	<div id="typewriter">
-		%if mode == 'type':
+		% if mode == 'type':
 			<input type="text" name="" id="inputWrite" value="{{key[1]}}">
-		%end
+		% end
 		<div id="svgContainer"></div>
 	</div>
 
-	%if mode == 'set':
+	% if mode == 'set':
 	<div id="setchart">
 	% for chart in setchart:
 	<a href="/type/{{chart}}#editor_mp">
 		<div class="chart">	
 			<div class="info">
 				<span class="key">
-				%if mode == 'set':
+				% if mode == 'set':
 					key :
-				%end
+				% end
 				{{chart}}</span>
 			</div>
 			<div class="imgBox">
@@ -71,8 +71,10 @@
 		</div>
 	</a>
 	% end
-	<div class="chart addChart">
+		<div class="chart addChart">
 			<span class="key">+</span>
+		</div>
 	</div>
 	% end
+	% include('templates/form-glyph.tpl')
 </section>

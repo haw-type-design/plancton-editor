@@ -1,9 +1,9 @@
 
 % grid
-grid := 0;
+grid := 1;
 
 % dot label
-dot_label := 0;
+dot_label := 1;
 
 % hints
 hints := 1;
@@ -11,7 +11,7 @@ outputtemplate := "files/output-svg/%c.svg";
 outputformat := "svg";
 
 % global unity
-u := 22.75pt;
+u := 22pt;
 
 % X Unity
 ux := 1u;
@@ -20,16 +20,16 @@ ux := 1u;
 uy := 1u;
 
 % Stroke Unity
-s := 1.5u;
+s := 1u;
 
 % X Stroke Unity
-sx := 1s;
+sx := 0.8s;
 
 % Y Stroke Unity
-sy := 1s;
+sy := 0.8s;
 
 % Stroke rotation
-rot := 81;
+rot := 0;
 
 % baseline
 baseline := 17;

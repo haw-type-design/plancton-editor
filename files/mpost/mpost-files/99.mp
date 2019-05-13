@@ -2,7 +2,7 @@
 % c
 input ../def;
 beginchar(99, 14);
-    x1 := 7.0 * ox;
+    x1 := 12.0 * ox;
     y1 := 14.0 * oy;
     x2 := 5.0 * ox;
     y2 := 13.0 * oy;

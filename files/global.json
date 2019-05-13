@@ -14,7 +14,7 @@
                 ],
                 "description": "grid",
                 "name": "grid",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             },
             "dot_label": {
@@ -26,7 +26,7 @@
                 ],
                 "description": "dot label",
                 "name": "dot_label",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             },
             "hints": {
@@ -54,7 +54,7 @@
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "22.75",
+                "value": "22",
                 "unity": "pt"
             },
             "ux": {
@@ -90,7 +90,7 @@
                 ],
                 "description": "Stroke Unity",
                 "name": "s",
-                "value": "1.5",
+                "value": "1",
                 "unity": "u"
             },
             "sx": {
@@ -102,7 +102,7 @@
                 ],
                 "description": "X Stroke Unity",
                 "name": "sx",
-                "value": "1",
+                "value": "0.8",
                 "unity": "s"
             },
             "sy": {
@@ -114,7 +114,7 @@
                 ],
                 "description": "Y Stroke Unity",
                 "name": "sy",
-                "value": "1",
+                "value": "0.8",
                 "unity": "s"
             },
             "rot": {
@@ -126,7 +126,7 @@
                 ],
                 "description": "Stroke rotation",
                 "name": "rot",
-                "value": "81",
+                "value": "0",
                 "unity": ""
             }
         },
