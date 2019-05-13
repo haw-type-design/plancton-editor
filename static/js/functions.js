@@ -41,7 +41,7 @@ function loadSvg(key) {
 	xhr.open("GET", "/files/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
 	xhr.overrideMimeType("image/svg+xml")
 	xhr.send("")
-	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + key + '" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
+	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
 	typewriter.innerHTML += p	
 }
 

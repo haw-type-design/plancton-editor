@@ -3,9 +3,9 @@
 input ../def;
 beginchar(112, 18);
     x1 := 11.0 * ox;
-    y1 := 14.0 * oy;
+    y1 := xHeight * uy;
     x2 := 10.0 * ox;
-    y2 := 14.0 * oy;
+    y2 := xHeight * uy;
     x3 := 12.0 * ox;
     y3 := 13.0 * oy;
     x4 := 14.0 * ox;

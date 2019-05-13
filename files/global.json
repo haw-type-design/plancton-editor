@@ -90,7 +90,7 @@
                 ],
                 "description": "Stroke Unity",
                 "name": "s",
-                "value": "0.15",
+                "value": "1.5",
                 "unity": "u"
             },
             "sx": {
@@ -140,7 +140,7 @@
                 ],
                 "description": "baseline",
                 "name": "baseline",
-                "value": "19",
+                "value": "17",
                 "unity": ""
             },
             "xHeight": {
@@ -152,7 +152,7 @@
                 ],
                 "description": "xHeight",
                 "name": "xHeight",
-                "value": "15",
+                "value": "19",
                 "unity": "   baseline"
             },
             "capHeight": {
@@ -164,7 +164,7 @@
                 ],
                 "description": "capHeight",
                 "name": "capHeight",
-                "value": "21",
+                "value": "10",
                 "unity": "  us"
             }
         }

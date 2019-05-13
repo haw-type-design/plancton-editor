@@ -20,7 +20,7 @@ ux := 1u;
 uy := 1u;
 
 % Stroke Unity
-s := 0.15u;
+s := 1.5u;
 
 % X Stroke Unity
 sx := 1s;
@@ -32,10 +32,10 @@ sy := 1s;
 rot := 81;
 
 % baseline
-baseline := 19;
+baseline := 17;
 
 % xHeight
-xHeight := 15   baseline;
+xHeight := 19   baseline;
 
 % capHeight
-capHeight := 21  us;
+capHeight := 10  us;

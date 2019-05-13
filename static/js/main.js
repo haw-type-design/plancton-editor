@@ -29,9 +29,13 @@ window.addEventListener('DOMContentLoaded', function(){
 			} else if (evt.ctrlKey && evt.keyCode === 37){
 				content.classList.remove('trip')
 				content.classList.add('dip')
+				document.getElementById('trip').classList.remove('active')
+				document.getElementById('dip').classList.add('active')
 			} else if (evt.ctrlKey && evt.keyCode === 39){
 				content.classList.remove('dip')
 				content.classList.add('trip')
+				document.getElementById('dip').classList.remove('active')
+				document.getElementById('trip').classList.add('active')
 			} 
 		}
 		

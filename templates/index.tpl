@@ -15,8 +15,8 @@
 		<div id="global_nav"></div>
 		<div class="tabs">
 		%if mode == 'type':
-			<a class="btn_file toggleNav">dip</a>
-			<a class="btn_file toggleNav active">trip</a>
+			<a id="dip" title="Ctrl+left" class="btn_file toggleNav">dip</a>
+			<a id="trip" title="Ctrl+right" class="btn_file toggleNav active">trip</a>
 			<br>
 			<a href="/index" class="btn_file" >set</a>
 			<a class="btn_file active" >type</a>
@@ -56,7 +56,7 @@
 	%if mode == 'set':
 	<div id="setchart">
 	% for chart in setchart:
-	<a href="/type/{{chart}}">
+	<a href="/type/{{chart}}#editor_mp">
 		<div class="chart">	
 			<div class="info">
 				<span class="key">
