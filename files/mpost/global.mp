@@ -11,7 +11,7 @@ outputtemplate := "files/output-svg/%c.svg";
 outputformat := "svg";
 
 % global unity
-u := 22pt;
+u := 28.5pt;
 
 % X Unity
 ux := 1u;

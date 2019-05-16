@@ -35,6 +35,7 @@ def index():
     else:
         if not MPFOLDER: 
             s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
+            s2m.buildSvg('files/mpost/mpost-files/', '-all') 
             MPFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
         if not OUTFOLDER: 
             s2m.buildSvg('files/mpost/mpost-files/', '-all') 

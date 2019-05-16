@@ -1,5 +1,5 @@
 *.log
-files/output-svg/*.svg
+files/
 mpost/mpost-files/
 sandbox/
 plancton-env/
