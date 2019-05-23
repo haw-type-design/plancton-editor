@@ -119,4 +119,4 @@ def test():
     return template('templates/test.tpl')
 
 
-run(app, host="localhost", port=8080, reloader=True, debug=True)
+run(app, host="localhost", port=8088, reloader=True, debug=True)
