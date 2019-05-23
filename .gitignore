@@ -1,6 +1,5 @@
 *.log
 files/
-mpost/mpost-files/
 sandbox/
 plancton-env/
 lib/__pycache__/
