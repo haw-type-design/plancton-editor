@@ -117,8 +117,6 @@ def buildSvg(dirMP, setfig):
         subprocess.call(["mpost", "-interaction=batchmode", mp])
         subprocess.call(["rm", "-f", "*.log"])
 
-    subprocess.call(["rm", "wesggggggghhhhhhh"])
-
 def buildGlobalMp(dirFiles) :
     out = []
     Tmp = '''{In} := {Out};'''

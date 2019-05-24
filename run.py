@@ -1,7 +1,10 @@
 from bottle import Bottle, run, template, route, static_file, get, request
 import lib.svg2mpost as s2m
+import lib.svg2font as s2f
 import subprocess
 import os
+from os import listdir
+from os.path import isfile, isdir, join
 import glob
 import random
 import urllib
@@ -79,7 +82,7 @@ def traitementJson():
     else:
         s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     sett = ''
-    print(json)
+    subprocess.popen('rm -f *.log')
     return json
 
 @app.route('/write-mp', method='post')
@@ -114,9 +117,27 @@ def editeSvg():
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return '! ! ! ! ! ! !' 
 
-@app.route('/test')
-def test():
-    return template('templates/test.tpl')
+@app.route('/specimen')
+@app.route('/specimen/<elem>')
+def specimen(elem='temp'):
+    archiveList = [f for f in listdir('files/fonts/archive/') if isdir('files/fonts/archive/' + f)]
+    return template('templates/specimen.tpl', archiveList=archiveList, elem=elem)
 
+@app.route('/manager')
+@app.route('/manager/<action>/<subaction>')
+@app.route('/manager/<action>/<subaction>/<elem>')
+def manager(action='none', subaction='false', elem='false'): 
+    if action == 'generate':
+        s2f.buildFont(subaction)
+        print('salut')
+    if action == 'versions':
+        if subaction == 'save':
+            s2f.saveVersion()
+        elif subaction == 'delete':
+            s2f.deleteVersion(elem)
+        else:
+            return 'Il y a une erreur...'
 
-run(app, host="localhost", port=8080, reloader=True, debug=True)
+    return 'yes'
+
+run(app, host="localhost", port=8088, reloader=True, debug=True)

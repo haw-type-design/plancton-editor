@@ -15,11 +15,13 @@
 		<div id="global_nav"></div>
 		<div class="tabs">
 		% if mode == 'type':
-			<a id="dip" title="Ctrl+left" class="btn_file toggleNav">dip</a>
-			<a id="trip" title="Ctrl+right" class="btn_file toggleNav active">trip</a>
-			<br>
-			<a href="/index" class="btn_file" >set</a>
-			<a class="btn_file active" >type</a>
+
+				<a id="dip" title="Ctrl+left" class="btn_file toggleNav">dip</a>
+				<a id="trip" title="Ctrl+right" class="btn_file toggleNav active">trip</a>
+				<br/>
+				<br/>
+				<a href="/index" class="btn_file" >set</a>
+				<a class="btn_file active" >type</a>
 		% else:
 			<a class="btn_file active" >set</a>
 			<a href="/type" class="btn_file" >type</a>

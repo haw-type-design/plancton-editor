@@ -26,8 +26,8 @@ body {
 }
 
 nav {
+	background: var(--main-bg-color);
 	grid-area: nav;
-    background: var(--main-bg-color);
 	height: 100%;
 	margin: 0px;
 	padding: 5px;
@@ -53,35 +53,36 @@ span.valueBox {
 #global_nav label {
 	float: left;
 	width: 50%;
-	/* display: block; */
 }
+
 #info_nav label {
 	width: 100%;
 	display: block;
 }
 
 nav .tabs {
+	bottom: 0px;
+	font-size: 12px;
+	left: 0px;
 	margin-bottom: 0px;
 	position: absolute;
-	bottom: 10px;
-	font-size: 12px;
-	width: 200px;
 	text-transform: uppercase;
+	width: 300px;
 }
 
 #typewriter {
-	grid-area: typewriter;
-	overflow-x: scroll;
-	overflow-y: hidden;
-	padding: 10px;
 	border-right: 5px solid var(--main-bg-color);
+	grid-area: typewriter;
+	padding: 10px;
+	overflow-y: hidden;
+	overflow-x: scroll;
 }
 
 #typewriter #svgContainer {
-	width: auto;
-	height: 100%;
 	display: table;
+	height: 100%;
 	margin: 0 auto;
+	width: auto;
 }
 
 #typewriter #svgContainer .cadratin {
@@ -90,24 +91,25 @@ nav .tabs {
 }
 
 #addGlyph {
-	grid-area: addGlyph;
 	background: var(--main-bg-color);
+	grid-area: addGlyph;
 }
 
 #editorBox {
-	grid-area: edition;
 	background: var(--main-bg-color);
+	grid-area: edition;
 }
 
 #editorBox .options h1 {
-	margin: 0;
 	font-size: inherit;
+	margin: 0;
 }
+
 .editor {
-	width: 100%;
-	height: 100%;
 	bottom: 0px;
 	display: none;
+	height: 100%;
+	width: 100%;
 }
 
 .editor:target {
@@ -119,22 +121,22 @@ nav .tabs {
 	overflow-y: scroll;
 }
 #setchart .imgBox {
-	margin-top: 0%;
 	height: 80%;
+	margin-top: 0%;
 	cursor: pointer;
 
 }
 #setchart img {
-	margin-top: 10%;
-	height: 100%;
 	cursor: pointer;
+	height: 100%;
+	margin-top: 10%;
 }
 
 #btn_all {
-	position: absolute;
-	display: block;
 	bottom: 20px;
+	display: block;
 	margin-left: 20px;
+	position: absolute;
 	z-index: 2;
 }
 
@@ -150,6 +152,11 @@ section#content.set {
 	grid-template-columns: 280px calc(100% - 280px);
 	grid-template-rows: 100%;
 	grid-template-areas: "nav setchart";
+}
+section#content.specimen {
+	grid-template-columns: 280px calc(100% - 280px);
+	grid-template-rows: 100%;
+	grid-template-areas: "nav typewriter";
 }
 
 section#content.type.trip {
@@ -191,31 +198,26 @@ section#content.type.free #editorBox {
 }
 
 section .loading:before {
-	content: 'loading...';
-	position: absolute;
-	left: calc(50% - 25px);
 	background: var(--main-active-color);
+	color: white;
+	content: 'loading...';
+	left: calc(50% - 25px);
+	padding: 2px;
+	position: absolute;
 	top: calc(50% - 50px);
 	width: 50px;
-	padding: 2px;
-	color: white;
 }
 
 .set .chart {
-	width: 10%;
 	height: 10%;
-}
-
-.type .chart {
-	width: 20%;
-	height: 20%;
+	width: 10%;
 }
 
 .chart {
     box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
+    font-size: 10px;
     float: left;
     text-align: center;
-    font-size: 10px;
 }
 
 .chart:hover {
@@ -223,16 +225,16 @@ section .loading:before {
 }
 
 .chart .info {
+    background: var(--main-bg-color);
     color: black;
     font-size: 12px;
     position: relative;
-    margin-left: 0px;
     margin-bottom: 0px;
-    background: var(--main-bg-color);
+    margin-left: 0px;
 }
 .chart:hover .info {
     background: var(--main-active-color);
-	color: white;
+		color: white;
 }
 
 .addChart {
@@ -248,16 +250,16 @@ svg text {
 }
 
 .btn {	
-	padding: 2px 3px;
 	border: 1px solid black;
 	border-radius: 5px;
+	padding: 2px 3px;
 }
 
 .btn_file {	
-	padding: 2px 3px;
+	background: #dddddd;
 	border: 1px solid black;
 	cursor: pointer;
-	background: #dddddd;
+	padding: 2px 3px;
 }
 .btn_file.active, .btn_file[data-active='true'] {
 	background: var(--main-active-color);
@@ -285,14 +287,15 @@ svg text {
 	background: black;
 	color: white;
 }
+
 .options .inks {
-	right: 10px;
 	position: absolute;
+	right: 10px;
 }
 
 .options #refresh {
-	display: none;
 	color: purple;
+	display: none;
 }
 
 .activeInks #refresh {
@@ -307,5 +310,13 @@ svg:hover text {
 	display: block;
 }
 
-/* N E W  G L Y P H */
+.specimen {
+	background: black;
+	color: grey;
+}
 
+.specimen #typewriter h1 {
+	font-size: 300pt;
+	color: red;
+	font-weight: normal
+}
