@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Plancton</title>
-	<link rel="stylesheet" href="/static/css/style.css" title="" type="text/css">
+	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/print.css" type="text/css" media="print">
 </head>
 <body>
 	{{!base}}
