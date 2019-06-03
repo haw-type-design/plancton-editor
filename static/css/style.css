@@ -149,7 +149,7 @@ section#content {
 }
 
 section#content.set {
-	grid-template-columns: 280px calc(100% - 280px);
+	grid-template-columns: 200px calc(100% - 200px);
 	grid-template-rows: 100%;
 	grid-template-areas: "nav setchart";
 }
@@ -160,7 +160,7 @@ section#content.specimen {
 }
 
 section#content.type.trip {
-	grid-template-columns: 280px auto 400px;
+	grid-template-columns: 200px auto 400px;
 }
 
 section#content.type.dip {
@@ -242,7 +242,7 @@ section .loading:before {
 }
 
 .cadratin:hover [style^="stroke:rgb(0.000000%,0.000000%,0.000000%);"] {
-	stroke-width: .6 !important;
+	stroke-width: 1 !important;
 }
 
 svg text {
