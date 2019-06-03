@@ -1,6 +1,4 @@
 % rebase('templates/base.tpl')
-
-
 <section id="content" class="specimen">
 	<nav>
 		<h1>P L A N C T O N</h1>
@@ -20,12 +18,11 @@
 	<div id="typewriter">
 		<style>
 		@font-face{
-			font-family: 'temp';
-			src: url('files/fonts/archive/{{ elem }}/temp.otf') 
-			
+			font-family:'{{ elem }}';
+			src: url('files/fonts/archive/{{ elem }}/{{ elem }}.otf');	
 		}
 		</style>
-		<div class="page" style="font-family: 'temp';" >
+		<div class="page" style="font-family: {{ elem }}, times;" >
 			<h1>Hello world {{ elem }}</h1>
 		</div>
 	</div>

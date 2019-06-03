@@ -117,12 +117,13 @@ def editeSvg():
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return '! ! ! ! ! ! !' 
 
-@app.route('/specimen')
 @app.route('/specimen/<elem>')
+@app.route('/specimen')
 def specimen(elem='temp'):
     archiveList = [f for f in listdir('files/fonts/archive/') if isdir('files/fonts/archive/' + f)]
     return template('templates/specimen.tpl', archiveList=archiveList, elem=elem)
 
+# /manager/generate/
 @app.route('/manager')
 @app.route('/manager/<action>/<subaction>')
 @app.route('/manager/<action>/<subaction>/<elem>')

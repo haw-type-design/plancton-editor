@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	readJson("/files/global.json", function(text){
+	readJson("/files/global.json?rand=" + getRandomInt(3000), function(text){
 		var data = JSON.parse(text)
 		buildNav(data)
 		changeValue(data)

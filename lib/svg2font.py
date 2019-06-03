@@ -61,28 +61,30 @@ def buildFont(outline):
     SVG_DIR = glob.glob('files/fonts/archive/temp/output-svg/*.svg')
     font = ff.open('.tmp/empty.sfd')
     for g in SVG_DIR:
-        with open(g, 'rt') as gp:
-            treeLet = et.parse(gp)
-        rootLet = treeLet.getroot()
-        gwidth = rootLet.get('width')
-        gheight = rootLet.get('height')
         gkey = g.split("/")[-1].replace(".svg", "")
-        gwidth = round(float(gwidth))
-        gclean = removeCadra(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
-        pos = getInfoPath(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
-        scaleValue = 1000 / pos[3]
-        f = open(g, 'w')
-        f.write(str(gclean)) 
-        f.close()
+        if gkey.isdigit() == True:
+            with open(g, 'rt') as gp:
+                treeLet = et.parse(gp)
+            rootLet = treeLet.getroot()
+            gwidth = rootLet.get('width')
+            gheight = rootLet.get('height')
+            gwidth = round(float(gwidth))
+            gclean = removeCadra(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
+            pos = getInfoPath(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
+            scaleValue = 1000 / pos[3]
+            f = open(g, 'w')
+            f.write(str(gclean)) 
+            f.close()
 
-        if outline == 'true':
-            subprocess.call(['bash', 'lib/outline.sh', 'files/fonts/archive/temp/output-svg/' + gkey + '.svg']) 
+            if outline == 'true':
+                subprocess.call(['bash', 'lib/outline.sh', 'files/fonts/archive/temp/output-svg/' + gkey + '.svg']) 
 
-        letter_char = font.createChar(int(gkey))
-        letter_char.importOutlines('files/fonts/archive/temp/output-svg/' + gkey + '.svg')
-        letter_char.removeOverlap()
-        letter_char.width = gwidth * scaleValue
-    trs = psMat.translate(0, -87) 
+            letter_char = font.createChar(int(gkey))
+            letter_char.importOutlines('files/fonts/archive/temp/output-svg/' + gkey + '.svg')
+            letter_char.removeOverlap()
+            letter_char.width = gwidth * scaleValue
+
+    trs = psMat.translate(0, 0) 
     font.selection.all()
     font.transform(trs)
     font.correctDirection()

@@ -82,8 +82,6 @@ function buildNav(data) {
 		p += '<label>' + i + '| <span class="valueBox" >' + info[i] + '</span></label>'
 	}
 	infoNav.innerHTML += p
-
-
 }
 
 function writeJson(data){
