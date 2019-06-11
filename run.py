@@ -119,9 +119,10 @@ def editeSvg():
 
 @app.route('/specimen/<elem>')
 @app.route('/specimen')
-def specimen(elem='temp'):
+def specimen(elem=str('temp')):
     archiveList = [f for f in listdir('files/fonts/archive/') if isdir('files/fonts/archive/' + f)]
-    return template('templates/specimen.tpl', archiveList=archiveList, elem=elem)
+    return template('templates/specimen.tpl', archiveList=archiveList, elem=str(elem))
+
 
 # /manager/generate/
 @app.route('/manager')

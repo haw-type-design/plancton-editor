@@ -240,7 +240,9 @@ section .loading:before {
 .addChart {
     background: var(--main-bg-color);
 }
-
+.cadratin:hover svg {
+	background: white;
+}
 .cadratin:hover [style^="stroke:rgb(0.000000%,0.000000%,0.000000%);"] {
 	stroke-width: 1 !important;
 }
@@ -311,12 +313,26 @@ svg:hover text {
 }
 
 .specimen {
-	background: black;
-	color: grey;
+	background: var(--main-background-color) ;
+	color: black;
 }
 
 .specimen #typewriter h1 {
-	font-size: 300pt;
-	color: red;
+	font-size: 72pt;
 	font-weight: normal
+}
+
+.specimen ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.specimen ul li {
+	height: 30px;
+	background: white; 
+}
+
+.specimen ul li span {
+	outline: 1px solid blue;
 }

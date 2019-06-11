@@ -50,6 +50,8 @@ def deleteVersion(elem):
     os.popen('rm -rf files/fonts/archive/' + elem + '/')
 
 def buildFont(outline):
+    compositeChar = [192, 193, 194, 195, 196, 199, 200, 201, 202, 203, 204, 205, 206, 207, 210, 211, 212, 213, 214, 217, 218, 219, 220, 224, 225, 226, 227, 231, 232, 233, 234, 235, 236, 237, 238, 239, 242, 243, 244, 249, 250, 251, 252, 350, 351]
+
     os.popen('cp -rf files/output-svg/ files/fonts/archive/temp/')
     os.popen('cp -f files/global.json files/fonts/archive/temp/')
     os.popen('rm -f files/fonts/archive/temp/output-svg/ps.svg')
@@ -81,10 +83,18 @@ def buildFont(outline):
 
             letter_char = font.createChar(int(gkey))
             letter_char.importOutlines('files/fonts/archive/temp/output-svg/' + gkey + '.svg')
-            letter_char.removeOverlap()
-            letter_char.width = gwidth * scaleValue
+            letter_char.left_side_bearing = letter_char.right_side_bearing = 10
 
-    trs = psMat.translate(0, 0) 
+            letter_char.removeOverlap()
+            # letter_char.width = gwidth * scaleValue
+            letter_char.width = (gwidth * scaleValue)
+    for letter_comp in compositeChar:
+        # print(letter_comp)
+        glyphAcc = font.createChar(letter_comp)
+        # glyphAcc.width = 16
+        glyphAcc.build()
+
+    trs = psMat.translate(0, -70) 
     font.selection.all()
     font.transform(trs)
     font.correctDirection()
