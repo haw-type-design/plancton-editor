@@ -19,7 +19,7 @@ Plancton is a [metapost](https://en.wikipedia.org/wiki/MetaPost) font editor.
 
 ## Start server
 
-`python run.py` listening on `http://localhost:8088/`
+`python run.py` listening on `http://localhost:8080/`
 
 ## Contributors
 * [Luuse](http://www.luuse.io/)

@@ -82,7 +82,7 @@ def traitementJson():
     else:
         s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     sett = ''
-    subprocess.popen('rm -f *.log')
+    # subprocess.popen('rm -f *.log')
     return json
 
 @app.route('/write-mp', method='post')
@@ -117,12 +117,13 @@ def editeSvg():
     s2m.buildSvg('files/mpost/mpost-files/', key) 
     return '! ! ! ! ! ! !' 
 
-@app.route('/specimen/<elem>')
 @app.route('/specimen')
-def specimen(elem=str('temp')):
+@app.route('/specimen/<name>')
+def specimen(name='temp'):
     archiveList = [f for f in listdir('files/fonts/archive/') if isdir('files/fonts/archive/' + f)]
-    return template('templates/specimen.tpl', archiveList=archiveList, elem=str(elem))
-
+    tt = name 
+    print(name)
+    return template('templates/specimen.tpl', archiveList=archiveList, elem=tt)
 
 # /manager/generate/
 @app.route('/manager')

@@ -62,6 +62,7 @@ def buildFont(outline):
         ascent = height * int(d['font_info']['ascent'])
     SVG_DIR = glob.glob('files/fonts/archive/temp/output-svg/*.svg')
     font = ff.open('.tmp/empty.sfd')
+
     for g in SVG_DIR:
         gkey = g.split("/")[-1].replace(".svg", "")
         if gkey.isdigit() == True:
@@ -86,12 +87,10 @@ def buildFont(outline):
             letter_char.left_side_bearing = letter_char.right_side_bearing = 10
 
             letter_char.removeOverlap()
-            # letter_char.width = gwidth * scaleValue
             letter_char.width = (gwidth * scaleValue)
+
     for letter_comp in compositeChar:
-        # print(letter_comp)
         glyphAcc = font.createChar(letter_comp)
-        # glyphAcc.width = 16
         glyphAcc.build()
 
     trs = psMat.translate(0, -70) 

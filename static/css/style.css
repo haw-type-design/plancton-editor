@@ -149,7 +149,7 @@ section#content {
 }
 
 section#content.set {
-	grid-template-columns: 200px calc(100% - 200px);
+	grid-template-columns: 280px calc(100% - 200px);
 	grid-template-rows: 100%;
 	grid-template-areas: "nav setchart";
 }
@@ -160,7 +160,7 @@ section#content.specimen {
 }
 
 section#content.type.trip {
-	grid-template-columns: 200px auto 400px;
+	grid-template-columns: 280px auto 400px;
 }
 
 section#content.type.dip {
@@ -329,10 +329,59 @@ svg:hover text {
 }
 
 .specimen ul li {
-	height: 30px;
-	background: white; 
+	display: flex;
+}
+
+.specimen ul li:nth-of-type(odd) {
+	background: #dddddd;
+}
+
+.specimen ul li:nth-of-type(even) {
+	background: white;
 }
 
 .specimen ul li span {
-	outline: 1px solid blue;
+	padding: 0;
+	cursor: pointer;
 }
+
+.specimen ul li span.delete,
+.specimen ul li span.compare {
+	width: 30px;
+	text-align: center;
+}
+
+.specimen ul li span.version {
+	width: 100%;
+	text-align: left;
+	padding: 0pt 5pt;
+}
+
+.specimen .page {
+	outline: 1px solid grey; 
+	width: 90%;
+
+}
+
+.specimen a {
+	color: inherit;
+}
+
+.pages {
+	text-align: center;
+	font-weight: normal;
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.page {
+	background: white;
+}
+
+.page h1 {
+	font-size: 15vw !important;
+	line-height: 1;
+	font-weight: normal;
+	text-align: center;
+}
+
