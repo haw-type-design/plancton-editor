@@ -1,6 +1,6 @@
 from bottle import Bottle, run, template, route, static_file, get, request
-import lib.svg2mpost as s2m
-import lib.svg2font as s2f
+import svg2mpost as s2m
+import svg2font as s2f
 import subprocess
 import os
 from os import listdir
