@@ -23,23 +23,29 @@ def write(loc, content):
 def asset(filepath):
     return static_file(filepath, root=os.path.join(ROOT_PATH, 'static'))
 
-@app.route('/files/<filepath:path>')
+@app.route('/projects/<filepath:path>')
 def files(filepath):
-    return static_file(filepath, root=os.path.join(ROOT_PATH, 'files'))
+    return static_file(filepath, root=os.path.join(ROOT_PATH, 'projects'))
 
 @app.route('/')
 @app.route('/index')
-def index():
-    INFOLDER = glob.glob('files/input-svg/*.svg')
-    MPFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
-    OUTFOLDER = glob.glob('files/output-svg/*.svg')
+def set(PROJECT):
+    return 'no project'
+
+
+@app.route('/set/<PROJECT>')
+def set(PROJECT):
+    INFOLDER = glob.glob('projects/' + PROJECT + '/input-svg/*.svg')
+    MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
+    OUTFOLDER = glob.glob('projects/' + PROJECT + 'files/output-svg/*.svg')
+    
     if not INFOLDER:
         return 'Il n\'y pas de fichiers'
     else:
         if not MPFOLDER: 
-            s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
-            s2m.buildSvg('files/mpost/mpost-files/', '-all') 
-            MPFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+            s2m.buildMp('projects/' + PROJECT + '/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
+            s2m.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', '-all') 
+            MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
         if not OUTFOLDER: 
             s2m.buildSvg('files/mpost/mpost-files/', '-all') 
     SET = []
@@ -49,12 +55,12 @@ def index():
         SET.append(int(key))
     rand = random.randint(1, 300)
     SET.sort()
-    return template('templates/index.tpl', setchart=SET, rand=rand, mode="set", key="none")
+    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode="set", key="none", PROJECT=PROJECT)
 
-@app.route('/type')
-@app.route('/type/<keycode>')
-def type(keycode='free'):
-    SETFOLDER = glob.glob('files/mpost/mpost-files/*.mp')
+@app.route('/type/<PROJECT>')
+@app.route('/type/<PROJECT>/<keycode>')
+def type(PROJECT, keycode='free'):
+    SETFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
     SET = []
     for CHAR in SETFOLDER:
         mpFile = os.path.basename(str(CHAR))
@@ -66,33 +72,34 @@ def type(keycode='free'):
     else:
     	chartKey = [keycode, chr(int(keycode))]
     print(SET.sort())
-    return template('templates/index.tpl', setchart=SET, rand=rand, mode='type', key=chartKey)
+    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=PROJECT)
 
-@app.route('/write', method='post')
+@app.route('/write-json', method='post')
 def traitementJson():
+    PROJECT = request.forms.project
     json = request.forms.json
     sett = request.forms.set
     if sett != '-all':
-        file = open('files/global.json','w') 
+        file = open('projects/' + PROJECT + '/global.json','w') 
         file.write(json)
         file.close()     
-        s2m.buildGlobalMp('files/global.json') 
+        s2m.buildGlobalMp('projects/' + PROJECT + '/global.json') 
         for n in sett:
-            s2m.buildSvg('files/mpost/mpost-files/', ord(n)) 
+            s2m.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', ord(n), 'projects/' +PROJECT + '/output-svg/') 
     else:
-        s2m.buildSvg('files/mpost/mpost-files/', '-all') 
+        s2m.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', '-all') 
     sett = ''
-    # subprocess.popen('rm -f *.log')
     return json
 
 @app.route('/write-mp', method='post')
 def writeMp():
+    PROJECT = request.forms.project
     mp = request.forms.mp
     key = request.forms.key
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
-    write('files/mpost/mpost-files/' + key + '.mp', mp)
-    s2m.buildSvg('files/mpost/mpost-files/', key) 
+    write('/mpost/mpost-files/' + key + '.mp', mp)
+    s2m.buildSvg('files/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
     return mp
 
 @app.route('/write-file', method='post')
@@ -100,7 +107,6 @@ def writeF():
     mp = request.forms.mp
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
-    print(mp)
     write('files/mpost/def.mp', mp)
     return mp
 
@@ -122,7 +128,6 @@ def editeSvg():
 def specimen(name='temp'):
     archiveList = [f for f in listdir('files/fonts/archive/') if isdir('files/fonts/archive/' + f)]
     tt = name 
-    print(name)
     return template('templates/specimen.tpl', archiveList=archiveList, elem=tt)
 
 # /manager/generate/
@@ -132,7 +137,6 @@ def specimen(name='temp'):
 def manager(action='none', subaction='false', elem='false'): 
     if action == 'generate':
         s2f.buildFont(subaction)
-        print('salut')
     if action == 'versions':
         if subaction == 'save':
             s2f.saveVersion()
@@ -143,4 +147,4 @@ def manager(action='none', subaction='false', elem='false'):
 
     return 'yes'
 
-run(app, host="localhost", port=8088, reloader=True, debug=True)
+run(app, host="0.0.0.0", port=8088, reloader=True, debug=True)

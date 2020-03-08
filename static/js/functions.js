@@ -1,4 +1,5 @@
 let content = document.getElementById('content')
+let projectName = content.getAttribute('data-project')
 let typewriter = document.getElementById('svgContainer')
 let setchart = document.getElementById('setchart')
 let editors = document.getElementsByClassName('editor')
@@ -13,8 +14,9 @@ let btn_refresh = document.getElementById('refresh')
 let btn_all = document.getElementById('btn_all')
 let btn_tab = document.getElementsByClassName('tab')
 let imgs = document.getElementsByClassName('imgChar')	
-let toggleNav = document.getElementsByClassName('toggleNav')	
 let aceEditor = []
+let toggleNav = document.getElementsByClassName('toggleNav')	
+
 
 if (content.className !== 'set ') {
 	var sentence = inputWrite.value
@@ -38,10 +40,10 @@ function readJson(file, callback) {
 
 function loadSvg(key) {
 	xhr = new XMLHttpRequest()
-	xhr.open("GET", "/files/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
+	xhr.open("GET", "/projects/" + projectName + "/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
 	xhr.overrideMimeType("image/svg+xml")
 	xhr.send("")
-	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
+	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
 	typewriter.innerHTML += p	
 }
 
@@ -72,6 +74,7 @@ function inputBuild(variablesTable, i) {
 
 function buildNav(data) {
 	var glob = data.variables
+
 	for (i in glob){
 		inputBuild(glob, i)
 	}
@@ -93,7 +96,7 @@ function writeJson(data){
 		typewriter.innerHTML = ''
 		typewriter.className = "loading"
 	}
-	
+
 	var xmlhttp = new XMLHttpRequest();
 
 	xmlhttp.onreadystatechange = function()
@@ -114,8 +117,9 @@ function writeJson(data){
 		}
 	}
 
-	xmlhttp.open('POST', '/write', true);
-	xmlhttp.send('json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
+	xmlhttp.open('POST', '/write-json' , true);
+	console.log(JSON.stringify(data,  null, 4))
+	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
 }
 
 function changeValue(data){
@@ -178,11 +182,10 @@ function refreshInks(editor) {
 		}, false)
 }
 
-
 function loadMp(editor, edi) {
 	var key = edi.getAttribute('data-key')
 	xhr = new XMLHttpRequest()
-	xhr.open("GET", "/files/mpost/" + key + ".mp?random=" + getRandomInt(3000), false)
+	xhr.open("GET", "/projects/" + projectName + "/mpost/" + key + ".mp?random=" + getRandomInt(3000), false)
 	xhr.send("")
 	editor.setValue(xhr.responseText)
 }
@@ -196,7 +199,7 @@ function write(type, editor, key) {
 		{
 			sentence = inputWrite.value
 			writeValue(sentence)
-			
+
 		}
 	}
 	xmlhttp.open('POST', '/' + type, true);
@@ -215,7 +218,6 @@ function toogle(elem, classN) {
 			var e = document.querySelector(elem + '.' + classN[0])
 			e.classList.remove(classN[0])
 			e.classList.add(classN[1])
-			console.log(e)
 			this.classList.add(classN[0])
 		})
 	}

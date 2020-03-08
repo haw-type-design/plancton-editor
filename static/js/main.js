@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', function(){
-	
 	toogle('#editorBox .btn_file', ['active', 'desactive'])
 	toogle('nav .btn_file', ['active', 'desactive'])
 
@@ -16,13 +15,13 @@ window.addEventListener('DOMContentLoaded', function(){
 			write('write-file', aceEditor[1], key)
 			write('write-mp', aceEditor[0], key)
 		})
+
 		writeValue(sentence);
 		activeInks()
 
 		document.onkeydown = keydown 
 		function keydown (evt) { 
 			if (!evt) evt = event; 
-			console.log(event)
 			if (evt.ctrlKey && evt.keyCode === 77) {
 				write('write-file', aceEditor[1], key)
 				write('write-mp', aceEditor[0], key)
@@ -52,7 +51,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		}
 	}
 
-	readJson("/files/global.json?rand=" + getRandomInt(3000), function(text){
+	readJson("/projects/" + projectName + "/global.json?rand=" + getRandomInt(3000), function(text){
 		var data = JSON.parse(text)
 		buildNav(data)
 		changeValue(data)

@@ -27,12 +27,18 @@ class projectInfo:
         print('     > > > author email is ' + author_email)
         return author_email
     
+    def licence(): 
+        global author_email
+        author_email=input('Licence Project: ')
+        print('     > > > Licence is ' + author_email)
+        return author_email
+    
     def ascent(): 
         global ascent
         ascent=int(input('Ascent value: '))
         
         if type(ascent) == int :
-            print('     > > > Ascent Value ' + str(ascent))
+            print('     > > > ascent value ' + str(ascent))
             return ascent
         else: 
             print('     > > > use number only !')
@@ -40,20 +46,32 @@ class projectInfo:
     
     def descent(): 
         global descent
-        descent=int(input('Ascent value: ')) 
+        descent=int(input('Descent value: ')) 
         if type(descent) == int :
-            print('     > > > Descent Value ' + str(descent))
+            print('     > > > descent value ' + str(descent))
             return descent
         else: 
             print('     > > > use number only !')
             projectInfo.descent()
 
+    def x_height(): 
+        global descent
+        descent=int(input(' x height value: ')) 
+        if type(descent) == int :
+            print('     > > > x height ' + str(descent))
+            return descent
+        else: 
+            print('     > > > use number only !')
+            projectInfo.descent()
 
 data = {}
 data['name'] = projectInfo.name()
 data['author'] = projectInfo.author()
+data['author_email'] = projectInfo.author_email()
+data['licence'] = projectInfo.licence()
 data['ascent'] = projectInfo.ascent()
 data['descent'] = projectInfo.descent()
+data['x_height'] = projectInfo.x_height()
 json_data = json.dumps(data)
 
 print(json_data)
