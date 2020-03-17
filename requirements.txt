@@ -2,5 +2,4 @@ bottle==0.12.16
 lxml==4.3.3
 superprocess==0.2.0
 svg.path==3.0
-git+https://gitlab.com/Luuse/plancton/svg2mpost.git
-git+https://gitlab.com/Luuse/plancton/svg2font.git
+
