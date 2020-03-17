@@ -43,8 +43,6 @@ def set():
         d = loadJson(p)
         projectsjson.append(d['font_info'])
     
-    # return template('templates/index.tpl')
-    # return 'globals' 
     return template('templates/index.tpl', projectsjson=projectsjson)
 
 
@@ -58,10 +56,11 @@ def set(PROJECT):
         return 'Il n\'y pas de fichiers'
     else:
         if not MPFOLDER: 
-            plct.buildMp('projects/' + PROJECT + '/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
+            plct.buildMp('projects/' + PROJECT + '/input-svg/', 'projects/' + PROJECT +  '/mpost/mpost-files/', '-all', origin)
             plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', '-all') 
             MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
         if not OUTFOLDER: 
+
             plct.buildGlobalMp('projects/' + PROJECT + '/global.json','projects/' + PROJECT + '/mpost/global.mp' ) 
             plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' + PROJECT + '/output-svg/', '-all') 
     SET = []
@@ -87,7 +86,6 @@ def type(PROJECT, keycode='free'):
     	chartKey = [keycode, 'Ab']
     else:
     	chartKey = [keycode, chr(int(keycode))]
-    print(SET.sort())
     return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=PROJECT)
 
 @app.route('/write-json', method='post')
@@ -111,7 +109,6 @@ def traitementJson():
 def writeMp():
 
     PROJECT = request.forms.project
-    print(PROJECT)
     mp = request.forms.mp
     key = request.forms.key
     mp = mp.replace('#59', ';')
@@ -131,8 +128,14 @@ def writeF():
 
 @app.route('/inkscape', method='post')
 def inkscape():
+    PROJECT = request.forms.project
+    print('------------')
+    print('------------')
+    print(PROJECT)
+    print('------------')
+    print('------------')
     key = request.forms.key
-    subprocess.Popen(['inkscape', 'files/input-svg/' + key + '.svg']) 
+    subprocess.Popen(['inkscape', 'projects/' + PROJECT + '/input-svg/' + key + '.svg']) 
     return '<<<<<<< I N K S C A P E !' 
 
 @app.route('/updateMp', method='post')

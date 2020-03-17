@@ -63,6 +63,7 @@ def parsePath(path, OX, OY):
     return [cordonates, draws, inc]
 
 def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
+    print('---------> BuildMp ')
     if origin == None:
         OX = 0
         OY = 0
@@ -87,6 +88,8 @@ def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
 
         for path in root.iter():
             d = path.attrib.get('d')
+            print(d)
+            print('---')
             if d:
                 letterD = d
                 valueP = parsePath(d, OX, OY)  
@@ -106,7 +109,7 @@ def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
 def buildSvg(dirMP, dirOut, setfig):
     if setfig != '-all':
         SET = glob.glob(dirMP + str(setfig) + '.mp')
-        print(setfig)
+        # print(setfig)
     else:
         SET = glob.glob(dirMP + '*.mp')
 

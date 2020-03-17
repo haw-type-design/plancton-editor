@@ -68,7 +68,7 @@ function inputBuild(variablesTable, i) {
 			p += '<div class="block_input" ><label>' + table[u].description + ' | <span id="span_' + u + '" class="valueBox">' + table[u].value + '</span></label>' + input.outerHTML + '</div>'
 		}
 	}
-	globalNav.innerHTML += '<div class="items" id="' + i + '" ><h1>' + i + '</h1>' + p + '</div>'
+	globalNav.innerHTML += 'salut<div class="items" id="' + i + '" ><h1>' + i + '</h1>' + p + '</div>'
 
 }
 
@@ -143,7 +143,6 @@ function writeValue(stn) {
 		code = entry.charCodeAt(0)
 		loadSvg(code)
 	});
-
 }
 
 function activeInks() {
@@ -158,7 +157,7 @@ function activeInks() {
 				}
 			}
 			xmlhttp.open('POST', '/inkscape', true)
-			xmlhttp.send('key=' + key)
+			xmlhttp.send('project=' + projectName + '&key=' + key)
 			this.parentElement.classList.add('activeInks')
 		}, false)
 }

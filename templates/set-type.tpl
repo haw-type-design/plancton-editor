@@ -68,7 +68,7 @@
 				{{chart}}</span>
 			</div>
 			<div class="imgBox">
-				<img class="imgChar" src="/projects/{{ PROJECT  }}/output-svg/{{chart}}.svg?random={{rand}}" />
+				<img class="imgChar" src="/projects/{{PROJECT}}/output-svg/{{chart}}.svg?random={{rand}}" />
 			</div>
 		</div>
 	</a>
