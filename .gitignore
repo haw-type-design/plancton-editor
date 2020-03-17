@@ -3,3 +3,6 @@ files/
 sandbox/
 plancton-env/
 lib/__pycache__/
+Projects/*/
+__pycache__
+projects/

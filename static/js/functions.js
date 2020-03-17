@@ -178,7 +178,7 @@ function refreshInks(editor) {
 				}
 			}
 			xmlhttp.open('POST', '/updateMp', true)
-			xmlhttp.send('key=' + key)
+			xmlhttp.send('project=' + projectName + '&key=' + key)
 		}, false)
 }
 
@@ -205,7 +205,7 @@ function write(type, editor, key) {
 	xmlhttp.open('POST', '/' + type, true);
 	contentMp = contentMp.replace(/;/g, '#59');
 	contentMp = contentMp.replace(/\+/g, '#45');
-	xmlhttp.send('mp=' + contentMp + '&key=' + key);
+	xmlhttp.send('project=' + projectName + '&mp=' + contentMp + '&key=' + key);
 }
 
 /* INTERFACE */

@@ -1,6 +1,7 @@
 {
     "font_info": {
-        "font-name": "Untitle",
+        "font-name": "Meta old french",
+        "font-id": "meta-old-french",
         "height": "32",
         "ascent": "22",
         "descent": "10"
@@ -16,7 +17,7 @@
                 ],
                 "description": "grid",
                 "name": "grid",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             },
             "dot_label": {
@@ -28,7 +29,7 @@
                 ],
                 "description": "dot label",
                 "name": "dot_label",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             },
             "hints": {
@@ -40,12 +41,12 @@
                 ],
                 "description": "hints",
                 "name": "hints",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             }
         },
         "dimensions": {
-            "outputtemplate": "\"files/output-svg/%c.svg\"",
+            "outputtemplate": "\"projects/meta-old-french/output-svg/%c.svg\"",
             "outputformat": "\"svg\"",
             "u": {
                 "type": "range",
@@ -56,7 +57,7 @@
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "16",
+                "value": "24.95",
                 "unity": "pt"
             },
             "ux": {
@@ -128,46 +129,32 @@
                 ],
                 "description": "Stroke rotation",
                 "name": "rot",
-                "value": "11",
-                "unity": ""
-            }
-        },
-        "heights": {
-            "baseline": {
-                "type": "range",
-                "range": [
-                    0,
-                    40,
-                    1
-                ],
-                "description": "baseline",
-                "name": "baseline",
-                "value": "17",
+                "value": "0",
                 "unity": ""
             },
-            "xHeight": {
+            "srf_H": {
                 "type": "range",
                 "range": [
                     0,
-                    40,
-                    1
+                    10,
+                    0.1
                 ],
-                "description": "xHeight",
-                "name": "xHeight",
-                "value": "19",
-                "unity": "   baseline"
+                "description": "Serif Height",
+                "name": "srf_H",
+                "value": "1",
+                "unity": "ux"
             },
-            "capHeight": {
+            "srf_W": {
                 "type": "range",
                 "range": [
                     0,
-                    40,
-                    1
+                    10,
+                    0.1
                 ],
-                "description": "capHeight",
-                "name": "capHeight",
-                "value": "10",
-                "unity": "  us"
+                "description": "Serif Width",
+                "name": "srf_W",
+                "value": "4",
+                "unity": "ux"
             }
         }
     }

@@ -106,6 +106,7 @@ def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
 def buildSvg(dirMP, dirOut, setfig):
     if setfig != '-all':
         SET = glob.glob(dirMP + str(setfig) + '.mp')
+        print(setfig)
     else:
         SET = glob.glob(dirMP + '*.mp')
 
@@ -115,7 +116,7 @@ def buildSvg(dirMP, dirOut, setfig):
         subprocess.call(["mpost", "-interaction=batchmode", mp])
         subprocess.call(["rm", "-f", "*.log"])
 
-def buildGlobalMp(dirFiles) :
+def buildGlobalMp(dirFiles, dirMP) :
     out = []
     Tmp = '''{In} := {Out};'''
 
@@ -141,7 +142,7 @@ def buildGlobalMp(dirFiles) :
                        Out = OUT,
                     )
             out.append(Line)
-        f = open('projects/meta-old-french/mpost/global.mp', 'w')
+        f = open(dirMP, 'w')
         f.write('\n'.join(out)) 
         f.close()
 

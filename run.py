@@ -1,5 +1,5 @@
 from bottle import Bottle, run, template, route, static_file, get, request
-import svg2mpost as s2m
+import plancton as plct
 import svg2font as s2f
 import subprocess
 import os
@@ -8,6 +8,7 @@ from os.path import isfile, isdir, join
 import glob
 import random
 import urllib
+import json 
 
 app = Bottle()
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +20,11 @@ def write(loc, content):
     file.write(str(content))
     file.close()
 
+def loadJson(dirFiles):
+    with open(dirFiles, 'r') as f:
+        data = json.load(f)
+    return data
+
 @app.route('/static/<filepath:path>')
 def asset(filepath):
     return static_file(filepath, root=os.path.join(ROOT_PATH, 'static'))
@@ -29,25 +35,35 @@ def files(filepath):
 
 @app.route('/')
 @app.route('/index')
-def set(PROJECT):
-    return 'no project'
+def set():
+    globals = glob.glob('projects/*/global.json')
+    projectsjson = []
+    
+    for p in globals:
+        d = loadJson(p)
+        projectsjson.append(d['font_info'])
+    
+    # return template('templates/index.tpl')
+    # return 'globals' 
+    return template('templates/index.tpl', projectsjson=projectsjson)
 
 
 @app.route('/set/<PROJECT>')
 def set(PROJECT):
     INFOLDER = glob.glob('projects/' + PROJECT + '/input-svg/*.svg')
     MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
-    OUTFOLDER = glob.glob('projects/' + PROJECT + 'files/output-svg/*.svg')
-    
+    OUTFOLDER = glob.glob('projects/' + PROJECT + '/output-svg/*.svg')
+
     if not INFOLDER:
         return 'Il n\'y pas de fichiers'
     else:
         if not MPFOLDER: 
-            s2m.buildMp('projects/' + PROJECT + '/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
-            s2m.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', '-all') 
+            plct.buildMp('projects/' + PROJECT + '/input-svg/', 'files/mpost/mpost-files/', '-all', origin)
+            plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', '-all') 
             MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
         if not OUTFOLDER: 
-            s2m.buildSvg('files/mpost/mpost-files/', '-all') 
+            plct.buildGlobalMp('projects/' + PROJECT + '/global.json','projects/' + PROJECT + '/mpost/global.mp' ) 
+            plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' + PROJECT + '/output-svg/', '-all') 
     SET = []
     for CHAR in MPFOLDER:
         mpFile = os.path.basename(str(CHAR))
@@ -83,31 +99,34 @@ def traitementJson():
         file = open('projects/' + PROJECT + '/global.json','w') 
         file.write(json)
         file.close()     
-        s2m.buildGlobalMp('projects/' + PROJECT + '/global.json') 
+        plct.buildGlobalMp('projects/' + PROJECT + '/global.json','projects/' + PROJECT + '/mpost/global.mp' ) 
         for n in sett:
-            s2m.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', ord(n), 'projects/' +PROJECT + '/output-svg/') 
+            plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/',  'projects/' +PROJECT + '/output-svg/', ord(n)) 
     else:
-        s2m.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', '-all') 
+        plct.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', '-all') 
     sett = ''
     return json
 
 @app.route('/write-mp', method='post')
 def writeMp():
+
     PROJECT = request.forms.project
+    print(PROJECT)
     mp = request.forms.mp
     key = request.forms.key
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
-    write('/mpost/mpost-files/' + key + '.mp', mp)
-    s2m.buildSvg('files/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
+    write('projects/' + PROJECT + '/mpost/mpost-files/' + key + '.mp', mp)
+    plct.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
     return mp
 
 @app.route('/write-file', method='post')
 def writeF():
+    PROJECT = request.forms.project
     mp = request.forms.mp
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
-    write('files/mpost/def.mp', mp)
+    write('projects/' + PROJECT + '/mpost/def.mp', mp)
     return mp
 
 @app.route('/inkscape', method='post')
@@ -118,9 +137,10 @@ def inkscape():
 
 @app.route('/updateMp', method='post')
 def editeSvg():
+    PROJECT = request.forms.project
     key = request.forms.key
-    s2m.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key, origin)
-    s2m.buildSvg('files/mpost/mpost-files/', key) 
+    plct.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key, origin)
+    plct.buildSvg('files/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
     return '! ! ! ! ! ! !' 
 
 @app.route('/specimen')
@@ -130,7 +150,6 @@ def specimen(name='temp'):
     tt = name 
     return template('templates/specimen.tpl', archiveList=archiveList, elem=tt)
 
-# /manager/generate/
 @app.route('/manager')
 @app.route('/manager/<action>/<subaction>')
 @app.route('/manager/<action>/<subaction>/<elem>')

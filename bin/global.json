@@ -1,6 +1,7 @@
 {
     "font_info": {
-        "font-name": "Help-me",
+        "font-name": "Meta old french",
+        "font-id": "meta-old-french",
         "height": "32",
         "ascent": "22",
         "descent": "10"
@@ -28,7 +29,7 @@
                 ],
                 "description": "dot label",
                 "name": "dot_label",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             },
             "hints": {
@@ -40,12 +41,12 @@
                 ],
                 "description": "hints",
                 "name": "hints",
-                "value": "0",
+                "value": "1",
                 "unity": ""
             }
         },
         "dimensions": {
-            "outputtemplate": "\"files/output-svg/%c.svg\"",
+            "outputtemplate": "\"projects/meta-old-french/output-svg/%c.svg\"",
             "outputformat": "\"svg\"",
             "u": {
                 "type": "range",
@@ -56,7 +57,7 @@
                 ],
                 "description": "global unity",
                 "name": "u",
-                "value": "10.25",
+                "value": "24.95",
                 "unity": "pt"
             },
             "ux": {

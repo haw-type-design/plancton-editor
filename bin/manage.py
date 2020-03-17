@@ -1,4 +1,5 @@
-import re, json
+import re, json, os, sys 
+from slugify import slugify
 
 class projectInfo:
     def __init__(self, arg):
@@ -7,13 +8,8 @@ class projectInfo:
     def name(): 
         global name
         name=input('Project name : ')
-        if re.match(r'^\w+$', name):
-            print('     > > > project name is ' + name)
-
-            return name
-        else: 
-            print('     > > > invalid character !')
-            projectInfo.name()
+        print('     > > > project name is ' + name)
+        return name
     
     def author(): 
         global author
@@ -64,16 +60,45 @@ class projectInfo:
             print('     > > > use number only !')
             projectInfo.descent()
 
-data = {}
-data['name'] = projectInfo.name()
-data['author'] = projectInfo.author()
-data['author_email'] = projectInfo.author_email()
-data['licence'] = projectInfo.licence()
-data['ascent'] = projectInfo.ascent()
-data['descent'] = projectInfo.descent()
-data['x_height'] = projectInfo.x_height()
-json_data = json.dumps(data)
+# fontInfo = {}
+# fontInfo['name'] = projectInfo.name()
+# fontInfo['name_slug'] = slugify(data['name'])
+# fontInfo['author'] = projectInfo.author()
+# fontInfo['author_email'] = projectInfo.author_email()
+# fontInfo['licence'] = projectInfo.licence()
+# fontInfo['ascent'] = projectInfo.ascent()
+# fontInfo['descent'] = projectInfo.descent()
+# fontInfo['x_height'] = projectInfo.x_height()
 
-print(json_data)
+fontInfo = {}
+fontInfo['name'] = 'meta old' 
+fontInfo['name_slug'] = 'meta-old' 
+fontInfo['author'] = 'luuse' 
+fontInfo['author_email'] = 'luuse@luuse.io' 
+fontInfo['licence'] = 'ofl' 
+fontInfo['ascent'] = 15 
+fontInfo['descent'] = 5 
+fontInfo['x_height'] = 10 
+
+defFile = open( 'tpl/def.mp.tpl', 'r')
+
+buildDef = defFile.read().format(
+        height = (fontInfo['ascent'] + fontInfo['descent']),
+        x_height = fontInfo['x_height'],
+        ascent = fontInfo['ascent'],
+        descent = fontInfo['descent']
+        )
+
+if not os.path.exists('projects/' + fontInfo['name_slug']):
+    os.mkdir('projects/' + fontInfo['name_slug'])
+
+os.mkdir('projects/' + fontInfo['name_slug'] + '/mpost')
+os.mkdir('projects/' + fontInfo['name_slug'] + '/fonts')
+os.mkdir('projects/' + fontInfo['name_slug'] + '/input-svg')
+os.mkdir('projects/' + fontInfo['name_slug'] + '/output-svg')
 
 
+# defFile = open( fontInfo + '')
+
+# print(buildDef)
+# print(json_data)
