@@ -6,7 +6,7 @@ Plancton is a [metapost](https://en.wikipedia.org/wiki/MetaPost) font editor.
  * [Fontforge](http://fontforge.github.io) 
  * [Ikscape](https://inkscape.org/)
  * [TexLive](https://tug.org/texlive/)
- * Python3
+ * Python2 or Python3
  * Virtualen
 
 ## Install

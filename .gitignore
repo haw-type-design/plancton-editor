@@ -6,3 +6,4 @@ lib/__pycache__/
 Projects/*/
 __pycache__
 projects/
+bottle.py
