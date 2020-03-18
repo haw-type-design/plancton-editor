@@ -247,6 +247,10 @@ section .loading:before {
 	stroke-width: 1 !important;
 }
 
+.cadratin [style^="fill: rgb(0.000000%,0.000000%,0.000000%);stroke: none;"]:hover{
+	opacity: .4;
+}
+
 svg text {
 	fill: var(--main-active-color); 
 }

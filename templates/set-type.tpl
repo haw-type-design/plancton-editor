@@ -20,7 +20,7 @@
 				<a id="trip" title="Ctrl+right" class="btn_file toggleNav active">trip</a>
 				<br/>
 				<br/>
-				<a href="/{{ PROJECT }}" class="btn_file" >set</a>
+				<a href="/set/{{ PROJECT }}" class="btn_file" >set</a>
 				<a class="btn_file active" >type</a>
 		% else:
 			<a class="btn_file active" >set</a>

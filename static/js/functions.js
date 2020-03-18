@@ -68,7 +68,7 @@ function inputBuild(variablesTable, i) {
 			p += '<div class="block_input" ><label>' + table[u].description + ' | <span id="span_' + u + '" class="valueBox">' + table[u].value + '</span></label>' + input.outerHTML + '</div>'
 		}
 	}
-	globalNav.innerHTML += 'salut<div class="items" id="' + i + '" ><h1>' + i + '</h1>' + p + '</div>'
+	globalNav.innerHTML += '<div class="items" id="' + i + '" ><h1>' + i + '</h1>' + p + '</div>'
 
 }
 
