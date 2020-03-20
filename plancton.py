@@ -117,7 +117,8 @@ def buildSvg(dirMP, dirOut, setfig):
         mpFile = os.path.basename(mp)
         key = os.path.splitext(mpFile)[0]
         subprocess.call(["mpost", "-interaction=batchmode", mp])
-    subprocess.call(["rm", "-f", "*.log"])
+        for LOG in glob.glob('*.log'):
+            os.remove(LOG)
 
 def buildGlobalMp(dirFiles, dirMP) :
     out = []
@@ -127,7 +128,6 @@ def buildGlobalMp(dirFiles, dirMP) :
         data = json.load(f, object_pairs_hook=OrderedDict)
 
     CATEGORIES = data['variables']
-    # print(data)
 
     for gvs in CATEGORIES:
 

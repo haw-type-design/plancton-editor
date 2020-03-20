@@ -76,6 +76,7 @@ class Modify:
         if data['font_info']:
             i = 0
             d = []
+            print(type(data['font_info']))
             for item in data['font_info']:
                 print("     [{}] {} =  {}".format(i,item,data['font_info'][item]))
                 d.append(item)
@@ -90,8 +91,7 @@ class Modify:
                     if type(r) == data_type:
                         data['font_info'][d[num]] = r
                         Utility.writeJson(global_path, data)
-                        print(data)
-                        global_file(pname)
+                        Modify.global_file(pname)
                     else:
                         print(' The value must be a ' + data_type )
                         change_value()

@@ -1,3 +1,0 @@
-hoo
-{test}
-hoo
