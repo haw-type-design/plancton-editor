@@ -1,6 +1,7 @@
 let content = document.getElementById('content')
 let projectName = content.getAttribute('data-project')
-let typewriter = document.getElementById('svgContainer')
+let typewriter = document.querySelector('.typewriter')
+let svgContainer = document.getElementById('svgContainer')
 let setchart = document.getElementById('setchart')
 let editors = document.getElementsByClassName('editor')
 let editor_mp = document.getElementById('editor_mp')
@@ -16,6 +17,8 @@ let btn_tab = document.getElementsByClassName('tab')
 let imgs = document.getElementsByClassName('imgChar')	
 let aceEditor = []
 let toggleNav = document.getElementsByClassName('toggleNav')	
+let inputZoom = document.querySelector('.zoom input')	
+let log = document.querySelector('.log')	
 
 
 if (content.className !== 'set ') {
@@ -26,25 +29,82 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+function pingServer(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", url, true);
+	svgContainer.className = "loading"
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status == "200") {
+			callback(xhr.responseText);
+			svgContainer.classList.remove("loading")
+		}
+	}
+	xhr.send(null);
+}
+
 function readJson(file, callback) {
 	var rawFile = new XMLHttpRequest();
 	rawFile.overrideMimeType("application/json");
 	rawFile.open("GET", file, true);
 	rawFile.onreadystatechange = function() {
 		if (rawFile.readyState === 4 && rawFile.status == "200") {
-			callback(rawFile.responseText);
+			callback(rawFile.responseText)
 		}
 	}
 	rawFile.send(null);
 }
 
+function writeJson(data){
+
+	if (data == false) {
+		var sentence = '-all'
+	}else {
+		var sentence = inputWrite.value
+		svgContainer.innerHTML = ''
+		svgContainer.className = "loading"
+	}
+
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange = function()
+	{
+		if (xmlhttp.readyState == 4)
+		{
+			if (data == false) {
+				for(img in imgs) {
+					var re = imgs[img].src
+					imgs[img].src = re + '2'
+				}
+			} else {	
+				var sentence = inputWrite.value
+				writeValue(sentence)	
+				writeJson(false)
+			}
+			svgContainer.classList.remove("loading")
+		}
+	}
+
+	xmlhttp.open('POST', '/write-json' , true);
+	console.log(JSON.stringify(data,  null, 4))
+	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
+}
+
 function loadSvg(key) {
+	var l = String.fromCharCode(key);
 	xhr = new XMLHttpRequest()
-	xhr.open("GET", "/projects/" + projectName + "/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
 	xhr.overrideMimeType("image/svg+xml")
-	xhr.send("")
-	p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '</a></span>'
-	typewriter.innerHTML += p	
+	xhr.open("GET", "/projects/" + projectName + "/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status == "200") {
+		p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a class="link_cadratin" href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '<span class="ref">'+l+' | '+key+'.mp</span></a></span>'
+		}else {
+			p = ''
+
+		}
+	}
+	xhr.send("")	
+	
+	svgContainer.innerHTML += p	
 }
 
 function inputBuild(variablesTable, i) {
@@ -65,10 +125,10 @@ function inputBuild(variablesTable, i) {
 				input.setAttribute('step', table[u].range[2])
 				input.setAttribute('value', table[u].value)
 			}
-			p += '<div class="block_input" ><label>' + table[u].description + ' | <span id="span_' + u + '" class="valueBox">' + table[u].value + '</span></label>' + input.outerHTML + '</div>'
+			p += '<li class="block_input" ><label><div title="'+table[u].description+'"class="description">'+table[u].description+'</div><span id="span_'+u+'" class="valueBox">| '+table[u].value+'</span></label>'+input.outerHTML+'</li>'
 		}
 	}
-	globalNav.innerHTML += '<div class="items" id="' + i + '" ><h1>' + i + '</h1>' + p + '</div>'
+	globalNav.innerHTML += '<ul class="items" id="' + i + '" ><li><h1>' + i + '</h1></li>' + p + '</ul>'
 
 }
 
@@ -87,40 +147,6 @@ function buildNav(data) {
 	infoNav.innerHTML += p
 }
 
-function writeJson(data){
-
-	if (data == false) {
-		var sentence = '-all'
-	}else {
-		var sentence = inputWrite.value
-		typewriter.innerHTML = ''
-		typewriter.className = "loading"
-	}
-
-	var xmlhttp = new XMLHttpRequest();
-
-	xmlhttp.onreadystatechange = function()
-	{
-		if (xmlhttp.readyState == 4)
-		{
-			if (data == false) {
-				for(img in imgs) {
-					var re = imgs[img].src
-					imgs[img].src = re + '2'
-				}
-			} else {	
-				var sentence = inputWrite.value
-				writeValue(sentence)	
-				writeJson(false)
-			}
-			typewriter.classList.remove("loading")
-		}
-	}
-
-	xmlhttp.open('POST', '/write-json' , true);
-	console.log(JSON.stringify(data,  null, 4))
-	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
-}
 
 function changeValue(data){
 	for (var i = 0, len = inputsRange.length; i < len; i++) {
@@ -129,20 +155,80 @@ function changeValue(data){
 			var vari = this.getAttribute('data-var')
 			var cat = this.closest('.items').id
 			sp = document.getElementById('span_' + vari)
-			sp.innerHTML = val
+			sp.innerHTML = '| ' + val
 			data.variables[cat][vari].value = val
 			writeJson(data, false)
 		});
 	}
 }
 
+
 function writeValue(stn) {
-	typewriter.innerHTML = ""
-	stn = sentence.split('')
-	stn.forEach(function(entry) {
-		code = entry.charCodeAt(0)
-		loadSvg(code)
-	});
+	svgContainer.innerHTML = ""
+	var out = []
+	
+	if(stn.charAt(0) == ':') {
+		switch(true) {
+			case /:add _[0-9]+_/.test(stn): // test de :add _65_
+				var k = stn.match(/[0-9]+/)
+				var l = String.fromCharCode(k)
+				log.innerHTML = `<span style="color: green">
+				Do you want add the glyph ` + l + ` ? </span>
+				<input type="button" value="Yes"/>
+				<input type="button" value="No"/>
+				`
+				break
+			case /:del(ete)? _[0-9]+_/.test(stn): // test de :del _65_
+				var k = stn.match(/[0-9]+/)
+				var l = String.fromCharCode(k)
+				log.innerHTML = `<span style="color: green">
+				Do you want delete the glyph ` + l + ` ? </span>
+				<input type="button" value="Yes"/>
+				<input type="button" value="No"/>
+				`
+				break
+			case /:generate font/.test(stn): // test de :add _65_
+				alert('on genère la font' + stn.match(/[0-9]+/))
+				break
+			case /:set/.test(stn): // test de :add _65_
+				pingServer('/set/meta-old-french', function(cb){
+					out = cb.split('|')
+					out.forEach(function(entry) {
+						loadSvg(entry)
+					});
+				})	
+				if(!typewriter.classList.contains('set')){
+					typewriter.classList.add('set')
+				}
+			default:
+				log.innerHTML = ''
+
+			// case (stn == ':help'):
+			// 	alert('on voit apparaitre l\'aide de commandes')
+			// 	break
+			// case (stn == ':set'):
+			// 	alert('on voit apparaitre tout le glyphs set')
+			// 	break
+			// case (stn == ':add'):	
+			// 	console.log(stn.split(' '))
+			// 	// if(stn.split(' ').length == 2) {
+			// 	// 	alert('on ajoute un glyph')
+			// 	// }
+			// 	break
+			// case ':delete':
+			// 	alert('on suprime un glyph')
+			// 	break
+		}
+	}else{
+		out= stn.split('')
+		out.forEach(function(entry) {
+			code = entry.charCodeAt(0)
+			loadSvg(code)
+		});
+		if(typewriter.classList.contains('set')){
+			typewriter.classList.remove('set')
+		}
+	}
 }
 
 function activeInks() {
@@ -190,6 +276,7 @@ function loadMp(editor, edi) {
 }
 
 function write(type, editor, key) {
+	console.log(editor)
 	var contentMp = editor.getValue()
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()

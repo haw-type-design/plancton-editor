@@ -4,6 +4,6 @@ sandbox/
 plancton-env/
 lib/__pycache__/
 Projects/*/
-__pycache__
+__pycache__/
 projects/
 bottle.py

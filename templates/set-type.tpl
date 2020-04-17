@@ -8,51 +8,48 @@
 
 <section id="content" class="{{mode}} {{status}}" data-project="{{ PROJECT }}">
 	<nav>
-		<h1>P L A N C T O N / {{ PROJECT }}</h1>
-		<hr>
-		<div id="interface_nav"></div>
-		<div id="info_nav"></div>
-		<div id="global_nav"></div>
-		<div class="tabs">
-		% if mode == 'type':
-
-				<a id="dip" title="Ctrl+left" class="btn_file toggleNav">dip</a>
-				<a id="trip" title="Ctrl+right" class="btn_file toggleNav active">trip</a>
-				<br/>
-				<br/>
-				<a href="/set/{{ PROJECT }}" class="btn_file" >set</a>
-				<a class="btn_file active" >type</a>
-		% else:
-			<a class="btn_file active" >set</a>
-			<a href="/type/{{ PROJECT }}" class="btn_file" >type</a>
-		% end
+		<div class="header">
+			P L A N C T O N
+			<hr>
 		</div>
+		<div class="global">
+			<div id="interface_nav"></div>
+			<div id="info_nav"></div>
+			<div id="global_nav"></div>
+		</div>
+
 	</nav>
-	% if mode == 'type':
 	<div id="editorBox">
 		<div class="options">
 			<div class="tabs">
 				<a class="btn_file tab active" data-active="false" href="#editor_mp" >char : {{key[1]}} | key : {{key[0]}}</a>
 				<a class="btn_file tab" data-active="false" href="#editor_def" >def.mp</a>
-				<a href="/type" class="btn_file">X</a>
-			</div>
-			<div class="tools_bar"  data-key="{{key[0]}}" >
-				<input type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run Mpost" >
-				<span class="inks" >
-					<span class="btn" id="refresh" >mpost <<< </span>
-					<span id="inkscape" class="btn" > inkscape</span>
-				</span>
 			</div>
 		</div>
 		<div class="editor" id="editor_mp" data-key="mpost-files/{{key[0]}}"></div>
 		<div class="editor" id="editor_def" data-key="def"></div>
+		<div class="tools_bar"  data-key="{{key[0]}}" >
+			<input type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run Mpost" >
+			<span class="inks" >
+				<span class="btn" id="refresh" >mpost <<< </span>
+				<span id="inkscape" class="btn" > inkscape</span>
+			</span>
+		</div>
 	</div>
-	% end
-	<div id="typewriter">
-		% if mode == 'type':
-			<input type="text" name="" id="inputWrite" value="{{key[1]}}">
-		% end
+	<div class="typewriter">
+		<div class="zoom">
+			<input class="zoom" type="range" step="0.1" value="1" min="0.5" max="5" />
+			<span class="zoom_value"> 1 </span>
+		</div>
 		<div id="svgContainer"></div>
+		<div class="footer">
+			% if mode == 'type':
+				<a id="dip" title="Ctrl+left" class="btn_file toggleNav"> << </a> 
+				<input type="text" name="" id="inputWrite" value="{{key[1]}}">
+				<span class="log" >set</span>
+				<!-- <a class="btn_file active" >type</a> -->
+			% end
+		</div>
 	</div>
 
 	% if mode == 'set':
@@ -78,6 +75,5 @@
 		</div>
 	</div>
 	% end
-	% include('templates/form-glyph.tpl')
 </section>
 

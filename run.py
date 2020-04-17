@@ -35,7 +35,7 @@ def files(filepath):
 
 @app.route('/')
 @app.route('/index')
-def set():
+def index():
     globals = glob.glob('projects/*/global.json')
     projectsjson = []
     
@@ -46,8 +46,8 @@ def set():
     return template('templates/index.tpl', projectsjson=projectsjson)
 
 
-@app.route('/set/<PROJECT>')
-def set(PROJECT):
+@app.route('/setOff/<PROJECT>')
+def setOff(PROJECT):
     INFOLDER = glob.glob('projects/' + PROJECT + '/input-svg/*.svg')
     MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
     OUTFOLDER = glob.glob('projects/' + PROJECT + '/output-svg/*.svg')
@@ -70,7 +70,30 @@ def set(PROJECT):
         SET.append(int(key))
     rand = random.randint(1, 300)
     SET.sort()
-    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode="set", key="none", PROJECT=PROJECT)
+    print(SET)
+    SET = list(map(str, SET))
+    return '|'.join(SET)
+    # return template('templates/set-type.tpl', setchart=SET, rand=rand, mode="set", key="none", PROJECT=PROJECT)
+
+@app.route('/set/<PROJECT>')
+def set(PROJECT):
+    MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
+
+    out_path = 'projects/' + PROJECT + '/output-svg/'
+    SET = []
+    for CHAR in MPFOLDER:
+        mpFile = os.path.basename(str(CHAR))
+        key = os.path.splitext(mpFile)[0]
+        # if os.path.isfile(out_path+key+'.svg'):
+        #     pass
+        # else:
+        #     plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
+
+        SET.append(int(key))
+    SET.sort()
+    # print(SET)
+    SET = list(map(str, SET))
+    return '|'.join(SET)
 
 @app.route('/type/<PROJECT>')
 @app.route('/type/<PROJECT>/<keycode>')

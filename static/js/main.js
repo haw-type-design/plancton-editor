@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', function(){
 	toogle('#editorBox .btn_file', ['active', 'desactive'])
 	toogle('nav .btn_file', ['active', 'desactive'])
 
-	if (content.className !== 'set ') {
+
 		var key = document.getElementsByClassName('tools_bar')[0].getAttribute('data-key')
 		for (var i = 0, len = editors.length; i < len; i++) {
 			aceEditor[i] = ace.edit(editors[i]);
@@ -10,7 +10,6 @@ window.addEventListener('DOMContentLoaded', function(){
 			loadMp(aceEditor[i], editors[i])
 			refreshInks(aceEditor[i])
 		}
-
 		run.addEventListener('click', function() {
 			write('write-file', aceEditor[1], key)
 			write('write-mp', aceEditor[0], key)
@@ -26,27 +25,20 @@ window.addEventListener('DOMContentLoaded', function(){
 				write('write-file', aceEditor[1], key)
 				write('write-mp', aceEditor[0], key)
 			} else if (evt.ctrlKey && evt.keyCode === 37){
-				content.classList.remove('trip')
-				content.classList.add('dip')
-				document.getElementById('trip').classList.remove('active')
-				document.getElementById('dip').classList.add('active')
+				content.classList.toggle('dip')
+				this.classList.toggle('active')
 			} else if (evt.ctrlKey && evt.keyCode === 39){
 				content.classList.remove('dip')
 				content.classList.add('trip')
 				document.getElementById('dip').classList.remove('active')
 				document.getElementById('trip').classList.add('active')
 			} 
-		}
 		
 		for (var i = 0, len = toggleNav.length; i < len; i++) {
 			toggleNav[i].addEventListener('click', function(){
-				if (this.innerHTML == 'trip') {
-					content.classList.remove('dip')
-					content.classList.add('trip')
-				} else {
-					content.classList.remove('trip')
-					content.classList.add('dip')
-				}
+					content.classList.toggle('dip')
+					this.classList.toggle('active')
+					
 			})
 		}
 	}
@@ -61,5 +53,10 @@ window.addEventListener('DOMContentLoaded', function(){
 		sentence = this.value
 		writeValue(sentence)
 	})
+
+	inputZoom.addEventListener('change', function(i,item){
+		svgContainer.style.transform = 'scale('+this.value+')'
+	})
+
 
 })

@@ -5,7 +5,7 @@ _DIRPROJ_ = 'projects'
 class Utility:
     def loadJson(dirFiles):
         with open(dirFiles, 'r') as f:
-            data = json.load(f)
+            data = json.load(f):
         return data
 
     def writeJson(path_file, data):
@@ -13,7 +13,12 @@ class Utility:
         file.write(json.dumps(data, ensure_ascii=False)) 
 
         file.close()
+
+    def stop():
+        stop()
     
+class 
+
 
 class Interacive:
 
@@ -76,12 +81,11 @@ class Modify:
         if data['font_info']:
             i = 0
             d = []
-            print(type(data['font_info']))
             for item in data['font_info']:
                 print("     [{}] {} =  {}".format(i,item,data['font_info'][item]))
                 d.append(item)
                 i = i + 1
-            num=int(input('\n Tape the number of the key: '))
+            num=int(input('\n Tape the number of the key : '))
 
             if type(num) == int:
 
@@ -91,7 +95,12 @@ class Modify:
                     if type(r) == data_type:
                         data['font_info'][d[num]] = r
                         Utility.writeJson(global_path, data)
-                        Modify.global_file(pname)
+                        continu = input('\n Do you want to continue the changes [Y/N] ')
+                        if continu == 'N' or continu == 'n':
+                            print('Byyyyyy !!!')
+                            Utility.stop()
+                        else:
+                            Modify.global_file(pname)
                     else:
                         print(' The value must be a ' + data_type )
                         change_value()

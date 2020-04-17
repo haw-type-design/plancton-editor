@@ -1,37 +1,77 @@
 @import 'fonts.css';
 
+/* RESET  */
+
+ul {
+	padding: 0;
+	display: block;
+}
+
+ul > li {
+	display: block;
+}
+
+a, .ref, input[type='text'] {
+	text-align: center;
+	text-decoration: none;
+	border-bottom: 1px solid grey;
+	border-left: 1px solid grey;
+	border-right: 1px solid grey;
+	border-top: none;
+	background: none;
+}
+
+.link_cadratin {
+	border: none;
+	color: grey;
+}
+
+
+/* ENDRESET */
+
+
 :root {
-  --main-bg-color: oldlace;
-  --main-active-color: blue;
+	--main-bg-color: oldlace;
+	--main-active-color: blue;
 }
 
 input[type='range'] {
-    -webkit-appearance: none !important;
-    background: white;
-    height:7px;
+	-webkit-appearance: none !important;
+	background: white;
+	height:7px;
 }
 input[type='range']::-webkit-slider-thumb {
-    -webkit-appearance: none !important;
-    background: var(--main-active-color);
-    height: 7px;
-    width: 7px;
+	-webkit-appearance: none !important;
+	background: var(--main-active-color);
+	height: 7px;
+	width: 7px;
 }
 
 body {
 	background: #F0F0F0;
 	display: grid;
-	font-family: 'NotoSans';
-	font-size: 10px;
+	font-family: 'source-code';
+	font-size: 14px;
+	line-height: 1.3em;
 	margin: 0px;
 }
 
 nav {
-	background: var(--main-bg-color);
+	/* background: var(--main-bg-color); */
 	grid-area: nav;
 	height: 100%;
 	margin: 0px;
 	padding: 5px;
 	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	width: 100%;
+}
+
+
+nav .header {
+	height: 40px;
 }
 
 nav h1 {
@@ -42,8 +82,23 @@ nav h1 {
 	margin-top: 12px;
 }
 
+nav .global {
+	height: calc(93% - 40px);
+	bottom: 0px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width: calc(100% - 5px);
+}
+
 nav .block_input {
 	padding: 3px 0;
+}
+nav .block_input .description {
+	display: inline-block;
+	width: 70px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 span.valueBox {
@@ -52,7 +107,7 @@ span.valueBox {
 
 #global_nav label {
 	float: left;
-	width: 50%;
+	width: 48%;
 }
 
 #info_nav label {
@@ -62,42 +117,85 @@ span.valueBox {
 
 nav .tabs {
 	bottom: 0px;
-	font-size: 12px;
 	left: 0px;
 	margin-bottom: 0px;
-	position: absolute;
 	text-transform: uppercase;
 	width: 300px;
+	height: 7%;
 }
 
-#typewriter {
-	border-right: 5px solid var(--main-bg-color);
-	grid-area: typewriter;
+.typewriter {
+	/* border-right: 5px solid var(--main-bg-color); */
+	box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
 	padding: 10px;
-	overflow-y: hidden;
-	overflow-x: scroll;
+	grid-area: typewriter;
 }
 
-#typewriter #svgContainer {
+.typewriter {
+	overflow: scroll;
+}
+
+.typewriter #svgContainer {
+	transform-origin: 0 0;
+}
+
+.typewriter:not(.set) #svgContainer {
 	display: table;
-	height: 100%;
+	height: calc(100% - 20px);
 	margin: 0 auto;
 	width: auto;
 }
 
-#typewriter #svgContainer .cadratin {
+.typewriter.set #svgContainer {
+	display: table-cell;
+	text-align: center;
+}
+
+.typewriter #svgContainer .cadratin {
 	display: table-cell;
 	vertical-align: middle;
 }
+.typewriter.set  #svgContainer .cadratin {
+	display: initial;
+	vertical-align: middle;
+}
+.typewriter #svgContainer .cadratin a {
+	display: inline-grid;
+}
+
+.typewriter .footer {
+	position: fixed;
+	bottom: 10px;
+}
+
+.typewriter .zoom {
+	position: absolute;
+	z-index: 10;
+}
+
+.typewriter .zoom input[type=range] {
+
+	box-sizing: border-box;
+	cursor:n-resize;
+}
 
 #addGlyph {
-	background: var(--main-bg-color);
+	/* background: var(--main-bg-color); */
 	grid-area: addGlyph;
 }
 
 #editorBox {
-	background: var(--main-bg-color);
+	background: none;
 	grid-area: edition;
+}
+
+.ace-tm {
+	background: none !important; 
+} 
+#editorBox .ace_content {
+	background: none;
+	box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
+	padding-left: 3px;
 }
 
 #editorBox .options h1 {
@@ -116,20 +214,10 @@ nav .tabs {
 	display: block;
 }
 
-#setchart {
-	grid-area: setchart;
-	overflow-y: scroll;
-}
-#setchart .imgBox {
-	height: 80%;
+.set .cadratin {
+	height: 20%;
 	margin-top: 0%;
-	cursor: pointer;
 
-}
-#setchart img {
-	cursor: pointer;
-	height: 100%;
-	margin-top: 10%;
 }
 
 #btn_all {
@@ -148,19 +236,9 @@ section#content {
 	z-index: 1;
 }
 
-section#content.set {
-	grid-template-columns: 280px calc(100% - 200px);
-	grid-template-rows: 100%;
-	grid-template-areas: "nav setchart";
-}
-section#content.specimen {
-	grid-template-columns: 280px calc(100% - 280px);
-	grid-template-rows: 100%;
-	grid-template-areas: "nav typewriter";
-}
 
 section#content.type.trip {
-	grid-template-columns: 280px auto 400px;
+	grid-template-columns: 300px auto 400px;
 }
 
 section#content.type.dip {
@@ -171,24 +249,21 @@ section#content.type.add {
 	grid-template-areas: "nav typewriter edition"
 	"nav addGlyph edition";
 }
-
 section#content.type {
 	grid-template-rows: 100%;
 	grid-template-areas: "nav typewriter edition"
 	"nav typewriter edition";
 }
 
-.dip #interface_nav,
-.dip #info_nav,
-.dip #global_nav {
-	display: none;
+.dip nav {
+	visibility: hidden;
 }
 .type:not(.add) #addGlyph{
 	display: none;
 }
 
 section#content.type.free {
-	grid-template-columns: 280px auto;
+	grid-template-columns: 300px auto;
 	grid-template-rows: 100%;
 	grid-template-areas: "nav typewriter"
 	"nav typewriter";
@@ -208,16 +283,17 @@ section .loading:before {
 	width: 50px;
 }
 
-.set .chart {
-	height: 10%;
-	width: 10%;
+.set svg{
+	height: 5vw;
+	width: 5vw;
+	padding: 10px;
+	margin: 10px;
 }
 
 .chart {
-    box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
-    font-size: 10px;
-    float: left;
-    text-align: center;
+	box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
+	float: left;
+	text-align: center;
 }
 
 .chart:hover {
@@ -225,20 +301,19 @@ section .loading:before {
 }
 
 .chart .info {
-    background: var(--main-bg-color);
-    color: black;
-    font-size: 12px;
-    position: relative;
-    margin-bottom: 0px;
-    margin-left: 0px;
+	background: var(--main-bg-color);
+	color: black;
+	position: relative;
+	margin-bottom: 0px;
+	margin-left: 0px;
 }
 .chart:hover .info {
-    background: var(--main-active-color);
-		color: white;
+	background: var(--main-active-color);
+	color: white;
 }
 
 .addChart {
-    background: var(--main-bg-color);
+	background: var(--main-bg-color);
 }
 .cadratin:hover svg {
 	background: white;
@@ -251,6 +326,7 @@ section .loading:before {
 	opacity: .4;
 }
 
+
 svg text {
 	fill: var(--main-active-color); 
 }
@@ -262,130 +338,12 @@ svg text {
 }
 
 .btn_file {	
-	background: #dddddd;
-	border: 1px solid black;
 	cursor: pointer;
 	padding: 2px 3px;
+	color: grey
 }
 .btn_file.active, .btn_file[data-active='true'] {
-	background: var(--main-active-color);
-	color: white;
+	color: var(--main-active-color);
 }
 
-.tabs {
-	display: grid;
-	grid-template-columns: auto auto 10%;
-}
-
-.tabs a {
-	text-align: center;
-	text-decoration: none;
-}
-
-.options .tools_bar {
-	font-size: 12px;
-	text-transform: uppercase;
-	cursor: pointer;
-	margin: 20px 1px;
-}
-
-.options .btn:hover {	
-	background: black;
-	color: white;
-}
-
-.options .inks {
-	position: absolute;
-	right: 10px;
-}
-
-.options #refresh {
-	color: purple;
-	display: none;
-}
-
-.activeInks #refresh {
-	display: initial;
-}
-
-.activeInks svg {
-	background: white;
-}
-
-svg:hover text {
-	display: block;
-}
-
-.specimen {
-	background: var(--main-background-color) ;
-	color: black;
-}
-
-.specimen #typewriter h1 {
-	font-size: 72pt;
-	font-weight: normal
-}
-
-.specimen ul {
-	list-style-type: none;
-	margin: 0px;
-	padding: 0px;
-}
-
-.specimen ul li {
-	display: flex;
-}
-
-.specimen ul li:nth-of-type(odd) {
-	background: #dddddd;
-}
-
-.specimen ul li:nth-of-type(even) {
-	background: white;
-}
-
-.specimen ul li span {
-	padding: 0;
-	cursor: pointer;
-}
-
-.specimen ul li span.delete,
-.specimen ul li span.compare {
-	width: 30px;
-	text-align: center;
-}
-
-.specimen ul li span.version {
-	width: 100%;
-	text-align: left;
-	padding: 0pt 5pt;
-}
-
-.specimen .page {
-	outline: 1px solid grey; 
-	width: 90%;
-
-}
-
-.specimen a {
-	color: inherit;
-}
-
-.pages {
-	text-align: center;
-	font-weight: normal;
-	height: 100%;
-	overflow-y: scroll;
-}
-
-.page {
-	background: white;
-}
-
-.page h1 {
-	font-size: 15vw !important;
-	line-height: 1;
-	font-weight: normal;
-	text-align: center;
-}
 
