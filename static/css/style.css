@@ -168,6 +168,36 @@ nav .tabs {
 	bottom: 10px;
 }
 
+.typewriter .footer #log.IN {
+	color: blue;
+}
+.typewriter .footer #log.OUT {
+	color: green;
+}
+.typewriter .footer #log.ERR {
+	color: red;
+}
+.typewriter .footer #log input {
+	background: none;
+	border: none;
+}
+
+.typewriter .footer #log input[value="yes"] {
+	background: none;
+	border: none;
+	outline: 1px solid green;
+	color: green;
+	margin: 0px 10px;
+}
+
+.typewriter .footer #log input[value="no"] {
+	background: none;
+	border: none;
+	outline: 1px solid red;
+	color: red;
+	margin: 0px 10px;
+}
+
 .typewriter .zoom {
 	position: absolute;
 	z-index: 10;
@@ -241,21 +271,24 @@ section#content.type.trip {
 	grid-template-columns: 300px auto 400px;
 }
 
-section#content.type.dip {
+section#content.type.hide_left {
 	grid-template-columns: 20px auto calc(40% - 20px);
 }
-
-section#content.type.add {
-	grid-template-areas: "nav typewriter edition"
-	"nav addGlyph edition";
+section#content.type.hide_right {
+	grid-template-columns: 300px auto  20px;
 }
+
+section#content.type.hide_right.hide_left {
+	grid-template-columns: 20px auto  20px;
+}
+
 section#content.type {
 	grid-template-rows: 100%;
 	grid-template-areas: "nav typewriter edition"
 	"nav typewriter edition";
 }
 
-.dip nav {
+.hide_left nav, .hide_right #editorBox *{
 	visibility: hidden;
 }
 .type:not(.add) #addGlyph{

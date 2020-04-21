@@ -6,7 +6,7 @@ let setchart = document.getElementById('setchart')
 let editors = document.getElementsByClassName('editor')
 let editor_mp = document.getElementById('editor_mp')
 let run = document.getElementById('run')
-let inputWrite= document.getElementById('inputWrite')
+let inputWrite = document.getElementById('inputWrite')
 let inputsRange = document.getElementsByClassName('input_range')
 let globalNav = document.getElementById('global_nav')
 let infoNav = document.getElementById('info_nav')
@@ -15,11 +15,10 @@ let btn_refresh = document.getElementById('refresh')
 let btn_all = document.getElementById('btn_all')
 let btn_tab = document.getElementsByClassName('tab')
 let imgs = document.getElementsByClassName('imgChar')	
-let aceEditor = []
+var aceEditor = []
 let toggleNav = document.getElementsByClassName('toggleNav')	
 let inputZoom = document.querySelector('.zoom input')	
-let log = document.querySelector('.log')	
-
+var log_elem = document.getElementById('log')	
 
 if (content.className !== 'set ') {
 	var sentence = inputWrite.value
@@ -29,17 +28,42 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+function get_session(key){
+	console.log('set session')
+	var xhr = new XMLHttpRequest()
+	xhr.open("GET", '/session_get/'+key, false)
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status == "200") {
+			console.log(xhr.responseText)
+		}
+	}
+	xhr.send()
+	return xhr.responseText
+}
+
+function set_session(key, value){
+	console.log('get session')
+	var xhr = new XMLHttpRequest()
+	xhr.open("GET", '/session_set/'+key+'/'+value, false)
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4 && xhr.status == "200") {
+			console.log(xhr.responseText)
+		}
+	}
+	xhr.send()
+}
+
 function pingServer(url, callback) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", url, true);
+	var xhr = new XMLHttpRequest()
+	xhr.open("GET", url, false)
 	svgContainer.className = "loading"
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status == "200") {
-			callback(xhr.responseText);
+			callback(xhr.responseText)
 			svgContainer.classList.remove("loading")
 		}
 	}
-	xhr.send(null);
+	xhr.send()
 }
 
 function readJson(file, callback) {
@@ -77,15 +101,14 @@ function writeJson(data){
 				}
 			} else {	
 				var sentence = inputWrite.value
-				writeValue(sentence)	
+				write_sentence(sentence)	
 				writeJson(false)
 			}
 			svgContainer.classList.remove("loading")
 		}
 	}
 
-	xmlhttp.open('POST', '/write-json' , true);
-	console.log(JSON.stringify(data,  null, 4))
+	xmlhttp.open('POST', '/write_json' , true);
 	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
 }
 
@@ -97,20 +120,16 @@ function loadSvg(key) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status == "200") {
 		p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a class="link_cadratin" href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '<span class="ref">'+l+' | '+key+'.mp</span></a></span>'
-		}else {
-			p = ''
-
 		}
 	}
 	xhr.send("")	
-	
 	svgContainer.innerHTML += p	
 }
 
 function inputBuild(variablesTable, i) {
 	var table = variablesTable[i]
-
 	var p = []
+
 	for (u in table){
 		if(table[u].type) {
 			var input = document.createElement("input")
@@ -147,7 +166,6 @@ function buildNav(data) {
 	infoNav.innerHTML += p
 }
 
-
 function changeValue(data){
 	for (var i = 0, len = inputsRange.length; i < len; i++) {
 		inputsRange[i].addEventListener('change', function() {
@@ -162,63 +180,12 @@ function changeValue(data){
 	}
 }
 
-
-function writeValue(stn) {
+function write_sentence(stn) {
 	svgContainer.innerHTML = ""
 	var out = []
 	
 	if(stn.charAt(0) == ':') {
-		switch(true) {
-			case /:add _[0-9]+_/.test(stn): // test de :add _65_
-				var k = stn.match(/[0-9]+/)
-				var l = String.fromCharCode(k)
-				log.innerHTML = `<span style="color: green">
-				Do you want add the glyph ` + l + ` ? </span>
-				<input type="button" value="Yes"/>
-				<input type="button" value="No"/>
-				`
-				break
-			case /:del(ete)? _[0-9]+_/.test(stn): // test de :del _65_
-				var k = stn.match(/[0-9]+/)
-				var l = String.fromCharCode(k)
-				log.innerHTML = `<span style="color: green">
-				Do you want delete the glyph ` + l + ` ? </span>
-				<input type="button" value="Yes"/>
-				<input type="button" value="No"/>
-				`
-				break
-			case /:generate font/.test(stn): // test de :add _65_
-				alert('on genère la font' + stn.match(/[0-9]+/))
-				break
-			case /:set/.test(stn): // test de :add _65_
-				pingServer('/set/meta-old-french', function(cb){
-					out = cb.split('|')
-					out.forEach(function(entry) {
-						loadSvg(entry)
-					});
-				})	
-				if(!typewriter.classList.contains('set')){
-					typewriter.classList.add('set')
-				}
-			default:
-				log.innerHTML = ''
-
-			// case (stn == ':help'):
-			// 	alert('on voit apparaitre l\'aide de commandes')
-			// 	break
-			// case (stn == ':set'):
-			// 	alert('on voit apparaitre tout le glyphs set')
-			// 	break
-			// case (stn == ':add'):	
-			// 	console.log(stn.split(' '))
-			// 	// if(stn.split(' ').length == 2) {
-			// 	// 	alert('on ajoute un glyph')
-			// 	// }
-			// 	break
-			// case ':delete':
-			// 	alert('on suprime un glyph')
-			// 	break
-		}
+		commands(stn)
 	}else{
 		out= stn.split('')
 		out.forEach(function(entry) {
@@ -228,6 +195,7 @@ function writeValue(stn) {
 		if(typewriter.classList.contains('set')){
 			typewriter.classList.remove('set')
 		}
+		set_session('sentence', stn)
 	}
 }
 
@@ -258,7 +226,7 @@ function refreshInks(editor) {
 				if (xmlhttp.readyState == 4)
 				{
 					sentence = inputWrite.value
-					writeValue(sentence)
+					write_sentence(sentence)
 					loadMp(editor)
 				}
 			}
@@ -276,7 +244,6 @@ function loadMp(editor, edi) {
 }
 
 function write(type, editor, key) {
-	console.log(editor)
 	var contentMp = editor.getValue()
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
@@ -284,8 +251,7 @@ function write(type, editor, key) {
 		if (xmlhttp.readyState == 4)
 		{
 			sentence = inputWrite.value
-			writeValue(sentence)
-
+			write_sentence(sentence)
 		}
 	}
 	xmlhttp.open('POST', '/' + type, true);

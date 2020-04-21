@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import json
 from collections import OrderedDict
 import glob
@@ -5,6 +7,7 @@ import os
 import subprocess
 import lxml.etree as ElementTree
 from svg.path import parse_path
+import svgwrite
 
 Template = '''
 % {char}
@@ -15,6 +18,92 @@ beginchar({keycode}, {width});
 endchar({lenpoints});
 end;
 '''
+
+class Plancton:
+    def __init__(self):
+        self.mp_template = '''
+        % {char}
+        input ../def;
+        beginchar({keycode}, {width});
+            {cordonates} 
+            {draws}
+        endchar({lenpoints});
+        end;
+        '''
+        self.dir_projects = 'projects'
+        self.project = 'meta-old-french'
+        self.global_json = 'global.json'
+
+    def read_json(path):
+        with open(path, 'r') as f:
+            data = json.load(f)
+        return data
+
+    def build_svg(self, key):
+        project_path = self.dir_projects+'/'+self.project
+        mp_path = project_path+'/mpost/mpost-files/'
+
+        if key != '-all':
+            SET = glob.glob(mp_path + str(key) + '.mp')
+        else:
+            SET = glob.glob(mp_path + '*.mp')
+
+        for mp in SET:
+            mpFile = os.path.basename(mp)
+            subprocess.call(["mpost", "-interaction=batchmode", mp])
+            for LOG in glob.glob('*.log'):
+                os.remove(LOG)
+
+    def del_glyph(self, key):
+        project_path = self.dir_projects+'/'+self.project
+        insvg = project_path+'/input-svg/'+str(key)+'.svg'
+        outsvg = project_path+'/output-svg/'+str(key)+'.svg'
+        mp = project_path+'/mpost/mpost-files/'+str(key)+'.mp'
+
+        if os.path.isfile(insvg):
+            os.remove(insvg)
+        if os.path.isfile(outsvg):
+            os.remove(outsvg)
+        if os.path.isfile(mp):
+            os.remove(mp)
+
+        return str(key)+' has been deleted !'
+
+    def add_glyph(self, key):
+        project_path = self.dir_projects+'/'+self.project
+        json_path = project_path+'/'+self.global_json
+        inputsvg_path = project_path+'/input-svg/'
+        json_path = project_path+'/'+self.global_json
+        
+        if os.path.isfile(inputsvg_path + str(key) + '.svg'):
+            return str(key)+' already exist ! Use del_glyph('+str(key)+') before.'
+        else: 
+            json = Plancton.read_json(json_path)
+            height = json['font_info']['height']
+            width = int(int(height)/2) 
+
+            svg = svgwrite.Drawing(str(key) + '.svg', size=(width, height))
+            svg.viewbox(0, 0, width, height)
+            svg.saveas(project_path+'/input-svg/'+str(key)+'.svg')
+            
+            buildFig = Template.format(
+                char       = chr(int(key)),
+                keycode    = key,
+                width      = width,
+                cordonates = '',
+                draws      = '',
+                lenpoints  = '0' 
+            )
+            f = open(project_path+'/mpost/mpost-files/'+str(key)+'.mp', 'w')
+            f.write(buildFig) 
+            f.close()
+            # os.chmod(project_path+'/mpost/mpost-files/'+str(key)+'.mp', 755)
+
+            self.build_svg(key)
+
+            return str(key)+' has been create !'
+
+
 
 def parsePath(path, OX, OY):
     dparse = parse_path(path)

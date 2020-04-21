@@ -44,10 +44,8 @@
 		<div id="svgContainer"></div>
 		<div class="footer">
 			% if mode == 'type':
-				<a id="dip" title="Ctrl+left" class="btn_file toggleNav"> << </a> 
-				<input type="text" name="" id="inputWrite" value="{{key[1]}}">
-				<span class="log" >set</span>
-				<!-- <a class="btn_file active" >type</a> -->
+				<input type="text" name="" id="inputWrite" value="">
+				<span id="log" class=""></span>
 			% end
 		</div>
 	</div>
@@ -70,9 +68,6 @@
 		</div>
 	</a>
 	% end
-		<div class="chart addChart">
-			<span class="key">+</span>
-		</div>
 	</div>
 	% end
 </section>
