@@ -127,27 +127,42 @@ function loadSvg(key) {
 }
 
 function inputBuild(variablesTable, i) {
-	var table = variablesTable[i]
+	var t = variablesTable[i]
 	var p = []
 
-	for (u in table){
-		if(table[u].type) {
+	for (u in t){
+		if(t[u].type) {
 			var input = document.createElement("input")
-			input.type = table[u].type;
-			input.className = "input_" + table[u].type 
+			input.type = t[u].type;
+			input.className = "input_" + t[u].type 
 			input.id = "input_" + u
-			input.setAttribute('title', table[u].description)
+			input.setAttribute('title', t[u].description)
 			input.setAttribute('data-var', u)
-			if (table[u].type == 'range') {
-				input.setAttribute('min', table[u].range[0])
-				input.setAttribute('max', table[u].range[1])
-				input.setAttribute('step', table[u].range[2])
-				input.setAttribute('value', table[u].value)
+			if (t[u].type == 'range') {
+				input.setAttribute('min', t[u].range[0])
+				input.setAttribute('max', t[u].range[1])
+				input.setAttribute('step', t[u].range[2])
+				input.setAttribute('value', t[u].value)
 			}
-			p += '<li class="block_input" ><label><div title="'+table[u].description+'"class="description">'+table[u].description+'</div><span id="span_'+u+'" class="valueBox">| '+table[u].value+'</span></label>'+input.outerHTML+'</li>'
+			p += '<li class="block_input" ><label data-unity="'+t[u].unity+'" ><div data-name="'+t[u].name+'"  title="'+t[u].description+' \n name: '+t[u].name+'"class="description">'+t[u].description+'</div><span id="span_'+u+'" class="valueBox">| '+t[u].value+'</span><span class="unity">'+t[u].unity+'</span></label>'+input.outerHTML+'</li>'
 		}
 	}
 	globalNav.innerHTML += '<ul class="items" id="' + i + '" ><li><h1>' + i + '</h1></li>' + p + '</ul>'
+
+	var inputs = document.querySelectorAll('.block_input > label > div')
+	inputs.forEach(function(item,i){
+		item.addEventListener('mouseenter', function(){
+			var name = this.getAttribute('data-name')
+			var elms = document.querySelectorAll('label[data-unity='+name+']')
+			// elms.forEach((el)=>{el.classList.add('ligth')} ) 
+			elms.forEach(function(el){ el.classList.add('ligth') }) 
+		})
+		item.addEventListener('mouseleave', function(){
+			var name = this.getAttribute('data-name')
+			var elms = document.querySelectorAll('label[data-unity='+name+']')
+			elms.forEach(function(el){el.classList.remove('ligth')} ) 
+		})
+	})
 
 }
 

@@ -6,7 +6,9 @@ import glob
 import os
 import subprocess
 import lxml.etree as ElementTree
-from svg.path import parse_path
+# from svg.path import parse_path
+# from svgpathtools import svg2paths
+from svgpathtools import svg2paths, parse_path
 import svgwrite
 
 Template = '''
@@ -34,25 +36,51 @@ class Plancton:
         self.project = 'meta-old-french'
         self.global_json = 'global.json'
 
+
     def read_json(path):
         with open(path, 'r') as f:
             data = json.load(f)
         return data
 
+    def adjust_viewbox(f_svg):
+        tree = ElementTree.parse(f_svg)
+        root = tree.getroot()
+        p = root.find(".//{http://www.w3.org/2000/svg}path")
+        d_string = p.get('d')
+        pp = parse_path(d_string)
+        xmin, xmax, ymin, ymax = pp.bbox()
+        width = xmax - xmin
+        height = ymax - ymin
+        root.set('width', str(width))
+        root.set('height', str(height))
+        root.set('viewBox', "{0} {1} {2} {3}".format(int(xmin), int(ymin), int(width), int(height)))
+        tree.write(open(f_svg, 'wb'), encoding='unicode')
+
     def build_svg(self, key):
         project_path = self.dir_projects+'/'+self.project
         mp_path = project_path+'/mpost/mpost-files/'
+        svg_path = project_path+'/output-svg/'
+        print(svg_path)
 
         if key != '-all':
             SET = glob.glob(mp_path + str(key) + '.mp')
+            SET_svg = glob.glob( svg_path + str(key) + '.svg')
         else:
             SET = glob.glob(mp_path + '*.mp')
+            SET_svg = glob.glob(svg_path + '*.svg')
 
         for mp in SET:
             mpFile = os.path.basename(mp)
             subprocess.call(["mpost", "-interaction=batchmode", mp])
             for LOG in glob.glob('*.log'):
                 os.remove(LOG)
+        print('-------------------------->')
+        print('-------------------------->')
+        print(SET_svg)
+        for svg in SET_svg:
+            print('-------------------------->', svg)
+            print('-------------------------->', svg)
+            Plancton.adjust_viewbox(svg)
 
     def del_glyph(self, key):
         project_path = self.dir_projects+'/'+self.project

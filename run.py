@@ -22,7 +22,7 @@ session = dict()
 # Session #
 ###########
 session['zoom'] = "1" 
-session['sentence'] = ':set'
+session['sentence'] = 'A'
 session['current'] = 'none'
 
 @app.route('/session_set/<key>/<value>')
@@ -159,7 +159,8 @@ def write_mp():
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
     write_file('projects/' + PROJECT + '/mpost/mpost-files/' + key + '.mp', mp)
-    plct.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
+    pl.build_svg(key)
+    # plct.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
     return mp
 
 @app.route('/write_file', method='post')

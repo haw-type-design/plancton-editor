@@ -1,8 +1,5 @@
 window.addEventListener('DOMContentLoaded', function(){
-	// _KEY_ = document.getElementsByClassName('tools_bar')[0].getAttribute('data-key')
-	_KEY_ = 65 
-	// toogle('#editorBox .btn_file', ['active', 'desactive'])
-	// toogle('nav .btn_file', ['active', 'desactive'])
+	_KEY_ = document.getElementsByClassName('tools_bar')[0].getAttribute('data-key')
 	write_sentence(sentence);
 	activeInks()
 	shortcuts()

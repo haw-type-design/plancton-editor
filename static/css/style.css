@@ -101,6 +101,18 @@ nav .block_input .description {
 	text-overflow: ellipsis;
 }
 
+nav .block_input label .unity {
+	display: none;
+}
+
+nav .block_input label.ligth .description {
+	color: blue;
+}
+nav .block_input label.ligth .unity {
+	display: inline-block;
+	color: blue;
+}
+
 span.valueBox {
 	color: var(--main-active-color);
 }
@@ -321,6 +333,9 @@ section .loading:before {
 	width: 5vw;
 	padding: 10px;
 	margin: 10px;
+}
+svg{
+	overflow: visible;
 }
 
 .chart {
