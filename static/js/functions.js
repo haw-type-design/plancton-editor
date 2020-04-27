@@ -29,7 +29,6 @@ function getRandomInt(max) {
 }
 
 function get_session(key){
-	console.log('set session')
 	var xhr = new XMLHttpRequest()
 	xhr.open("GET", '/session_get/'+key, false)
 	xhr.onreadystatechange = function() {
@@ -42,7 +41,6 @@ function get_session(key){
 }
 
 function set_session(key, value){
-	console.log('get session')
 	var xhr = new XMLHttpRequest()
 	xhr.open("GET", '/session_set/'+key+'/'+value, false)
 	xhr.onreadystatechange = function() {
@@ -196,12 +194,12 @@ function changeValue(data){
 }
 
 function write_sentence(stn) {
-	svgContainer.innerHTML = ""
-	var out = []
 	
 	if(stn.charAt(0) == ':') {
 		commands(stn)
 	}else{
+		var out = []
+		svgContainer.innerHTML = ""
 		out= stn.split('')
 		out.forEach(function(entry) {
 			code = entry.charCodeAt(0)

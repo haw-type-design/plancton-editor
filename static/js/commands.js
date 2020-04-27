@@ -41,6 +41,18 @@ function commands(stn){
 				}
 			})
 			break
+		case /:clean [0-9]+/.test(stn): // test de :del _65_
+			var k = stn.match(/[0-9]+/)
+			var l = String.fromCharCode(k)
+			LOG('IN', 'Do you want clean the metapost file of '+l+' ?', true, function(result){
+				if(result === true){	
+					pingServer('/clean/'+k, function(cb){
+						LOG('OUT', cb, false)
+						window.location.pathname = '/type/'+projectName+'/'+k
+					})
+				}
+			})
+			break
 		case /:generate font/.test(stn): // test de :add _65_
 			alert('on genère la font' + stn.match(/[0-9]+/))
 			break
@@ -70,6 +82,4 @@ function commands(stn){
 			log_elem.innerHTML = ""
 
 	}
-
-
 }

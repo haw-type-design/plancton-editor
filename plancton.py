@@ -10,6 +10,7 @@ import lxml.etree as ElementTree
 # from svgpathtools import svg2paths
 from svgpathtools import svg2paths, parse_path
 import svgwrite
+import re 
 
 Template = '''
 % {char}
@@ -74,12 +75,8 @@ class Plancton:
             subprocess.call(["mpost", "-interaction=batchmode", mp])
             for LOG in glob.glob('*.log'):
                 os.remove(LOG)
-        print('-------------------------->')
-        print('-------------------------->')
-        print(SET_svg)
         for svg in SET_svg:
-            print('-------------------------->', svg)
-            print('-------------------------->', svg)
+            print('HEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRREEEEEEEEE')
             Plancton.adjust_viewbox(svg)
 
     def del_glyph(self, key):
@@ -132,6 +129,47 @@ class Plancton:
             return str(key)+' has been create !'
 
 
+    def clean_mp(self, key, write=False):
+
+        def Sort(sub_li):
+            l = len(sub_li)
+            for i in range(0, l):
+                for j in range(0, l-i-1):
+                    if (int(sub_li[j][2]) > int(sub_li[j + 1][2])):
+                        tempo = sub_li[j]
+                        sub_li[j]= sub_li[j + 1]
+                        sub_li[j + 1]= tempo
+            return sub_li
+
+        project_path = self.dir_projects+'/'+self.project
+        mp = project_path+'/mpost/mpost-files/'+str(key)+'.mp'
+        
+        with open(mp) as fl: 
+            data = fl.read()
+        pattern = '(([x|y|z])([0-9]+))'
+        result = re.findall(pattern, data)
+        o = []
+        for v in result: o.append(int(v[2]))
+        o = list(set(o))
+        o.sort()
+        i = 1
+        fin = dict()
+        for k in o:
+            fin[k] = i 
+            i = i + 1
+        result = Sort(result)
+
+        for r in result:
+            v = int(r[2])
+            data = re.sub(r'('+r[0]+')([^0-9])', r[1]+str(fin[v])+'\g<2>', data)
+        data = re.sub(r'(endchar\()(.*)\);?', '\g<1>'+str(len(fin))+');', data)
+
+        if write == True:
+            file = open(mp, 'w')
+            file.write(data)
+            file.close()
+
+        return data
 
 def parsePath(path, OX, OY):
     dparse = parse_path(path)
@@ -180,7 +218,6 @@ def parsePath(path, OX, OY):
     return [cordonates, draws, inc]
 
 def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
-    print('---------> BuildMp ')
     if origin == None:
         OX = 0
         OY = 0
@@ -226,7 +263,6 @@ def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
 def buildSvg(dirMP, dirOut, setfig):
     if setfig != '-all':
         SET = glob.glob(dirMP + str(setfig) + '.mp')
-        # print(setfig)
     else:
         SET = glob.glob(dirMP + '*.mp')
 

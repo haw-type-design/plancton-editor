@@ -97,7 +97,6 @@ def type(project, keycode='free'):
 ################
 @app.route('/add/<keycode>')
 def add(keycode=False):
-    print('add', pl.project)
     if keycode == False:
         return "The keycode is missing !"
     pl.add_glyph(keycode)
@@ -109,6 +108,13 @@ def delete(keycode=False):
         return "The keycode is missing !"
     pl.del_glyph(keycode)
     return "Glyph " +keycode+" has been removed!"
+
+@app.route('/clean/<keycode>')
+def delete(keycode=False):
+    if keycode == False:
+        return "The keycode is missing !"
+    pl.clean_mp(keycode, True)
+    return "Glyph " +keycode+" has been cleaned!"
 
 @app.route('/generate_font/<project>/<keycode>')
 def generate_font(project, keycode=False):
@@ -145,10 +151,9 @@ def write_json():
         file.close()     
         plct.buildGlobalMp('projects/' + pl.project + '/global.json','projects/' + pl.project + '/mpost/global.mp' ) 
         for n in sett:
-            plct.buildSvg('projects/' + pl.project + '/mpost/mpost-files/',  'projects/' +pl.project + '/output-svg/', ord(n)) 
+            pl.build_svg(ord(n)) 
     else:
-        plct.buildSvg('projects/' + pl.project +'/mpost/mpost-files/', 'projects/' +pl.project + '/output-svg/', '-all') 
-    sett = ''
+        pl.build_svg('-all') 
     return json
 
 @app.route('/write_mp', method='post')
@@ -160,7 +165,6 @@ def write_mp():
     mp = mp.replace('#45', '+')
     write_file('projects/' + PROJECT + '/mpost/mpost-files/' + key + '.mp', mp)
     pl.build_svg(key)
-    # plct.buildSvg('projects/' + PROJECT +'/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
     return mp
 
 @app.route('/write_file', method='post')
@@ -178,11 +182,6 @@ def writefile():
 @app.route('/inkscape', method='post')
 def inkscape():
     PROJECT = request.forms.project
-    print('------------')
-    print('------------')
-    print(PROJECT)
-    print('------------')
-    print('------------')
     key = request.forms.key
     subprocess.Popen(['inkscape', 'projects/' + PROJECT + '/input-svg/' + key + '.svg']) 
     return '<<<<<<< I N K S C A P E !' 
