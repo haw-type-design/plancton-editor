@@ -78,6 +78,7 @@ def index():
 def type(project, keycode='free'):
     pl.project = project
 
+    pl.build_svg('-all') 
     SETFOLDER = glob.glob('projects/' + pl.project + '/mpost/mpost-files/*.mp')
     SET = []
     for CHAR in SETFOLDER:
