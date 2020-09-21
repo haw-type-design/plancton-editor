@@ -48,7 +48,7 @@ function commands(stn){
 				if(result === true){	
 					pingServer('/clean/'+k, function(cb){
 						LOG('OUT', cb, false)
-						window.location.pathname = '/type/'+projectName+'/'+k
+						window.location.reload(false);
 					})
 				}
 			})

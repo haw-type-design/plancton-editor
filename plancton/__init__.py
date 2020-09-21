@@ -1,26 +1,16 @@
-#!/usr/bin/python
+#/usr/bin/python
 # -*- coding: utf-8 -*-
+
 import json
 from collections import OrderedDict
 import glob
 import os
 import subprocess
-import lxml.etree as ElementTree
-# from svg.path import parse_path
-# from svgpathtools import svg2paths
+import lxml.etree as ET
 from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
-
-Template = '''
-% {char}
-input ../def;
-beginchar({keycode}, {width});
-    {cordonates} 
-    {draws}
-endchar({lenpoints});
-end;
-'''
+import fontforge 
 
 class Plancton:
     def __init__(self):
@@ -34,17 +24,17 @@ class Plancton:
         end;
         '''
         self.dir_projects = 'projects'
-        self.project = 'meta-old-french'
+        self.project = ''
         self.global_json = 'global.json'
-
 
     def read_json(path):
         with open(path, 'r') as f:
             data = json.load(f)
         return data
 
+    # C O N V E R T - M P -> S V G
     def adjust_viewbox(f_svg):
-        tree = ElementTree.parse(f_svg)
+        tree = ET.parse(f_svg)
         root = tree.getroot()
         p = root.find(".//{http://www.w3.org/2000/svg}path")
         d_string = p.get('d')
@@ -61,7 +51,6 @@ class Plancton:
         project_path = self.dir_projects+'/'+self.project
         mp_path = project_path+'/mpost/mpost-files/'
         svg_path = project_path+'/output-svg/'
-        print(svg_path)
 
         if key != '-all':
             SET = glob.glob(mp_path + str(key) + '.mp')
@@ -76,7 +65,6 @@ class Plancton:
             for LOG in glob.glob('*.log'):
                 os.remove(LOG)
         for svg in SET_svg:
-            print('HEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRREEEEEEEEE')
             Plancton.adjust_viewbox(svg)
 
     def del_glyph(self, key):
@@ -98,10 +86,9 @@ class Plancton:
         project_path = self.dir_projects+'/'+self.project
         json_path = project_path+'/'+self.global_json
         inputsvg_path = project_path+'/input-svg/'
-        json_path = project_path+'/'+self.global_json
         
         if os.path.isfile(inputsvg_path + str(key) + '.svg'):
-            return str(key)+' already exist ! Use del_glyph('+str(key)+') before.'
+            return str(key)+' already exist ! Use ":delete '+str(key)+'" before.'
         else: 
             json = Plancton.read_json(json_path)
             height = json['font_info']['height']
@@ -111,7 +98,7 @@ class Plancton:
             svg.viewbox(0, 0, width, height)
             svg.saveas(project_path+'/input-svg/'+str(key)+'.svg')
             
-            buildFig = Template.format(
+            buildFig = self.mp_template.format(
                 char       = chr(int(key)),
                 keycode    = key,
                 width      = width,
@@ -122,9 +109,8 @@ class Plancton:
             f = open(project_path+'/mpost/mpost-files/'+str(key)+'.mp', 'w')
             f.write(buildFig) 
             f.close()
-            # os.chmod(project_path+'/mpost/mpost-files/'+str(key)+'.mp', 755)
-
             self.build_svg(key)
+            
 
             return str(key)+' has been create !'
 
@@ -171,136 +157,101 @@ class Plancton:
 
         return data
 
-def parsePath(path, OX, OY):
-    dparse = parse_path(path)
-    cordonates = []
-    draws = []
-    inc = 1
-    incD = 0 
-    y = 20
-    line = ' --'
-    curve = ' ..'
-    for point in dparse:
-        type = str(point)[0:4]
-        if type == 'Move':
-            if incD > 0:
-                cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real - OX) + ' * ox;')
-                cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y - OY) + ' * oy;')
-                draws.append(' z' + str(inc))
-                draws.append('; \n')
-                inc = inc + 1
+    #########################
+    # S V G   T O   F O N T #
+    #########################
+    def svg_to_font(self):
 
-            draws.append('draw')
-            incD = 1
-            ii = 0
+        def removeCadra(root, pattern):
+            for child in root:
+                if child.tag == '{http://www.w3.org/2000/svg}path':
+                    if child.attrib['style'].startswith(pattern):
+                        b = child
+            root.remove(b)
+            ET.dump(root)
+            return ET.tostring(root, encoding='utf8', method='xml').decode()
+        # Build new directory
+        project_path = self.dir_projects+'/'+self.project
+        json_path = project_path+'/'+self.global_json
+        json = Plancton.read_json(json_path)
+        ex_folder = project_path+'/fonts/test/'
+        ex_folder_svg = project_path+'/fonts/test/svg/'
 
-        elif type == 'Line' or type == 'Cubi': 
+        if not os.path.exists(ex_folder):
+            os.mkdir(ex_folder)
+        if not os.path.exists(ex_folder_svg):
+            os.mkdir(ex_folder_svg)
 
-            cordonates.append('x' + str(inc) + ' := ' + str(point.start.real - OX) + ' * ox;')
-            cordonates.append('y' + str(inc)+ ' := ' + str(y - point.start.imag + y - OY) + ' * oy;')
- 
-            draws.append(' z' + str(inc))
-            if type == 'Line':
-                draws.append(line)
-            elif type == 'Cubi':
-                draws.append(curve)
-            inc = inc + 1
-            ii = 1
+        svg_dir = glob.glob(project_path+'/output-svg/*.svg')
+        # svg_dir = glob.glob(ex_folder_svg+'*.svg')
 
-        elif type == 'Close': 
-            draws.append(';')
+        font = fontforge.font()
+        height = 1000 / int(json['font_info']['height'])
+        font.descent = height * int(json['font_info']['descent'])
+        font.ascent = height * int(json['font_info']['ascent'])
+        font.fontname = json['font_info']['font-id']
+        font.familyname = json['font_info']['font-id']
+        font.copyright = json['font_info']['author-name']
 
-    cordonates.append('x' + str(inc) + ' := ' + str(dparse[inc - 1].end.real - OX) + ' * ox;')
-    cordonates.append('y' + str(inc) + ' := ' + str(y - dparse[inc - 1].end.imag + y - OY) + ' * oy;')
-    draws.append(' z' + str(inc))
-    draws.append('; \n')
-
-    return [cordonates, draws, inc]
-
-def buildMp(dirFiles_svg, dirFiles_mp, setfig, origin=None):
-    if origin == None:
-        OX = 0
-        OY = 0
-    else: 
-        OX = origin[0]
-        OY = origin[1]
-
-    if setfig != '-all':
-        SET = glob.glob(dirFiles_svg + str(setfig) + '.svg')
-    else:
-        SET = glob.glob(dirFiles_svg + '*.svg')
-
-    for files in SET:
-        with open(files, 'rt') as f:
-            tree = ElementTree.parse(f)
-
-        root = tree.getroot()
-
-        lDec = root.attrib['data-dec']
-        lWidth = root.attrib['width']
-        lHeight = root.attrib['height']
-
-        for path in root.iter():
-            d = path.attrib.get('d')
-            print(d)
-            print('---')
-            if d:
-                letterD = d
-                valueP = parsePath(d, OX, OY)  
-
-                buildFig = Template.format(
-                    char       = chr(int(lDec)),
-                    keycode    = lDec,
-                    width      = lWidth,
-                    cordonates = '\n    '.join(valueP[0]),
-                    draws      = ''.join(valueP[1]),
-                    lenpoints  = valueP[2]
-                )
-                f = open( dirFiles_mp + lDec + '.mp', 'w')
-                f.write(buildFig) 
+        for g in svg_dir:
+            gkey = os.path.basename(g).replace('.svg', '')
+            if gkey.isdigit() == True:
+                with open(g, 'rb') as gp:
+                    treeLet = ET.parse(gp)
+                rootLet = treeLet.getroot()
+                gclean = removeCadra(rootLet, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
+                out_svg = ex_folder_svg+gkey+'.svg' 
+                f = open(ex_folder_svg+gkey+'.svg', 'w')
+                f.write(gclean) 
                 f.close()
- 
-def buildSvg(dirMP, dirOut, setfig):
-    if setfig != '-all':
-        SET = glob.glob(dirMP + str(setfig) + '.mp')
-    else:
-        SET = glob.glob(dirMP + '*.mp')
+                gwidth = rootLet.get('width')
+                gheight = rootLet.get('height')
+                print(gwidth, '\n', gheight)
+                print('\n----------------------\n', gkey, '\n----------------------\n' )
 
-    for mp in SET:
-        mpFile = os.path.basename(mp)
-        key = os.path.splitext(mpFile)[0]
-        subprocess.call(["mpost", "-interaction=batchmode", mp])
-        for LOG in glob.glob('*.log'):
-            os.remove(LOG)
+                char = font.createChar(int(gkey))
 
-def buildGlobalMp(dirFiles, dirMP) :
-    out = []
-    Tmp = '''{In} := {Out};'''
+                try:
+                    char.importOutlines(out_svg).simplify().handle_eraser()
+                except:
+                    print('glyph failed')
+                    continue
 
-    with open(dirFiles) as f:
-        data = json.load(f, object_pairs_hook=OrderedDict)
+        font.generate('temp.otf')
 
-    CATEGORIES = data['variables']
+    def build_global_mp(self):
+        dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 
+        dirFiles = self.dir_projects+'/'+self.project+'/'+self.global_json
+        out = []
+        Tmp = '''{In} := {Out};'''
 
-    for gvs in CATEGORIES:
+        with open(dirFiles) as f:
+            data = json.load(f, object_pairs_hook=OrderedDict)
 
-        for gv in CATEGORIES[gvs]:
-            item = CATEGORIES[gvs][gv]
-            if type(item) == OrderedDict:
-                IN = '\n% ' +item['description']+ '\n' +item['name']
-                OUT = item['value'] + item['unity']
-            else:
-                IN = gv
-                OUT = item 
+        CATEGORIES = data['variables']
 
-            Line = Tmp.format(
-                       In = IN,
-                       Out = OUT,
-                    )
-            out.append(Line)
-        f = open(dirMP, 'w')
-        f.write('\n'.join(out)) 
-        f.close()
+        for gvs in CATEGORIES:
 
-        print('\n'.join(out))
+            for gv in CATEGORIES[gvs]:
+                item = CATEGORIES[gvs][gv]
+                if type(item) == OrderedDict:
+                    IN = '\n% ' +item['description']+ '\n' +item['name']
+                    OUT = item['value'] + item['unity']
+                else:
+                    IN = gv
+                    OUT = item
+
+                Line = Tmp.format(
+                           In = IN,
+                           Out = OUT,
+                        )
+                out.append(Line)
+            f = open(dirMP, 'w')
+            f.write('\n'.join(out))
+            f.close()
+
+            print('\n'.join(out))
+
+
+
 

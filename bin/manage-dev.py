@@ -17,9 +17,6 @@ class Utility:
     def stop():
         stop()
     
-class 
-
-
 class Interacive:
 
     def new_or_modify():

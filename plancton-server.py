@@ -21,7 +21,7 @@ session = dict()
 ###########
 # Session #
 ###########
-session['zoom'] = "1" 
+session['zoom'] = '1' 
 session['sentence'] = 'A'
 session['current'] = 'none'
 
@@ -91,7 +91,6 @@ def type(project, keycode='free'):
     	chartKey = [keycode, chr(int(keycode))]
     return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project)
 
-
 ################
 # COMMANDS URL #
 ################
@@ -120,7 +119,6 @@ def delete(keycode=False):
 def generate_font(project, keycode=False):
     if keycode == False:
         return "The keycode is missing !"
-    # On supprime les fichiers MP inputSVG outputSVG
     return "Font has been generated!"
 
 @app.route('/set/<PROJECT>')
@@ -136,7 +134,6 @@ def set(PROJECT):
     SET = list(map(str, SET))
     return '|'.join(SET)
 
-
 ##################
 # WRITE FILE URL #
 ##################
@@ -149,7 +146,7 @@ def write_json():
         file = open('projects/' + pl.project + '/global.json','w') 
         file.write(json)
         file.close()     
-        plct.buildGlobalMp('projects/' + pl.project + '/global.json','projects/' + pl.project + '/mpost/global.mp' ) 
+        pl.build_global_mp() 
         for n in sett:
             pl.build_svg(ord(n)) 
     else:
@@ -191,40 +188,7 @@ def editeSvg():
     PROJECT = request.forms.project
     key = request.forms.key
     plct.buildMp('files/input-svg/', 'files/mpost/mpost-files/', key, origin)
-    plct.buildSvg('files/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', key) 
+    pl.build_svg(key) 
     return '! ! ! ! ! ! !' 
 
 run(app, host="0.0.0.0", port=8088, reloader=True, debug=True)
-
-
-
-##########
-# THRASH #
-##########
-# @app.route('/setOff/<PROJECT>')
-# def setOff(PROJECT):
-#     INFOLDER = glob.glob('projects/' + PROJECT + '/input-svg/*.svg')
-#     MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
-#     OUTFOLDER = glob.glob('projects/' + PROJECT + '/output-svg/*.svg')
-#
-#     if not INFOLDER:
-#         return 'Il n\'y pas de fichiers'
-#     else:
-#         if not MPFOLDER: 
-#             plct.buildMp('projects/' + PROJECT + '/input-svg/', 'projects/' + PROJECT +  '/mpost/mpost-files/', '-all', origin)
-#             plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' +PROJECT + '/output-svg/', '-all') 
-#             MPFOLDER = glob.glob('projects/' + PROJECT + '/mpost/mpost-files/*.mp')
-#         if not OUTFOLDER: 
-#
-#             plct.buildGlobalMp('projects/' + PROJECT + '/global.json','projects/' + PROJECT + '/mpost/global.mp' ) 
-#             plct.buildSvg('projects/' + PROJECT + '/mpost/mpost-files/', 'projects/' + PROJECT + '/output-svg/', '-all') 
-#     SET = []
-#     for CHAR in MPFOLDER:
-#         mpFile = os.path.basename(str(CHAR))
-#         key = os.path.splitext(mpFile)[0]
-#         SET.append(int(key))
-#     rand = random.randint(1, 300)
-#     SET.sort()
-#     print(SET)
-#     SET = list(map(str, SET))
-#     return '|'.join(SET)
