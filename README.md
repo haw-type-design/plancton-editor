@@ -19,12 +19,13 @@ Plancton is a [metapost](https://en.wikipedia.org/wiki/MetaPost) font editor.
 
 ## Start server
 
-`python run.py` listening on `http://localhost:8080/`
+`python plancton-server.py` listening on `http://localhost:8080/`
 
 ## Contributors
 * [Luuse](http://www.luuse.io/)
 
 ## License
 
-GNU General Public License - [gpl3](https://www.gnu.org/licenses/gpl-3.0.en.html)
+GNU General Public License - [gpl3](https://www.gnu.org/licenses/gpl-3.0.en.html
+
 
