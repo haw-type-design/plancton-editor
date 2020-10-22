@@ -15,6 +15,17 @@
 		<div class="global">
 			<div id="interface_nav"></div>
 			<div id="info_nav"></div>
+			<br>
+			<div id="versionning">
+				<!-- <input type="button" value="save"> -->
+				<input type="button" value="new version">
+				<select id="select_version">
+					<option value="v1">version name 1</option>
+					<option value="v2">version name 2</option>
+					<option value="v3">version name 3</option>
+					<option value="v4">version name 4</option>
+				</select>
+			</div>
 			<div id="global_nav"></div>
 		</div>
 

@@ -5,7 +5,7 @@
 		<hr>
 		% for project in projectsjson:
 		<a href="/type/{{ project['font-id'] }}">{{ project['font-name'] }}</a>
-			<br>
+		<br>
 		% end
 </section>
 
