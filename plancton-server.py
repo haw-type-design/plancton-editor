@@ -24,6 +24,7 @@ session = dict()
 session['zoom'] = '1' 
 session['sentence'] = 'A'
 session['current'] = 'none'
+session['version'] = 'regular'
 
 @app.route('/session_set/<key>/<value>')
 def session_set(key, value):
@@ -78,6 +79,7 @@ def index():
 def type(project, keycode='free'):
     pl.project = project
 
+    pl.build_svg('-all') 
     SETFOLDER = glob.glob('projects/' + pl.project + '/mpost/mpost-files/*.mp')
     SET = []
     for CHAR in SETFOLDER:
@@ -85,11 +87,15 @@ def type(project, keycode='free'):
         key = os.path.splitext(mpFile)[0]
         SET.append(int(key))
     rand = random.randint(1, 300)
+    
+
     if keycode == 'free':
         chartKey = [keycode, session['sentence']]
     else:
     	chartKey = [keycode, chr(int(keycode))]
-    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project)
+
+    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=pl.getVersions())
+
 
 ################
 # COMMANDS URL #
@@ -139,11 +145,19 @@ def set(PROJECT):
 ##################
 @app.route('/write_json', method='post')
 def write_json():
+
+    print('################')
+    print('################')
+    print('################')
+    print('################')
+    print('################')
+    print('################')
+    
     json = request.forms.json
     sett = request.forms.set
 
     if sett != '-all':
-        file = open('projects/' + pl.project + '/global.json','w') 
+        file = open('projects/' + pl.project + '/version/regular.json','w') 
         file.write(json)
         file.close()     
         pl.build_global_mp() 

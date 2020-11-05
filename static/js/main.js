@@ -14,8 +14,8 @@ window.addEventListener('DOMContentLoaded', function(){
 		loadMp(aceEditor[i], editors[i])
 		refreshInks(aceEditor[i])
 	}
-
-	readJson("/projects/" + projectName + "/global.json?rand=" + getRandomInt(3000), function(text){
+	
+	readJson("/projects/" + projectName + "/versions/regular.json?rand=" + getRandomInt(3000), function(text){
 		var data = JSON.parse(text)
 		buildNav(data)
 		changeValue(data)

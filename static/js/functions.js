@@ -1,23 +1,23 @@
-let content = document.getElementById('content')
-let projectName = content.getAttribute('data-project')
-let typewriter = document.querySelector('.typewriter')
-let svgContainer = document.getElementById('svgContainer')
-let setchart = document.getElementById('setchart')
-let editors = document.getElementsByClassName('editor')
-let editor_mp = document.getElementById('editor_mp')
-let run = document.getElementById('run')
-let inputWrite = document.getElementById('inputWrite')
-let inputsRange = document.getElementsByClassName('input_range')
-let globalNav = document.getElementById('global_nav')
-let infoNav = document.getElementById('info_nav')
-let btn_inkscape = document.getElementById('inkscape')
-let btn_refresh = document.getElementById('refresh')
-let btn_all = document.getElementById('btn_all')
-let btn_tab = document.getElementsByClassName('tab')
-let imgs = document.getElementsByClassName('imgChar')	
+var content = document.getElementById('content')
+var projectName = content.getAttribute('data-project')
+var typewriter = document.querySelector('.typewriter')
+var svgContainer = document.getElementById('svgContainer')
+var setchart = document.getElementById('setchart')
+var editors = document.getElementsByClassName('editor')
+var editor_mp = document.getElementById('editor_mp')
+var run = document.getElementById('run')
+var inputWrite = document.getElementById('inputWrite')
+var inputsRange = document.getElementsByClassName('input_range')
+var globalNav = document.getElementById('global_nav')
+var infoNav = document.getElementById('info_nav')
+var btn_inkscape = document.getElementById('inkscape')
+var btn_refresh = document.getElementById('refresh')
+var btn_all = document.getElementById('btn_all')
+var btn_tab = document.getElementsByClassName('tab')
+var imgs = document.getElementsByClassName('imgChar')	
 var aceEditor = []
-let toggleNav = document.getElementsByClassName('toggleNav')	
-let inputZoom = document.querySelector('.zoom input')	
+var toggleNav = document.getElementsByClassName('toggleNav')	
+var inputZoom = document.querySelector('.zoom input')	
 var log_elem = document.getElementById('log')	
 
 if (content.className !== 'set ') {
@@ -51,23 +51,11 @@ function set_session(key, value){
 	xhr.send()
 }
 
-function pingServer(url, callback) {
-	var xhr = new XMLHttpRequest()
-	xhr.open("GET", url, false)
-	svgContainer.className = "loading"
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4 && xhr.status == "200") {
-			callback(xhr.responseText)
-			svgContainer.classList.remove("loading")
-		}
-	}
-	xhr.send()
-}
 
 function readJson(file, callback) {
 	var rawFile = new XMLHttpRequest();
 	rawFile.overrideMimeType("application/json");
-	rawFile.open("GET", file, true);
+	rawFile.open("GET", file, true)
 	rawFile.onreadystatechange = function() {
 		if (rawFile.readyState === 4 && rawFile.status == "200") {
 			callback(rawFile.responseText)
@@ -107,7 +95,7 @@ function writeJson(data){
 	}
 
 	xmlhttp.open('POST', '/write_json' , true);
-	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
+	// xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
 }
 
 function loadSvg(key) {
@@ -188,6 +176,7 @@ function changeValue(data){
 			sp = document.getElementById('span_' + vari)
 			sp.innerHTML = '| ' + val
 			data.variables[cat][vari].value = val
+			console.log(data)
 			writeJson(data, false)
 		});
 	}

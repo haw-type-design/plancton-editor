@@ -15,6 +15,17 @@
 		<div class="global">
 			<div id="interface_nav"></div>
 			<div id="info_nav"></div>
+			<br>
+			<div id="versionning">
+				<!-- <input type="button" value="save"> -->
+				<input type="button" value="new version">
+				<select id="select_version">
+				% for version in versions:
+					<option value="v1">{{ version['name'] }}</option>
+				% end
+				</select>
+				<input type="button" value="❆" />
+			</div>
 			<div id="global_nav"></div>
 		</div>
 

@@ -25,6 +25,7 @@ class Plancton:
         '''
         self.dir_projects = 'projects'
         self.project = ''
+        self.version = 'main'
         self.global_json = 'global.json'
 
     def read_json(path):
@@ -221,12 +222,15 @@ class Plancton:
 
     def build_global_mp(self):
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 
-        dirFiles = self.dir_projects+'/'+self.project+'/'+self.global_json
+        dirFiles = self.dir_projects+'/'+self.project+'/versions/'+self.global_json
         out = []
         Tmp = '''{In} := {Out};'''
 
         with open(dirFiles) as f:
             data = json.load(f, object_pairs_hook=OrderedDict)
+        print('------------')
+        print(data)
+        print('------------')
 
         CATEGORIES = data['variables']
 
@@ -250,8 +254,20 @@ class Plancton:
             f.write('\n'.join(out))
             f.close()
 
-            print('\n'.join(out))
 
+    def getVersions(self):
 
+        def getInfo(v):
+            with open(v) as f:
+                data = json.load(f, object_pairs_hook=OrderedDict)
+            return { "name": data['font_info']['version'], "path" : v }
+        
+        versions = glob.glob(self.dir_projects+'/'+self.project+'/versions/*.json')
 
+        out = [] 
+        i = 0
+        for v in versions: out.append(getInfo(v))
+
+        return out 
+        
 
