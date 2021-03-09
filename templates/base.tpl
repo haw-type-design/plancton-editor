@@ -13,8 +13,8 @@
 	<script charset="utf-8" src="/static/js/shortcuts.js" ></script>
 	<script charset="utf-8" src="/static/js/commands.js" ></script>
 	<script charset="utf-8" src="/static/js/main.js" ></script>
-	<!-- <script charset="utf&#45;8" src="/static/js/ace.js" ></script> -->
-	<script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js" ></script>
+	<script charset="utf-8" src="/static/js/ace.js" ></script>
+	<!-- <script charset="utf&#45;8" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js" ></script> -->
 	<script>
 	</script>
 </html>

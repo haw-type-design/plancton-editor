@@ -25,8 +25,7 @@ class Plancton:
         '''
         self.dir_projects = 'projects'
         self.project = ''
-        self.version = 'main'
-        self.global_json = 'global.json'
+        self.current_json = 'current.json'
 
     def read_json(path):
         with open(path, 'r') as f:
@@ -85,7 +84,7 @@ class Plancton:
 
     def add_glyph(self, key):
         project_path = self.dir_projects+'/'+self.project
-        json_path = project_path+'/'+self.global_json
+        json_path = project_path+'/'+self.current_json
         inputsvg_path = project_path+'/input-svg/'
         
         if os.path.isfile(inputsvg_path + str(key) + '.svg'):
@@ -173,7 +172,7 @@ class Plancton:
             return ET.tostring(root, encoding='utf8', method='xml').decode()
         # Build new directory
         project_path = self.dir_projects+'/'+self.project
-        json_path = project_path+'/'+self.global_json
+        json_path = project_path+'/'+self.current_json
         json = Plancton.read_json(json_path)
         ex_folder = project_path+'/fonts/test/'
         ex_folder_svg = project_path+'/fonts/test/svg/'
@@ -222,15 +221,12 @@ class Plancton:
 
     def build_global_mp(self):
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 
-        dirFiles = self.dir_projects+'/'+self.project+'/versions/'+self.global_json
+        dirFiles = self.dir_projects+'/'+self.project+'/'+self.current_json
         out = []
         Tmp = '''{In} := {Out};'''
 
         with open(dirFiles) as f:
             data = json.load(f, object_pairs_hook=OrderedDict)
-        print('------------')
-        print(data)
-        print('------------')
 
         CATEGORIES = data['variables']
 
@@ -254,20 +250,44 @@ class Plancton:
             f.write('\n'.join(out))
             f.close()
 
+            print('\n'.join(out))
+
+
+    def searchKeysByVal(self,dict, byVal):
+        keysList = []
+        itemsList = dict.items()
+        for item in itemsList:
+            print(item)
+        #     if item[1] == byVal:
+        #         keysList.append(item[0])
+        # return keysList
 
     def getVersions(self):
 
         def getInfo(v):
             with open(v) as f:
                 data = json.load(f, object_pairs_hook=OrderedDict)
-            return { "name": data['font_info']['version'], "path" : v }
-        
+            return  data
+
+
+
         versions = glob.glob(self.dir_projects+'/'+self.project+'/versions/*.json')
 
-        out = [] 
-        i = 0
-        for v in versions: out.append(getInfo(v))
+        out = {}
 
-        return out 
+        # for v in versions: out.append(getInfo(v))
+        for v in versions:
+            name = getInfo(v)['font_info']['version']
+            out[name] = {'name': name, 'path': v} 
         
+        print(out)
+        return out
+
+    def switchVersion(self, current_version, select_version):
+
+        versions = self.getVersions()
+        
+
+
+
 
