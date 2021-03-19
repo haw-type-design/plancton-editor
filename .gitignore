@@ -8,3 +8,4 @@ __pycache__/
 projects/
 bottle.py
 env
+.DS_Store
