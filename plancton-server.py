@@ -1,6 +1,6 @@
 from bottle import Bottle, run, template, route, static_file, get, request, response
 import plancton as plct
-import svg2font as s2f
+# import svg2font as s2f
 import subprocess
 import os
 from os import listdir

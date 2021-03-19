@@ -10,7 +10,7 @@ import lxml.etree as ET
 from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
-import fontforge 
+# import fontforge 
 
 class Plancton:
     def __init__(self):
