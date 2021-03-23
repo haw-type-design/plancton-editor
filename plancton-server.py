@@ -78,9 +78,13 @@ def index():
 @app.route('/type/<project>/<keycode>')
 def type(project, keycode='free'):
     pl.project = project
-    # if keycode == 'free':
-    #     pl.build_svg('-all') 
+    if keycode == 'free':
+        pl.build_svg('-all') 
     SETFOLDER = glob.glob('projects/' + pl.project + '/mpost/mpost-files/*.mp')
+    print('--------------')
+    print(pl.project)
+    print(SETFOLDER)
+    print('--------------')
     SET = []
     for CHAR in SETFOLDER:
         mpFile = os.path.basename(str(CHAR))

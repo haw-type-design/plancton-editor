@@ -66,6 +66,12 @@ class Plancton:
                 os.remove(LOG)
         for svg in SET_svg:
             Plancton.adjust_viewbox(svg)
+        
+        print('--------------------------------------')
+        print('--------------------------------------')
+        print(mp_path)
+        print('--------------------------------------')
+        print('--------------------------------------')
 
     def del_glyph(self, key):
         project_path = self.dir_projects+'/'+self.project
