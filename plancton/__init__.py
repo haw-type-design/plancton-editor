@@ -45,7 +45,7 @@ class Plancton:
         root.set('width', str(width))
         root.set('height', str(height))
         root.set('viewBox', "{0} {1} {2} {3}".format(int(xmin), int(ymin), int(width), int(height)))
-        tree.write(open(f_svg, 'wb'), encoding='unicode')
+        tree.write(open(f_svg, 'wb'))
 
     def build_svg(self, key):
         project_path = self.dir_projects+'/'+self.project
