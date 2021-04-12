@@ -20,6 +20,9 @@ let toggleNav = document.getElementsByClassName('toggleNav')
 let inputZoom = document.querySelector('.zoom input')	
 var log_elem = document.getElementById('log')	
 
+let inputGitCheckout = document.querySelector('input#input_git_checkout')	
+let inputGitCheckoutSelect = document.getElementById('select_version')	
+
 if (content.className !== 'set ') {
 	var sentence = inputWrite.value
 }
@@ -288,5 +291,9 @@ function toogle(elem, classN) {
 	}
 } 
 
-
-
+// TERMINAL
+function git_action_checkout(new_branch){
+	pingServer('/git/checkout/'+new_branch+'/none', function(cb){
+		alert(cb)
+	})
+}

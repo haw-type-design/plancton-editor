@@ -1,5 +1,6 @@
 from bottle import Bottle, run, template, route, static_file, get, request, response
 import plancton as plct
+import plancton.gitManager as gm 
 # import svg2font as s2f
 import subprocess
 import os
@@ -12,9 +13,12 @@ import json
 app = Bottle()
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
 origin = [0, 18]
 
 pl = plct.Plancton()
+gitm = gm.gitManager()
+gitm.project_path = ''
 
 session = dict()
 
@@ -24,7 +28,7 @@ session = dict()
 session['zoom'] = '1' 
 session['sentence'] = 'Abc'
 session['current'] = 'none'
-session['version'] = 'regular'
+session['version'] = 'none'
 
 @app.route('/session_set/<key>/<value>')
 def session_set(key, value):
@@ -78,14 +82,18 @@ def index():
 @app.route('/type/<project>/<keycode>')
 def type(project, keycode='free'):
     pl.project = project
+
+    gitm.project_path = 'projects/' + pl.project
+    versions = gitm.branch_list()
+    
+    for v in versions:
+        if v.startswith('*'):
+            current_version = v
+
     if keycode == 'free':
         print('----------------------')
         pl.build_svg('-all') 
     SETFOLDER = glob.glob('projects/' + pl.project + '/mpost/mpost-files/*.mp')
-    print('--------------')
-    print(pl.project)
-    print(SETFOLDER)
-    print('--------------')
     SET = []
     for CHAR in SETFOLDER:
         mpFile = os.path.basename(str(CHAR))
@@ -96,13 +104,14 @@ def type(project, keycode='free'):
         chartKey = [keycode, session['sentence']]
     else:
     	chartKey = [keycode, chr(int(keycode))]
-    print(pl.switchVersion('main', 'regular'))
-    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=pl.getVersions())
+    # print(pl.switchVersion('main', 'regular'))
+    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=versions, current_version=current_version)
 
 
 ################
 # COMMANDS URL #
 ################
+
 @app.route('/add/<keycode>')
 def add(keycode=False):
     if keycode == False:
@@ -115,10 +124,10 @@ def delete(keycode=False):
     if keycode == False:
         return "The keycode is missing !"
     pl.del_glyph(keycode)
-    return "Glyph " +keycode+" has been removed!"
+    return "Glyph "+keycode+" has been removed!"
 
 @app.route('/clean/<keycode>')
-def delete(keycode=False):
+def clean(keycode=False):
     if keycode == False:
         return "The keycode is missing !"
     pl.clean_mp(keycode, True)
@@ -142,6 +151,24 @@ def set(PROJECT):
     SET.sort()
     SET = list(map(str, SET))
     return '|'.join(SET)
+
+
+##################
+# GIT COMMANDS   #
+##################
+
+@app.route('/git/<action>/<branch>/<message>')
+def git_action(action=False, branch=False, message=False):
+    if action == 'checkout':
+        if branch.startswith('*'):
+            return 'c\'est la branch courante' 
+        else:
+            rr = gitm.checkout_branch(branch)
+            return rr 
+    elif action == 'save':
+        rr = gitm.save('.', branch, message)
+        return rr 
+
 
 ##################
 # WRITE FILE URL #
