@@ -10,7 +10,8 @@ import lxml.etree as ET
 from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
-# import fontforge 
+import fontforge 
+import math       
 
 class Plancton:
     def __init__(self):
@@ -210,12 +211,13 @@ class Plancton:
                 f = open(ex_folder_svg+gkey+'.svg', 'w')
                 f.write(gclean) 
                 f.close()
-                gwidth = rootLet.get('width')
+                gwidth = float(rootLet.get('width'))
                 gheight = rootLet.get('height')
-                print(gwidth, '\n', gheight)
+                print(int(gwidth), '\n', gheight)
                 print('\n----------------------\n', gkey, '\n----------------------\n' )
 
                 char = font.createChar(int(gkey))
+                char.width = int(gwidth * 1.9)
 
                 try:
                     char.importOutlines(out_svg).simplify().handle_eraser()
@@ -223,7 +225,7 @@ class Plancton:
                     print('glyph failed')
                     continue
 
-        font.generate('temp.otf')
+        font.generate('exports/'+self.project+'.otf')
 
     def build_global_mp(self):
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 
