@@ -176,7 +176,7 @@ class Plancton:
                 if child.tag == '{http://www.w3.org/2000/svg}path':
                     if child.attrib['style'].startswith(pattern):
                         b = child
-            root.remove(b)
+                        root.remove(b)
             ET.dump(root)
             return ET.tostring(root, encoding='utf8', method='xml').decode()
         # Build new directory
@@ -227,7 +227,7 @@ class Plancton:
                     print('glyph failed')
                     continue
 
-        font.generate('exports/'+self.project+'.otf')
+        font.generate('static/fonts/exports/'+self.project+'.otf')
 
     def build_global_mp(self):
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 

@@ -209,6 +209,16 @@ def writefile():
     write_file('projects/' + PROJECT + '/mpost/def.mp', mp)
     return mp
 
+
+# TEST FONT 
+
+@app.route('/testing/<project>')
+def test_font(project):
+    pl.project = project 
+    pl.svg_to_font()
+    return template('templates/test.tpl', project=project)
+
+
 #############
 # EDIT FILE #
 #############
