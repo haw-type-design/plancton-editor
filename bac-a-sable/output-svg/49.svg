@@ -1,0 +1,19 @@
+<!-- Created by MetaPost 2.00 on 2021.04.20:1145 --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="452.203217" height="851.206055" viewBox="0 0 452 851">
+<!-- Original BoundingBox: 0.000000 -239.401703 452.203217 611.804352 -->
+  <path d="M0.000000 850.401703L452.203217 850.401703L452.203217 -0.804352L0.000000 -0.804352Z" style="stroke:rgb(100.000000%,0.000000%,0.000000%); stroke-width: 0.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M-272.548468 545.120879C-288.550099 560.042486,-310.912855 542.983205,-328.285079 524.353582" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M-254.407283 564.575119C-270.408914 579.496727,-254.951378 602.995163,-237.579154 621.624785" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M67.900786 227.650101L-4.663954 149.833138C29.108223 186.049739,75.517779 207.887311,124.950452 210.821971L-273.861524 582.716304" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M-292.002709 563.262063L87.355026 209.508916" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M-364.567449 485.445101L-201.296784 660.533266" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+</svg>
