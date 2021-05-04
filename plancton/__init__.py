@@ -52,6 +52,8 @@ class Plancton:
         project_path = self.dir_projects+'/'+self.project
         mp_path = project_path+'/mpost/mpost-files/'
         svg_path = project_path+'/output-svg/'
+        if not os.path.exists(svg_path):
+            os.makedirs(svg_path)
 
         if key != '-all':
             SET = glob.glob(mp_path + str(key) + '.mp')

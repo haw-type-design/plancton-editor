@@ -1,0 +1,10 @@
+<!-- Created by MetaPost 2.00 on 2021.04.20:1145 --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="345.80246" height="851.206055" viewBox="13 0 345 851">
+<!-- Original BoundingBox: -13.300034 -239.401703 345.802460 611.804352 -->
+  <path d="M13.000000 850.401703L358.802460 850.401703L358.802460 -0.804352L13.000000 -0.804352Z" style="stroke:rgb(100.000000%,0.000000%,0.000000%); stroke-width: 0.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M105.948121 209.945925L-253.955374 545.557888C-321.923185 608.938241,-425.952385 613.295462,-498.982167 555.820740L-498.982167 555.820740C-415.832842 624.052703,-295.025611 620.227102,-216.359948 546.870944L124.089306 229.400166" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M-437.993334 426.206334L64.223333 165.201105L165.814094 274.144986L-437.993334 426.206334" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+</svg>

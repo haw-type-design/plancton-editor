@@ -9,3 +9,4 @@ projects/
 bottle.py
 env
 .DS_Store
+gittest.py

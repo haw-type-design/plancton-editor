@@ -1,5 +1,13 @@
 from plancton import Plancton
+import plancton.gitManager as gm 
 
-pl = Plancton()
-pl.project = 'meta-old-french'
-pl.svg_to_font()
+#
+# gitm = gm.gitManager()
+# gitm.project_path = 'projects/tmp/meta-old-french/'
+# gitm.save('.', 'test', 'yess')
+
+branch = '*test'
+
+if branch.startswith('*'):
+    print('est la branch courante') 
+

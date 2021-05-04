@@ -17,15 +17,20 @@
 			<div id="info_nav"></div>
 			<br>
 			<div id="versionning">
-			<!-- <input type="button" value="save"> -->
-					<input type="button" value="new version">
+					<input type="button" value="save" />
+					<input type="text" value="message commit" />
 					<select id="select_version">
 					% for version in versions:
-						<option value="v1">{{ version}}</option>
+						% if version == current_version:
+						<option value="{{version}}" selected>{{version}}</option>
+						% else: 
+						<option value="{{version}}">{{version}}</option>
+						% end
 					% end
 					</select>
-					<input type="button" value="save" />
-					<input type="button" value="❆" />
+					<input id="input_git_checkout" type="button" value="go" />
+					<input type="button" value="new version">
+					<br>
 			</div>
 
 			<div id="global_nav"></div>
@@ -50,6 +55,11 @@
 		</div>
 	</div>
 	<div class="typewriter">
+	<!-- <div id="terminal" > -->
+	<!-- 	<pre class="result"> -->
+	<!-- 	</pre> -->
+	<!-- 	<input id="btn_terminal_close"type="button" value="exit"> -->
+	<!-- </div> -->
 		<div class="zoom">
 			<input class="zoom" type="range" step="0.1" value="1" min="0.5" max="5" />
 			<span class="zoom_value"> 1 </span>

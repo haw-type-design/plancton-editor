@@ -32,4 +32,15 @@ window.addEventListener('DOMContentLoaded', function(){
 		set_session('zoom', this.value)
 	})
 
+	// Event button git  
+	
+	inputGitCheckout.addEventListener('click', function(){
+		console.log(inputGitCheckoutSelect)
+		var new_branch = inputGitCheckoutSelect.value
+		alert(new_branch)
+		git_action_checkout(new_branch)
+	})
+	
+	
+
 })
