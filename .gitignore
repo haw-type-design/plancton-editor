@@ -10,3 +10,4 @@ bottle.py
 env
 .DS_Store
 gittest.py
+static/fonts/exports/
