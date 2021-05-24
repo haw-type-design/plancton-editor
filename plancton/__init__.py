@@ -179,6 +179,7 @@ class Plancton:
                         root.remove(b)
             ET.dump(root)
             return ET.tostring(root, encoding='utf8', method='xml').decode()
+
         # Build new directory
         project_path = self.dir_projects+'/'+self.project
         json_path = project_path+'/'+self.current_json
