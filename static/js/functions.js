@@ -114,17 +114,21 @@ function writeJson(data){
 }
 
 function loadSvg(key) {
+
 	var l = String.fromCharCode(key);
 	xhr = new XMLHttpRequest()
 	xhr.overrideMimeType("image/svg+xml")
 	xhr.open("GET", "/projects/" + projectName + "/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
 	xhr.onreadystatechange = function() {
+			
 		if (xhr.readyState === 4 && xhr.status == "200") {
-		p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a class="link_cadratin" href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '<span class="ref">'+l+' | '+key+'.mp</span></a></span>'
+		
+		 p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a class="link_cadratin" href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '<span class="ref">'+l+' | '+key+'.mp</span></a></span>'
 		}
 	}
 	xhr.send("")	
 	svgContainer.innerHTML += p	
+	delete p
 }
 
 function inputBuild(variablesTable, i) {
