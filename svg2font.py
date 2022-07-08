@@ -1,4 +1,4 @@
-import fontforge as ff
+import fontforge
 import lxml.etree as et
 import glob
 import os
@@ -18,7 +18,6 @@ def getInfoPath(f, pattern):
             if child.tag == '{http://www.w3.org/2000/svg}path':
                 if child.attrib['style'].startswith(pattern):
                     dparse = parse_path(child.attrib['d'])
-                    # print(dparse.outline)
                     for point in dparse:
                         type = str(point)[0:4]
                         x = dparse[1].start.real
@@ -35,7 +34,7 @@ def removeCadra(g, pattern):
         if child.tag == '{http://www.w3.org/2000/svg}path':
             if child.attrib['style'].startswith(pattern):
                 b = child
-    root.remove(b)
+                root.remove(b)
     et.dump(root)
     return et.tostring(root, encoding='utf8', method='xml').decode()
     
@@ -49,60 +48,65 @@ def saveVersion():
 def deleteVersion(elem):
     os.popen('rm -rf files/fonts/archive/' + elem + '/')
 
-def buildFont(outline):
-    compositeChar = [192, 193, 194, 195, 196, 199, 200, 201, 202, 203, 204, 205, 206, 207, 210, 211, 212, 213, 214, 217, 218, 219, 220, 224, 225, 226, 227, 231, 232, 233, 234, 235, 236, 237, 238, 239, 242, 243, 244, 249, 250, 251, 252, 350, 351]
+def buildFont(PATH_,outline):
+    # compositeChar = [192, 193, 194, 195, 196, 199, 200, 201, 202, 203, 204, 205, 206, 207, 210, 211, 212, 213, 214, 217, 218, 219, 220, 224, 225, 226, 227, 231, 232, 233, 234, 235, 236, 237, 238, 239, 242, 243, 244, 249, 250, 251, 252, 350, 351]
+    SVG_DIR = glob.glob(PATH_+'/output-svg/*.svg')
 
-    os.popen('cp -rf files/output-svg/ files/fonts/archive/temp/')
-    os.popen('cp -f files/global.json files/fonts/archive/temp/')
-    os.popen('rm -f files/fonts/archive/temp/output-svg/ps.svg')
-    with open('files/global.json') as json_data:
-        d = json.load(json_data)
-        height = 1000 / int(d['font_info']['height']) 
-        descent = height * int(d['font_info']['descent'])
-        ascent = height * int(d['font_info']['ascent'])
-    SVG_DIR = glob.glob('files/fonts/archive/temp/output-svg/*.svg')
-    font = ff.open('.tmp/empty.sfd')
+    # os.popen('cp -rf files/output-svg/ files/fonts/archive/temp/')
+    # with open('files/global.json') as json_data:
+    #     d = json.load(json_data)
+    #     height = 1000 / int(d['font_info']['height']) 
+    #     descent = height * int(d['font_info']['descent'])
+    #     ascent = height * int(d['font_info']['ascent'])
+    # font = fontforge.open('.tmp/empty.sfd')
+    font = fontforge.font()
 
     for g in SVG_DIR:
+
         gkey = g.split("/")[-1].replace(".svg", "")
         if gkey.isdigit() == True:
             with open(g, 'rt') as gp:
                 treeLet = et.parse(gp)
+
             rootLet = treeLet.getroot()
             gwidth = rootLet.get('width')
             gheight = rootLet.get('height')
             gwidth = round(float(gwidth))
-            gclean = removeCadra(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
-            pos = getInfoPath(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
-            scaleValue = 1000 / pos[3]
-            f = open(g, 'w')
-            f.write(str(gclean)) 
-            f.close()
+            # gclean = removeCadra(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
+            # pos = getInfoPath(g, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
+            # scaleValue = 1000 / pos[3]
+            # f = open(g, 'w')
+            # f.write(str(gclean)) 
+            # f.close()
 
-            if outline == 'true':
+            if outline == True:
                 subprocess.call(['bash', 'lib/outline.sh', 'files/fonts/archive/temp/output-svg/' + gkey + '.svg']) 
 
             letter_char = font.createChar(int(gkey))
-            letter_char.importOutlines('files/fonts/archive/temp/output-svg/' + gkey + '.svg')
+            letter_char.importOutlines(PATH_ + gkey + '.svg')
             letter_char.left_side_bearing = letter_char.right_side_bearing = 10
+            print(gkey, '->>>', svg)
+            # letter_char.removeOverlap()
+            # letter_char.width = (gwidth * scaleValue)
 
-            letter_char.removeOverlap()
-            letter_char.width = (gwidth * scaleValue)
+    # for letter_comp in compositeChar:
+    #     glyphAcc = font.createChar(letter_comp)
+    #     glyphAcc.build()
 
-    for letter_comp in compositeChar:
-        glyphAcc = font.createChar(letter_comp)
-        glyphAcc.build()
-
-    trs = psMat.translate(0, -70) 
-    font.selection.all()
-    font.transform(trs)
-    font.correctDirection()
-    font.removeOverlap()
-    font.simplify()
-    font.round()
-    font.ascent = ascent
-    font.descent = descent 
-    font.generate('files/fonts/archive/temp/temp.otf')
-    font.generate('files/fonts/archive/temp/temp.ufo')
+    # trs = psMat.translate(0, -70) 
+    # font.selection.all()
+    # font.transform(trs)
+    # font.correctDirection()
+    # font.removeOverlap()
+    # font.simplify()
+    # font.round()
+    # font.ascent = ascent
+    # font.descent = descent 
+    font.generate('temp.otf')
+    font.generate('temp.ufo')
     font.close()
-    subprocess.call(['fontforge', 'files/fonts/archive/temp/temp.otf'])
+    # subprocess.call(['fontforge', 'temp.otf'])
+
+
+    
+buildFont('bac-a-sable/output-svg', False)

@@ -82,13 +82,23 @@ nav h1 {
 	margin-top: 12px;
 }
 
-nav .global {
+nav .global, nav #editor_global {
 	height: calc(93% - 40px);
 	bottom: 0px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	width: calc(100% - 5px);
 }
+
+nav.editing .global, nav #editor_global{
+	display: none;
+}
+
+ nav.editing #editor_global{
+ 	display: block;
+ }
+
+
 
 nav .block_input {
 	padding: 3px 0;
@@ -134,6 +144,15 @@ nav .tabs {
 	text-transform: uppercase;
 	width: 300px;
 	height: 7%;
+}
+
+nav #nav_close{
+	position: absolute;
+	right: 0;
+	width: 10%;
+	height: 100%;
+	display: block;
+	
 }
 
 .typewriter {
@@ -226,18 +245,25 @@ nav .tabs {
 	grid-area: addGlyph;
 }
 
-#editorBox {
+section#content #editorBox {
 	background: none;
 	grid-area: edition;
+	/* white-space: pre-wrap!important; */
 }
 
+
+
 .ace-tm {
-	background: none !important; 
-} 
+	background: none !important;
+}
 #editorBox .ace_content {
 	background: none;
 	box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
 	padding-left: 3px;
+}
+
+#editorBox .options{
+	min-width: 300px;
 }
 
 #editorBox .options h1 {
@@ -245,14 +271,16 @@ nav .tabs {
 	margin: 0;
 }
 
-.editor {
+.editor, #editor_css{
 	bottom: 0px;
 	display: none;
 	height: 100%;
 	width: 100%;
 }
 
-.editor:target {
+
+
+.editor:target, #editor_css{
 	display: block;
 }
 
@@ -281,17 +309,20 @@ section#content {
 
 section#content.type.trip {
 	grid-template-columns: 300px auto 400px;
+	/* grid-template-columns: 200px auto 600px; */
+
 }
 
 section#content.type.hide_left {
 	grid-template-columns: 20px auto calc(40% - 20px);
 }
+
 section#content.type.hide_right {
-	grid-template-columns: 300px auto  20px;
+	grid-template-columns: 300px auto  60px;
 }
 
 section#content.type.hide_right.hide_left {
-	grid-template-columns: 20px auto  20px;
+	grid-template-columns: 20px auto  60px;
 }
 
 section#content.type {
@@ -300,9 +331,7 @@ section#content.type {
 	"nav typewriter edition";
 }
 
-.hide_left nav, .hide_right #editorBox *{
-	visibility: hidden;
-}
+
 .type:not(.add) #addGlyph{
 	display: none;
 }
@@ -376,16 +405,16 @@ svg{
 
 
 svg text {
-	fill: var(--main-active-color); 
+	fill: var(--main-active-color);
 }
 
-.btn {	
+.btn {
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 2px 3px;
 }
 
-.btn_file {	
+.btn_file {
 	cursor: pointer;
 	padding: 2px 3px;
 	color: grey
@@ -394,4 +423,39 @@ svg text {
 	color: var(--main-active-color);
 }
 
+.btn_file[href="#editor_current"]{
+	margin-left: auto;
+}
 
+/* TERMINAL */
+
+#terminal {
+	padding: 1em;
+	background: blue;
+	color: white;
+	width: 100%;
+	height: auto;
+}
+
+button#specimen{
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	background-color:blue;
+	height: 100px;
+}
+#versionning{
+	opacity: 0.2;
+}
+
+/*SPECIMEN*/
+
+section#specimen{
+	display: grid;
+	grid-template-columns: auto 400px;
+}
+
+section.hide_right#specimen{
+	
+	grid-template-columns: auto 20px;
+}

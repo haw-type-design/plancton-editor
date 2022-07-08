@@ -1,0 +1,11 @@
+<!-- Created by MetaPost 2.00 on 2021.04.20:1145 --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="159.601135" height="851.206055" viewBox="0 0 159 851">
+<!-- Original BoundingBox: 0.000000 -239.401703 159.601135 611.804352 -->
+  <path d="M0.000000 850.401703L159.601135 850.401703L159.601135 -0.804352L0.000000 -0.804352Z" style="stroke:rgb(100.000000%,0.000000%,0.000000%); stroke-width: 0.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M-275.710266 366.214302L16.103342 94.096528" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
+    <path d="M16.103342 94.096528C26.122437 104.840803,25.534562 121.672858,14.790287 131.691953L-275.710266 366.214302L-21.492083 92.783472C-10.747808 82.764377,6.084247 83.352252,16.103342 94.096528Z" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+  </g>
+  <path d="M79.800568 584.399811l0 0" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 66.500473;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
+</svg>

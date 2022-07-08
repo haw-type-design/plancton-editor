@@ -52,6 +52,8 @@ class Plancton:
         project_path = self.dir_projects+'/'+self.project
         mp_path = project_path+'/mpost/mpost-files/'
         svg_path = project_path+'/output-svg/'
+        if not os.path.exists(svg_path):
+            os.makedirs(svg_path)
 
         if key != '-all':
             SET = glob.glob(mp_path + str(key) + '.mp')
@@ -169,14 +171,16 @@ class Plancton:
     #########################
     def svg_to_font(self):
 
+
         def removeCadra(root, pattern):
             for child in root:
                 if child.tag == '{http://www.w3.org/2000/svg}path':
                     if child.attrib['style'].startswith(pattern):
                         b = child
-            root.remove(b)
+                        root.remove(b)
             ET.dump(root)
             return ET.tostring(root, encoding='utf8', method='xml').decode()
+
         # Build new directory
         project_path = self.dir_projects+'/'+self.project
         json_path = project_path+'/'+self.current_json
@@ -223,9 +227,11 @@ class Plancton:
                     char.importOutlines(out_svg).simplify().handle_eraser()
                 except:
                     print('glyph failed')
+                    print(char)
                     continue
 
-        font.generate('exports/'+self.project+'.otf')
+        font.generate('static/fonts/exports/'+self.project+'.otf')
+        font.generate('fonts/'+self.project+'.otf')
 
     def build_global_mp(self):
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 

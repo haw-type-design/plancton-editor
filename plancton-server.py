@@ -1,5 +1,6 @@
 from bottle import Bottle, run, template, route, static_file, get, request, response
 import plancton as plct
+import plancton.gitManager as gm 
 # import svg2font as s2f
 import subprocess
 import os
@@ -12,9 +13,12 @@ import json
 app = Bottle()
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+
 origin = [0, 18]
 
 pl = plct.Plancton()
+gitm = gm.gitManager()
+gitm.project_path = ''
 
 session = dict()
 
@@ -24,7 +28,7 @@ session = dict()
 session['zoom'] = '1' 
 session['sentence'] = 'Abc'
 session['current'] = 'none'
-session['version'] = 'regular'
+session['version'] = 'none'
 
 @app.route('/session_set/<key>/<value>')
 def session_set(key, value):
@@ -78,13 +82,18 @@ def index():
 @app.route('/type/<project>/<keycode>')
 def type(project, keycode='free'):
     pl.project = project
+
+    gitm.project_path = 'projects/' + pl.project
+    versions = gitm.branch_list()
+    
+    for v in versions:
+        if v.startswith('*'):
+            current_version = v
+
     if keycode == 'free':
+        print('----------------------')
         pl.build_svg('-all') 
     SETFOLDER = glob.glob('projects/' + pl.project + '/mpost/mpost-files/*.mp')
-    print('--------------')
-    print(pl.project)
-    print(SETFOLDER)
-    print('--------------')
     SET = []
     for CHAR in SETFOLDER:
         mpFile = os.path.basename(str(CHAR))
@@ -95,13 +104,14 @@ def type(project, keycode='free'):
         chartKey = [keycode, session['sentence']]
     else:
     	chartKey = [keycode, chr(int(keycode))]
-    print(pl.switchVersion('main', 'regular'))
-    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=pl.getVersions())
+    # print(pl.switchVersion('main', 'regular'))
+    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=versions, current_version=current_version)
 
 
 ################
 # COMMANDS URL #
 ################
+
 @app.route('/add/<keycode>')
 def add(keycode=False):
     if keycode == False:
@@ -114,20 +124,38 @@ def delete(keycode=False):
     if keycode == False:
         return "The keycode is missing !"
     pl.del_glyph(keycode)
-    return "Glyph " +keycode+" has been removed!"
+    return "Glyph "+keycode+" has been removed!"
+
+@app.route('/jkon/<data>')
+def jkon(data=False):
+    if data == False:
+        return "The keycode is missing !"
+    return "Glyph "+data+" has been removed!"
+
+
 
 @app.route('/clean/<keycode>')
-def delete(keycode=False):
+def clean(keycode=False):
     if keycode == False:
         return "The keycode is missing !"
     pl.clean_mp(keycode, True)
     return "Glyph " +keycode+" has been cleaned!"
+
+@app.route('/clean/<keycode>')
+def clean(keycode=False):
+    if keycode == False:
+        return "The keycode is missing !"
+    pl.clean_mp(keycode, True)
+    return "Glyph " +keycode+" has been cleaned!"
+
+
 
 @app.route('/generate_font/<project>/<keycode>')
 def generate_font(project, keycode=False):
     if keycode == False:
         return "The keycode is missing !"
     return "Font has been generated!"
+
 
 @app.route('/set/<PROJECT>')
 def set(PROJECT):
@@ -142,9 +170,69 @@ def set(PROJECT):
     SET = list(map(str, SET))
     return '|'.join(SET)
 
+# @app.route('/editglobal', method='post')
+# def edit_global(data):
+#     json = request.forms.json
+#     sett = request.forms.set
+#     file = open('projects/' + pl.project + '/global.json','w')
+#     file.write(data)
+#     file.close()
+      
+    
+
+
+##################
+# GIT COMMANDS   #
+##################
+
+@app.route('/git/<action>/<branch>/<message>')
+def git_action(action=False, branch=False, message=False):
+    if action == 'checkout':
+        if branch.startswith('*'):
+            return 'c\'est la branch courante' 
+        else:
+            rr = gitm.checkout_branch(branch)
+            return rr 
+    elif action == 'save':
+        rr = gitm.save('.', branch, message)
+        return rr 
+
+
 ##################
 # WRITE FILE URL #
 ##################
+
+
+@app.route('/write_mp', method='post')
+def write_mp():
+    PROJECT = request.forms.project
+    mp = request.forms.mp
+    key = request.forms.key
+    mp = mp.replace('#59', ';')
+    mp = mp.replace('#45', '+')
+    write_file('projects/' + PROJECT + '/mpost/mpost-files/' + key + '.mp', mp)
+    pl.build_svg(key)
+    return mp
+
+@app.route('/write_file', method='post')
+def writefile():
+    print('coucou')
+    PROJECT = request.forms.project
+    mp = request.forms.mp
+    mp = mp.replace('#59', ';')
+    mp = mp.replace('#45', '+')
+    write_file('projects/' + PROJECT + '/mpost/def.mp', mp)
+    return mp
+
+@app.route('/write_jkon', method='post')
+def write_jkon():
+    PROJECT = request.forms.project
+    mp = request.forms.json
+    mp = mp.replace('#59', ';')
+    mp = mp.replace('#45', '+')
+    write_file('projects/' + PROJECT + '/current.json', mp)
+    return mp
+
 @app.route('/write_json', method='post')
 def write_json():
     json = request.forms.json
@@ -161,25 +249,25 @@ def write_json():
         pl.build_svg('-all') 
     return json
 
-@app.route('/write_mp', method='post')
-def write_mp():
-    PROJECT = request.forms.project
-    mp = request.forms.mp
-    key = request.forms.key
-    mp = mp.replace('#59', ';')
-    mp = mp.replace('#45', '+')
-    write_file('projects/' + PROJECT + '/mpost/mpost-files/' + key + '.mp', mp)
-    pl.build_svg(key)
-    return mp
+@app.route('/write_css', method='post')
+def write_css():
+    css = request.forms.css
 
-@app.route('/write_file', method='post')
-def writefile():
-    PROJECT = request.forms.project
-    mp = request.forms.mp
-    mp = mp.replace('#59', ';')
-    mp = mp.replace('#45', '+')
-    write_file('projects/' + PROJECT + '/mpost/def.mp', mp)
-    return mp
+    file = open('static/css/' + pl.project + '.css','w') 
+    file.write(css)
+    file.close()     
+    
+    return css
+
+
+# TEST FONT 
+
+@app.route('/testing/<project>')
+def test_font(project):
+    pl.project = project 
+    pl.svg_to_font()
+    return template('templates/test.tpl', project=project)
+
 
 #############
 # EDIT FILE #
