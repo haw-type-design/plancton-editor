@@ -120,6 +120,38 @@ function writeJson(data){
 	
 }
 
+
+function writeGlobal(editor){
+
+	
+		var sentence = inputWrite.value
+		svgContainer.innerHTML = ''
+		svgContainer.className = "loading"
+
+		var contentMp = editor.getValue()
+		contentMp = contentMp.replace(/;/g, '#59');
+		contentMp = contentMp.replace(/\+/g, '#45');
+	
+
+	var xmlhttp = new XMLHttpRequest();
+
+	xmlhttp.onreadystatechange = function()
+	{
+		if (xmlhttp.readyState == 4)
+		{
+				console.log('lol')
+				var sentence = inputWrite.value
+				write_sentence(sentence)	
+			svgContainer.classList.remove("loading")
+		}
+	}
+
+	xmlhttp.open('POST', '/write_global' , true);
+	xmlhttp.send('project=' + projectName + '&data=' + contentMp  + '&set=' + sentence);
+	//xmlhttp.send('project=' + projectName + '&json=' + data + '&set=' + sentence);
+	
+}
+
 function loadSvg(key) {
 
 	var l = String.fromCharCode(key);
@@ -329,7 +361,9 @@ function write(type, editor, key) {
 
 	var data1, data2 
 	var contentMp = editor.getValue()
+
 	console.log(contentMp)
+	
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
 	{
@@ -340,15 +374,15 @@ function write(type, editor, key) {
 		}
 	}
 
-	if (type == 'write_json'){
-		data1 = 'json'
-		data2 = 'set'
-	}else{
+	// si write global
+
+
+	
 		data1 = 'mp'
 		data2 = 'key'
 		contentMp = contentMp.replace(/;/g, '#59');
-	contentMp = contentMp.replace(/\+/g, '#45');
-	}
+		contentMp = contentMp.replace(/\+/g, '#45');
+	
 	
 		xmlhttp.open('POST', '/' + type, true);
 	
@@ -357,26 +391,26 @@ function write(type, editor, key) {
 	
 }
 
-function writejkon(type, editor, key) {
-	var contentMp = editor.getValue()
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function()
-	{
-		if (xmlhttp.readyState == 4)
-		{
-			sentence = inputWrite.value
-			write_sentence(sentence)
-		}
-	}
+// function writejkon(type, editor, key) {
+// 	var contentMp = editor.getValue()
+// 	var xmlhttp = new XMLHttpRequest();
+// 	xmlhttp.onreadystatechange = function()
+// 	{
+// 		if (xmlhttp.readyState == 4)
+// 		{
+// 			sentence = inputWrite.value
+// 			write_sentence(sentence)
+// 		}
+// 	}
 	
 		
-	xmlhttp.open('POST', '/write_jkon', true);
-	contentMp = contentMp.replace(/;/g, '#59');
-	contentMp = contentMp.replace(/\+/g, '#45');
-	xmlhttp.send('project=' + projectName + '&json=' + contentMp + '&key=' + key);
+// 	xmlhttp.open('POST', '/write_jkon', true);
+// 	contentMp = contentMp.replace(/;/g, '#59');
+// 	contentMp = contentMp.replace(/\+/g, '#45');
+// 	xmlhttp.send('project=' + projectName + '&json=' + contentMp + '&key=' + key);
 
 	
-}
+// }
 
 /* INTERFACE */
 

@@ -90,14 +90,14 @@ nav .global, nav #editor_global {
 	width: calc(100% - 5px);
 }
 
-nav.editing .global, nav #editor_global{
+/*nav.editing .global, nav #editor_global{
 	display: none;
 }
 
  nav.editing #editor_global{
  	display: block;
  }
-
+*/
 
 
 nav .block_input {
@@ -273,7 +273,7 @@ section#content #editorBox {
 
 .editor, #editor_css{
 	bottom: 0px;
-	display: none;
+	/*display: none;*/
 	height: 100%;
 	width: 100%;
 }

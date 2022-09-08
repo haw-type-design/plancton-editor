@@ -26,7 +26,7 @@ session = dict()
 # Session #
 ###########
 session['zoom'] = '1' 
-session['sentence'] = 'Abc'
+session['sentence'] = 'abc'
 session['current'] = 'none'
 session['version'] = 'none'
 
@@ -126,12 +126,6 @@ def delete(keycode=False):
     pl.del_glyph(keycode)
     return "Glyph "+keycode+" has been removed!"
 
-@app.route('/jkon/<data>')
-def jkon(data=False):
-    if data == False:
-        return "The keycode is missing !"
-    return "Glyph "+data+" has been removed!"
-
 
 
 @app.route('/clean/<keycode>')
@@ -224,14 +218,30 @@ def writefile():
     write_file('projects/' + PROJECT + '/mpost/def.mp', mp)
     return mp
 
-@app.route('/write_jkon', method='post')
-def write_jkon():
+
+
+
+@app.route('/write_global', method='post')
+def write_global():
+    print('c moi')
+    data = request.forms.data
+    sett = request.forms.set
     PROJECT = request.forms.project
-    mp = request.forms.json
-    mp = mp.replace('#59', ';')
-    mp = mp.replace('#45', '+')
-    write_file('projects/' + PROJECT + '/current.json', mp)
-    return mp
+    print('coucou' + sett)
+    if sett != '-all':
+        print('coucou' + sett)
+        data = data.replace('#59', ';')
+        data = data.replace('#45', '+')
+        file = open('projects/metabise/mpost/global.mp','w')
+        file.write(data)
+        file.close() 
+        
+        for n in sett:
+            pl.build_svg(ord(n)) 
+    else:
+        pl.build_svg('-all') 
+        print('nik')
+    return data
 
 @app.route('/write_json', method='post')
 def write_json():
@@ -242,7 +252,7 @@ def write_json():
         file = open('projects/' + pl.project + '/current.json','w') 
         file.write(json)
         file.close()     
-        pl.build_global_mp() 
+        #pl.build_global_mp() 
         for n in sett:
             pl.build_svg(ord(n)) 
     else:

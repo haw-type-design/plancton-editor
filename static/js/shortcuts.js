@@ -13,6 +13,10 @@ function shortcuts() {
 					
 					write('write_file', aceEditor[2], _KEY_)
 					write('write_mp', aceEditor[1], _KEY_)
+
+				break
+				case 71:
+					writeGlobal(aceEditor[0]);
 				
 					
 					// write('write_json', aceEditor[2], _KEY_)

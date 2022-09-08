@@ -234,6 +234,7 @@ class Plancton:
         font.generate('fonts/'+self.project+'.otf')
 
     def build_global_mp(self):
+        
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 
         dirFiles = self.dir_projects+'/'+self.project+'/'+self.current_json
         out = []
