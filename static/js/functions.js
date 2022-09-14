@@ -139,7 +139,7 @@ function writeGlobal(editor){
 	{
 		if (xmlhttp.readyState == 4)
 		{
-				console.log('lol')
+			
 				var sentence = inputWrite.value
 				write_sentence(sentence)	
 			svgContainer.classList.remove("loading")
@@ -212,6 +212,7 @@ function inputBuild(variablesTable, i) {
 
 function buildNav(data) {
 	var glob = data.variables
+	console.log(glob);
 
 	for (i in glob){
 		inputBuild(glob, i)
@@ -425,7 +426,19 @@ function toogle(elem, classN) {
 			this.classList.add(classN[0])
 		})
 	}
-} 
+}
+
+/* BIDOUILLE */
+
+document.querySelector("a[href='#editor_mp']").addEventListener('click', function(){
+	document.getElementById('editor_mp').style.display='block';
+	document.getElementById('editor_def').style.display='none';
+	});
+
+document.querySelector("a[href='#editor_def']").addEventListener('click', function(){
+	document.getElementById('editor_def').style.display='block';
+	document.getElementById('editor_mp').style.display='none';
+	});
 
 // TERMINAL
 function git_action_checkout(new_branch){

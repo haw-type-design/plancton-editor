@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	readJson("/projects/" + projectName + "/current.json?rand=" + getRandomInt(3000), function(text){
 		var data = JSON.parse(text)
-		// buildNav(data)
+		 buildNav(data)
 		// changeValue(data)
 	})
 

@@ -21,6 +21,10 @@ a, .ref, input[type='text'] {
 	background: none;
 }
 
+a:visited{
+	color:blue;
+}
+
 .link_cadratin {
 	border: none;
 	color: grey;
@@ -34,6 +38,8 @@ a, .ref, input[type='text'] {
 	--main-bg-color: oldlace;
 	--main-active-color: blue;
 }
+
+
 
 input[type='range'] {
 	-webkit-appearance: none !important;
@@ -55,6 +61,27 @@ body {
 	line-height: 1.3em;
 	margin: 0px;
 }
+
+
+/* INDEX */
+
+#projects a{
+	display: inline-block;
+}
+
+#projects a{
+	border: 1px solid black;
+	border-radius: 20px;
+}
+
+#projects li a{
+	/*border: 0;*/
+	
+}
+
+ul#projects li{
+
+	}
 
 nav {
 	/* background: var(--main-bg-color); */

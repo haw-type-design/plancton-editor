@@ -210,7 +210,7 @@ def write_mp():
 
 @app.route('/write_file', method='post')
 def writefile():
-    print('coucou')
+
     PROJECT = request.forms.project
     mp = request.forms.mp
     mp = mp.replace('#59', ';')
@@ -223,11 +223,11 @@ def writefile():
 
 @app.route('/write_global', method='post')
 def write_global():
-    print('c moi')
+   
     data = request.forms.data
     sett = request.forms.set
     PROJECT = request.forms.project
-    print('coucou' + sett)
+
     if sett != '-all':
         print('coucou' + sett)
         data = data.replace('#59', ';')
@@ -240,7 +240,7 @@ def write_global():
             pl.build_svg(ord(n)) 
     else:
         pl.build_svg('-all') 
-        print('nik')
+    
     return data
 
 @app.route('/write_json', method='post')
