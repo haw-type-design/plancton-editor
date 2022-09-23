@@ -85,7 +85,6 @@ function readJson(file, callback) {
 }
 
 function writeJson(data){
-	console.log(data)
 	if (data == false) {
 		var sentence = '-all'
 	}else {
@@ -116,8 +115,6 @@ function writeJson(data){
 
 	xmlhttp.open('POST', '/write_json' , true);
 	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
-	//xmlhttp.send('project=' + projectName + '&json=' + data + '&set=' + sentence);
-	
 }
 
 
@@ -316,19 +313,19 @@ function loadMp(editor, edi) {
 
 function loadCss(editor, edi) {
 	
-		var xhr = new XMLHttpRequest();
-xhr.open('GET', "/static/css/metabise.css", true)
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', "/static/css/metabise.css", true)
 
 
-xhr.onload = function () {
-    if (xhr.readyState == 4) {
-       
-            console.log(xhr.response);
-            //console.log(xhr.responseText);
+	xhr.onload = function () {
+		if (xhr.readyState == 4) {
 
-       
-    }
-    editor.setValue(xhr.response)
+			console.log(xhr.response);
+			//console.log(xhr.responseText);
+
+
+		}
+		editor.setValue(xhr.response)
 };
 
 
@@ -363,7 +360,6 @@ function write(type, editor, key) {
 	var data1, data2 
 	var contentMp = editor.getValue()
 
-	console.log(contentMp)
 	
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
@@ -375,10 +371,6 @@ function write(type, editor, key) {
 		}
 	}
 
-	// si write global
-
-
-	
 		data1 = 'mp'
 		data2 = 'key'
 		contentMp = contentMp.replace(/;/g, '#59');
@@ -388,7 +380,6 @@ function write(type, editor, key) {
 		xmlhttp.open('POST', '/' + type, true);
 	
 		xmlhttp.send('project=' + projectName + '&' + data1 + '='+ contentMp + '&' + data2 + '=' + key);
-
 	
 }
 

@@ -10,20 +10,18 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	for (var i = 0, len = editors.length; i < len; i++) {
 		aceEditor[i] = ace.edit(editors[i]);
-		aceEditor[i].getSession().setMode("ace/mode/javascript");
+		aceEditor[i].getSession().setMode("ace/mode/python");
+		aceEditor[i].setTheme("ace/theme/xcode")
 		console.log(editors[i].id);
-		if (editors[i].id =='editor_global'){
-			
-
-		}else{
-		loadMp(aceEditor[i], editors[i])
-		refreshInks(aceEditor[i])
-	}
+		if (editors[i].id != 'editor_global'){
+			loadMp(aceEditor[i], editors[i])
+			refreshInks(aceEditor[i])
+		}
 	}
 
 	readJson("/projects/" + projectName + "/current.json?rand=" + getRandomInt(3000), function(text){
 		var data = JSON.parse(text)
-		 buildNav(data)
+		buildNav(data)
 		// changeValue(data)
 	})
 
