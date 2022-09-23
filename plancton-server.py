@@ -89,9 +89,10 @@ def type(project, keycode='free'):
     for v in versions:
         if v.startswith('*'):
             current_version = v
+        else: 
+            current_version = 'main'
 
     if keycode == 'free':
-        print('----------------------')
         pl.build_svg('-all') 
     SETFOLDER = glob.glob('projects/' + pl.project + '/mpost/mpost-files/*.mp')
     SET = []
@@ -229,10 +230,9 @@ def write_global():
     PROJECT = request.forms.project
 
     if sett != '-all':
-        print('coucou' + sett)
         data = data.replace('#59', ';')
         data = data.replace('#45', '+')
-        file = open('projects/metabise/mpost/global.mp','w')
+        file = open('projects/'+pl.project+'/mpost/global.mp','w')
         file.write(data)
         file.close() 
         
@@ -262,13 +262,11 @@ def write_json():
 @app.route('/write_css', method='post')
 def write_css():
     css = request.forms.css
-
     file = open('static/css/' + pl.project + '.css','w') 
     file.write(css)
     file.close()     
     
     return css
-
 
 # TEST FONT 
 
@@ -278,16 +276,9 @@ def test_font(project):
     pl.svg_to_font()
     return template('templates/test.tpl', project=project)
 
-
 #############
 # EDIT FILE #
 #############
-@app.route('/inkscape', method='post')
-def inkscape():
-    PROJECT = request.forms.project
-    key = request.forms.key
-    subprocess.Popen(['inkscape', 'projects/' + PROJECT + '/input-svg/' + key + '.svg']) 
-    return '<<<<<<< I N K S C A P E !' 
 
 @app.route('/updateMp', method='post')
 def editeSvg():

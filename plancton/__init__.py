@@ -17,12 +17,12 @@ class Plancton:
     def __init__(self):
         self.mp_template = '''
         % {char}
-        input ../def;
-        beginchar({keycode}, {width});
-            {cordonates} 
-            {draws}
-        endchar({lenpoints});
-        end;
+input ../def;
+beginchar({keycode}, {width});
+    {cordonates} 
+    {draws}
+endchar({lenpoints});
+end;
         '''
         self.dir_projects = 'projects'
         self.project = ''
@@ -70,20 +70,12 @@ class Plancton:
         for svg in SET_svg:
             Plancton.adjust_viewbox(svg)
         
-        print('--------------------------------------')
-        print('--------------------------------------')
-        print(mp_path)
-        print('--------------------------------------')
-        print('--------------------------------------')
 
     def del_glyph(self, key):
         project_path = self.dir_projects+'/'+self.project
-        insvg = project_path+'/input-svg/'+str(key)+'.svg'
         outsvg = project_path+'/output-svg/'+str(key)+'.svg'
         mp = project_path+'/mpost/mpost-files/'+str(key)+'.mp'
 
-        if os.path.isfile(insvg):
-            os.remove(insvg)
         if os.path.isfile(outsvg):
             os.remove(outsvg)
         if os.path.isfile(mp):
@@ -96,21 +88,13 @@ class Plancton:
         json_path = project_path+'/'+self.current_json
         inputsvg_path = project_path+'/input-svg/'
         
-        if os.path.isfile(inputsvg_path + str(key) + '.svg'):
+        if os.path.isfile(project_path+'/mpost/mpost-files/'+str(key)+'.mp'):
             return str(key)+' already exist ! Use ":delete '+str(key)+'" before.'
         else: 
-            json = Plancton.read_json(json_path)
-            height = json['font_info']['height']
-            width = int(int(height)/2) 
-
-            svg = svgwrite.Drawing(str(key) + '.svg', size=(width, height))
-            svg.viewbox(0, 0, width, height)
-            svg.saveas(project_path+'/input-svg/'+str(key)+'.svg')
-            
             buildFig = self.mp_template.format(
                 char       = chr(int(key)),
                 keycode    = key,
-                width      = width,
+                width      = '5',
                 cordonates = '',
                 draws      = '',
                 lenpoints  = '0' 
@@ -119,7 +103,6 @@ class Plancton:
             f.write(buildFig) 
             f.close()
             self.build_svg(key)
-            
 
             return str(key)+' has been create !'
 
