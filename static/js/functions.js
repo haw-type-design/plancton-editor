@@ -363,6 +363,7 @@ function write(type, editor, file, key) {
 	
 	var data1, data2
 	//var fileMp = editor.getAttribute('href')
+
 	var contentMp = editor.getValue()
 	//console.log("c moi" + editor.getValue())
 
@@ -370,7 +371,7 @@ function write(type, editor, file, key) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
 	{
-		if (xmlhttp.readyState == 4)
+		if (xmlhttp.readyState == 4 )
 		{
 			sentence = inputWrite.value
 			write_sentence(sentence)
