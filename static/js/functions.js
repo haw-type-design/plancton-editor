@@ -17,6 +17,7 @@ let btn_inkscape = document.getElementById('inkscape')
 let btn_refresh = document.getElementById('refresh')
 let btn_all = document.getElementById('btn_all')
 let btn_tab = document.getElementsByClassName('tab')
+
 let imgs = document.getElementsByClassName('imgChar')	
 var aceEditor = []
 var cssEditor = []
@@ -28,6 +29,7 @@ var log_elem = document.getElementById('log')
 let inputGitCheckout = document.querySelector('input#input_git_checkout')	
 let inputGitCheckoutSelect = document.getElementById('select_version')	
 
+ 
 if (content.className !== 'set ') {
 	var sentence = inputWrite.value
 }
@@ -119,6 +121,8 @@ function writeJson(data){
 
 
 function writeGlobal(editor){
+
+	print('couchou')
 
 	
 		var sentence = inputWrite.value
@@ -355,10 +359,12 @@ function writeCss(editor){
 
 }
 
-function write(type, editor, key) {
-
-	var data1, data2 
+function write(type, editor, file, key) {
+	
+	var data1, data2
+	//var fileMp = editor.getAttribute('href')
 	var contentMp = editor.getValue()
+	//console.log("c moi" + editor.getValue())
 
 	
 	var xmlhttp = new XMLHttpRequest();
@@ -372,15 +378,17 @@ function write(type, editor, key) {
 	}
 
 		data1 = 'mp'
-		data2 = 'key'
+		data2 = 'file'
+		data3 = 'key'
 		contentMp = contentMp.replace(/;/g, '#59');
 		contentMp = contentMp.replace(/\+/g, '#45');
 	
-	
-		xmlhttp.open('POST', '/' + type, true);
-	
-		xmlhttp.send('project=' + projectName + '&' + data1 + '='+ contentMp + '&' + data2 + '=' + key);
-	
+		
+			console.log(file)
+		xmlhttp.open('POST', '/write_file', true);
+		xmlhttp.send('project=' + projectName + '&mp='+ contentMp + '&file=' + file + '&key=' + key );
+
+		//console.log(fileMp + "," + data2)
 }
 
 // function writejkon(type, editor, key) {
@@ -420,16 +428,29 @@ function toogle(elem, classN) {
 }
 
 /* BIDOUILLE */
+var tabs = document.querySelectorAll(".tabs > a");
+for (var i = 0, len = tabs.length; i < len; i++) {
 
-document.querySelector("a[href='#editor_mp']").addEventListener('click', function(){
-	document.getElementById('editor_mp').style.display='block';
-	document.getElementById('editor_def').style.display='none';
-	});
+	tabs[i].addEventListener('click', function(){
+		for (var j = 0, len = tabs.length; j < len; j++) {
+			console.log(tabs[j])
 
-document.querySelector("a[href='#editor_def']").addEventListener('click', function(){
-	document.getElementById('editor_def').style.display='block';
-	document.getElementById('editor_mp').style.display='none';
+		}
+
+		// toogle(".tabs > a", 'active')
+		console.log('coucou')
+		for (var j=0; j<len; j++){
+
+			document.querySelector(tabs[j].getAttribute("href")).style.display='none';
+			
+		}
+		var href= this.getAttribute("href");
+			console.log(href);
+		console.log(document.querySelector(href));
+		document.querySelector(href).style.display='block';
 	});
+}
+
 
 // TERMINAL
 function git_action_checkout(new_branch){

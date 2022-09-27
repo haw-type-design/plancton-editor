@@ -79,10 +79,22 @@ def index():
     return template('templates/index.tpl', projectsjson=projectsjson)
 
 @app.route('/type/<project>')
+
 @app.route('/type/<project>/<keycode>')
 def type(project, keycode='free'):
     pl.project = project
 
+    defFiles = []
+
+    mpFiles= glob.glob('projects/' + pl.project + '/mpost/*.mp')
+    for mpFile in mpFiles:
+        defFile =  os.path.basename(mpFile)
+        defFile =  defFile.replace('.mp', '')
+        print("deffff"+defFile)
+        if defFile != "global":
+            defFiles.append(defFile )
+        
+    print(defFiles)
     gitm.project_path = 'projects/' + pl.project
     versions = gitm.branch_list()
     
@@ -106,7 +118,7 @@ def type(project, keycode='free'):
     else:
     	chartKey = [keycode, chr(int(keycode))]
     # print(pl.switchVersion('main', 'regular'))
-    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=versions, current_version=current_version)
+    return template('templates/set-type.tpl', setchart=SET, rand=rand, mode='type', key=chartKey, PROJECT=pl.project, versions=versions, current_version=current_version, defFiles=defFiles)
 
 
 ################
@@ -203,9 +215,10 @@ def write_mp():
     PROJECT = request.forms.project
     mp = request.forms.mp
     key = request.forms.key
+    file = request.forms.file
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
-    write_file('projects/' + PROJECT + '/mpost/mpost-files/' + key + '.mp', mp)
+    write_file('projects/' + PROJECT + '/mpost/' + file + '.mp', mp)
     pl.build_svg(key)
     return mp
 
@@ -214,9 +227,22 @@ def writefile():
 
     PROJECT = request.forms.project
     mp = request.forms.mp
+    file = request.forms.file
+    key = request.forms.key
+    print('FILLLE'+ file)
+    print('KEY'+ key)
     mp = mp.replace('#59', ';')
     mp = mp.replace('#45', '+')
-    write_file('projects/' + PROJECT + '/mpost/def.mp', mp)
+   
+    if file == str(key):
+        print('mpost')
+        chemin = '/mpost/mpost-files/' + file + '.mp'
+        write_file('projects/' + PROJECT + chemin, mp)
+        pl.build_svg(key)
+    else:
+        chemin = '/mpost/' + file + '.mp'
+        write_file('projects/' + PROJECT + chemin, mp)
+    
     return mp
 
 

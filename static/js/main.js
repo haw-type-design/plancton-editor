@@ -1,8 +1,12 @@
 window.addEventListener('DOMContentLoaded', function(){
 	_KEY_ = document.getElementsByClassName('tools_bar')[0].getAttribute('data-key')
+
 	write_sentence(sentence);
 	activeInks()
 	shortcuts()
+
+	_FILES_ = document.getElementsByClassName('defFiles')
+	
 
 	stn = get_session('sentence')
 	inputWrite.value = stn 

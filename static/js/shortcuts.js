@@ -10,9 +10,14 @@ function shortcuts() {
 
 			switch(evt.keyCode){
 				case 77: // Press M
+
+					for (var i = 0, len = _FILES_.length; i < len; i++) {
+						 write('write_file', aceEditor[i + 2],_FILES_[i].getAttribute('data-key'), _KEY_)
+						
+						
+					}
 					
-					write('write_file', aceEditor[2], _KEY_)
-					write('write_mp', aceEditor[1], _KEY_)
+					write('write_file', aceEditor[1], _KEY_, _KEY_)
 
 				break
 				case 71:

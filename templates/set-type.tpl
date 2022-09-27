@@ -9,7 +9,7 @@
 <section id="content" class="{{mode}} {{status}}" data-project="{{ PROJECT }}">
 	<nav>
 		<div class="header">
-			<h1>PL</h1>
+			<h1>P L A N C T O N</h1>
 			<hr>
 		</div>
 		
@@ -44,13 +44,19 @@
 		<div class="options">
 			<div class="tabs">
 				<a class="btn_file tab active" data-active="true" href="#editor_mp" >char : {{key[1]}} | key : {{key[0]}}</a>
-				<a class="btn_file tab" data-active="false" href="#editor_def" >def.mp</a>
+				% for defFile in defFiles:
+				<a class="btn_file tab" data-active="false" href="#editor_{{defFile}}" >{{defFile}}</a>
+				%end
 			
 			</div>
 		</div>
 		
 		<div class="editor" id="editor_mp" data-key="mpost-files/{{key[0]}}"></div>
-		<div class="editor" id="editor_def" data-key="def"></div>
+
+		% for defFile in defFiles:
+		<div class="editor defFiles" id="editor_{{defFile}}" data-key="{{defFile}}"></div>
+		% end
+		
 		<div class="tools_bar"  data-key="{{key[0]}}" >
 			<input type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run Mpost" >
 			<span class="inks" >
