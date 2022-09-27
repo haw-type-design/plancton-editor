@@ -355,7 +355,7 @@ function writeCss(editor){
 
 }
 
-function write(type, editor, key) {
+function write(type, editor, key, reload=true) {
 
 	var data1, data2 
 	var contentMp = editor.getValue()
@@ -364,7 +364,7 @@ function write(type, editor, key) {
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
 	{
-		if (xmlhttp.readyState == 4)
+		if (xmlhttp.readyState == 4 && reload=true)
 		{
 			sentence = inputWrite.value
 			write_sentence(sentence)

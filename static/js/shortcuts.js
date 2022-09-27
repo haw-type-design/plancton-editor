@@ -1,3 +1,9 @@
+function saveMP(){
+	write('write_file', aceEditor[2], _KEY_, false)
+	write('write_mp', aceEditor[1], _KEY_, true)
+	writeGlobal(aceEditor[0]);
+
+}
 function shortcuts() {
 	var section = document.getElementsByTagName('section')[0]
 	
@@ -10,34 +16,20 @@ function shortcuts() {
 
 			switch(evt.keyCode){
 				case 77: // Press M
-					
-					write('write_file', aceEditor[2], _KEY_)
-					write('write_mp', aceEditor[1], _KEY_)
+					write('write_file', aceEditor[2], _KEY_, false)
+					write('write_mp', aceEditor[1], _KEY_, true)
 
 				break
-				case 71:
+				case 71: // Press G
+					write('write_file', aceEditor[2], _KEY_, false)
+					write('write_mp', aceEditor[1], _KEY_, true)
 					writeGlobal(aceEditor[0]);
-				
-					
-					// write('write_json', aceEditor[2], _KEY_)
-					
-					//write('write_json', aceEditor[2], _KEY_)
 					break
 
 				case 84: // Press T : save CSS specimen
 					writeCss(cssEditor)
-					//window.location.reload(false)
-
-
-					// writeCss(aceEditor[])
-
-				
 					break
-					
-					// write('write_json', aceEditor[2], _KEY_)
-					
-					//write('write_json', aceEditor[2], _KEY_)
-					break
+
 				case 191: // Press : Focus Zoom
 					inputWrite.value = ':'
 					inputWrite.focus()
