@@ -86,44 +86,9 @@ function readJson(file, callback) {
 	rawFile.send(null);
 }
 
-function writeJson(data){
-	if (data == false) {
-		var sentence = '-all'
-	}else {
-		var sentence = inputWrite.value
-		svgContainer.innerHTML = ''
-		svgContainer.className = "loading"
-	}
 
-	var xmlhttp = new XMLHttpRequest();
-
-	xmlhttp.onreadystatechange = function()
-	{
-		if (xmlhttp.readyState == 4)
-		{
-			if (data == false) {
-				for(img in imgs) {
-					var re = imgs[img].src
-					imgs[img].src = re + '2'
-				}
-			} else {	
-				var sentence = inputWrite.value
-				write_sentence(sentence)	
-				writeJson(false)
-			}
-			svgContainer.classList.remove("loading")
-		}
-	}
-
-	xmlhttp.open('POST', '/write_json' , true);
-	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
-}
-
-
-function writeGlobal(editor){
-
-	print('couchou')
-
+function writeGlobal(){
+		var editor = aceEditor[0]
 	
 		var sentence = inputWrite.value
 		svgContainer.innerHTML = ''
@@ -373,8 +338,8 @@ function write(type, editor, file, key) {
 	{
 		if (xmlhttp.readyState == 4 )
 		{
-			sentence = inputWrite.value
-			write_sentence(sentence)
+			console.log('yes')
+		
 		}
 	}
 

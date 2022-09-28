@@ -18,24 +18,8 @@
 			<div id="interface_nav"></div>
 			<div id="info_nav"></div>
 			<br>
-			<div id="versionning">
-					<input type="button" value="save" />
-					<input type="text" value="message commit" />
-					<select id="select_version">
-					% for version in versions:
-						% if version == current_version:
-						<option value="{{version}}" selected>{{version}}</option>
-						% else:
-						<option value="{{version}}">{{version}}</option>
-						% end
-					% end
-					</select>
-					<input id="input_git_checkout" type="button" value="go" />
-					<input type="button" value="new version">
-					<br>
 
-			</div>
-
+			<input onClick="writeGlobal()"type="button" class="btn" title="Ctrl + m" id="run" value="Run >>>> " >
 
 			<div class="editor" id="global_nav" data-key="global"></div>
 		</div>
@@ -51,6 +35,7 @@
 			</div>
 		</div>
 		
+			<input onClick="saveMP({{key[0]}})"type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run" >
 		<div class="editor" id="editor_mp" data-key="mpost-files/{{key[0]}}"></div>
 
 		% for defFile in defFiles:

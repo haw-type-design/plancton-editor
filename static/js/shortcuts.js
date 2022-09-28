@@ -1,8 +1,10 @@
-function saveMP(){
-	write('write_file', aceEditor[2], _KEY_, false)
-	write('write_mp', aceEditor[1], _KEY_, true)
-	writeGlobal(aceEditor[0]);
-
+function saveMP(_KEY_){
+	for (var i = 0, len = _FILES_.length; i < len; i++) {
+		write('write_file', aceEditor[i + 2],_FILES_[i].getAttribute('data-key'), _KEY_)	
+	}
+	write('write_file', aceEditor[1], _KEY_, _KEY_)
+	sentence = inputWrite.value
+	write_sentence(sentence)
 }
 function shortcuts() {
 	var section = document.getElementsByTagName('section')[0]
@@ -16,22 +18,11 @@ function shortcuts() {
 
 			switch(evt.keyCode){
 				case 77: // Press M
-
-
-					for (var i = 0, len = _FILES_.length; i < len; i++) {
-						 write('write_file', aceEditor[i + 2],_FILES_[i].getAttribute('data-key'), _KEY_)
-						
-						
-					}
-					
-					write('write_file', aceEditor[1], _KEY_, _KEY_)
-
-
+					saveMP(_KEY_)
 				break
-				case 71: // Press G
-					write('write_file', aceEditor[2], _KEY_, false)
-					write('write_mp', aceEditor[1], _KEY_, true)
-					writeGlobal(aceEditor[0]);
+
+				case 71: // PresssaveMP(_KEY_) G
+					writeGlobal();
 					break
 
 				case 84: // Press T : save CSS specimen
