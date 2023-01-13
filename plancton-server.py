@@ -26,7 +26,7 @@ session = dict()
 # Session #
 ###########
 session['zoom'] = '1' 
-session['sentence'] = 'abc'
+session['sentence'] = ''
 session['current'] = 'none'
 session['version'] = 'none'
 
@@ -111,7 +111,7 @@ def type(project, keycode='free'):
     for CHAR in SETFOLDER:
         mpFile = os.path.basename(str(CHAR))
         key = os.path.splitext(mpFile)[0]
-        SET.append(int(key))
+        SET.append(key)
     rand = random.randint(1, 300)
     if keycode == 'free':
         chartKey = [keycode, session['sentence']]

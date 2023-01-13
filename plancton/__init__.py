@@ -10,7 +10,11 @@ import lxml.etree as ET
 from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
-import fontforge 
+try:
+    import fontforge 
+except ImportError:
+    print('ImportError fontforge')
+
 import math       
 
 class Plancton:
@@ -177,17 +181,30 @@ end;
             os.mkdir(ex_folder_svg)
 
         svg_dir = glob.glob(project_path+'/output-svg/*.svg')
-        # svg_dir = glob.glob(ex_folder_svg+'*.svg')
+        print(svg_dir)
 
         font = fontforge.font()
-        height = 1000 / int(json['font_info']['height'])
-        font.descent = height * int(json['font_info']['descent'])
-        font.ascent = height * int(json['font_info']['ascent'])
+        try: 
+            height = 1000 / int(json['font_info']['height'])
+        except:
+            print('no height define in json')
+
+        try: 
+            font.descent = height * int(json['font_info']['descent'])
+        except:
+            print('no descent define in json')
+
+        try:
+            font.ascent = height * int(json['font_info']['ascent'])
+        except:
+            print('no descent define in json')
+
         font.fontname = json['font_info']['font-id']
         font.familyname = json['font_info']['font-id']
         font.copyright = json['font_info']['author-name']
 
         for g in svg_dir:
+            print(g)
             gkey = os.path.basename(g).replace('.svg', '')
             if gkey.isdigit() == True:
                 with open(g, 'rb') as gp:
@@ -204,7 +221,8 @@ end;
                 print('\n----------------------\n', gkey, '\n----------------------\n' )
 
                 char = font.createChar(int(gkey))
-                char.width = int(gwidth * 1.9)
+                # char.width = int(gwidth/2)
+                char.width = 200
 
                 try:
                     char.importOutlines(out_svg).simplify().handle_eraser()

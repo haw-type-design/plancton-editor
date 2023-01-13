@@ -1,7 +1,0 @@
-<!-- Created by MetaPost 2.00 on 2021.04.20:1145 --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="372.402649" height="851.206055" viewBox="0 66 372 851">
-<!-- Original BoundingBox: 0.000000 -239.401703 372.402649 678.304764 -->
-  <path d="M0.000000 917.401703L372.402649 917.401703L372.402649 66.195648L0.000000 66.195648Z" style="stroke:rgb(100.000000%,0.000000%,0.000000%); stroke-width: 0.000000;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
-  <g transform="matrix(0.681995,-0.731357,0.731357,0.681995,0.000000,0.000000)">
-    <path d="M-266.348478 357.484384C-384.039419 467.231825,-445.006164 622.957307,-450.628032 783.923027C-445.132817 626.583636,-363.520799 484.469116,-248.207293 376.938625C-132.893767 269.408156,14.568275 197.909872,171.907665 203.405109C10.941945 197.783219,-148.657538 247.736943,-266.348478 357.484384Z" style="stroke:rgb(0.000000%,0.000000%,0.000000%); stroke-width: 26.600062;stroke-linecap: round;stroke-linejoin: round;stroke-miterlimit: 10.000000;fill: none;"/>
-  </g>
-</svg>
