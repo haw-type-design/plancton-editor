@@ -1,4 +1,4 @@
-bottle==0.12.16
+bottle==0.12.24
 lxml==4.3.3
 plancton==0.6.0
 superprocess==0.2.0
