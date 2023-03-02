@@ -5,21 +5,31 @@ let svgContainer = document.getElementById('svgContainer')
 let setchart = document.getElementById('setchart')
 let editors = document.getElementsByClassName('editor')
 let editor_mp = document.getElementById('editor_mp')
+let editor_css = document.getElementById('editor_css')
 let run = document.getElementById('run')
 let inputWrite = document.getElementById('inputWrite')
 let inputsRange = document.getElementsByClassName('input_range')
+let nav = document. getElementsByTagName('nav')[0]
 let globalNav = document.getElementById('global_nav')
+let editGlobal = document.getElementById('editor_global')
 let infoNav = document.getElementById('info_nav')
 let btn_inkscape = document.getElementById('inkscape')
 let btn_refresh = document.getElementById('refresh')
 let btn_all = document.getElementById('btn_all')
 let btn_tab = document.getElementsByClassName('tab')
+
 let imgs = document.getElementsByClassName('imgChar')	
 var aceEditor = []
+var cssEditor = []
 let toggleNav = document.getElementsByClassName('toggleNav')	
 let inputZoom = document.querySelector('.zoom input')	
 var log_elem = document.getElementById('log')	
 
+
+let inputGitCheckout = document.querySelector('input#input_git_checkout')	
+let inputGitCheckoutSelect = document.getElementById('select_version')	
+
+ 
 if (content.className !== 'set ') {
 	var sentence = inputWrite.value
 }
@@ -76,15 +86,18 @@ function readJson(file, callback) {
 	rawFile.send(null);
 }
 
-function writeJson(data){
 
-	if (data == false) {
-		var sentence = '-all'
-	}else {
+function writeGlobal(){
+		var editor = aceEditor[0]
+	
 		var sentence = inputWrite.value
 		svgContainer.innerHTML = ''
 		svgContainer.className = "loading"
-	}
+
+		var contentMp = editor.getValue()
+		contentMp = contentMp.replace(/;/g, '#59');
+		contentMp = contentMp.replace(/\+/g, '#45');
+	
 
 	var xmlhttp = new XMLHttpRequest();
 
@@ -92,36 +105,35 @@ function writeJson(data){
 	{
 		if (xmlhttp.readyState == 4)
 		{
-			if (data == false) {
-				for(img in imgs) {
-					var re = imgs[img].src
-					imgs[img].src = re + '2'
-				}
-			} else {	
+			
 				var sentence = inputWrite.value
 				write_sentence(sentence)	
-				writeJson(false)
-			}
 			svgContainer.classList.remove("loading")
 		}
 	}
 
-	xmlhttp.open('POST', '/write_json' , true);
-	xmlhttp.send('project=' + projectName + '&json=' + JSON.stringify(data,  null, 4) + '&set=' + sentence);
+	xmlhttp.open('POST', '/write_global' , true);
+	xmlhttp.send('project=' + projectName + '&data=' + contentMp  + '&set=' + sentence);
+	//xmlhttp.send('project=' + projectName + '&json=' + data + '&set=' + sentence);
+	
 }
 
 function loadSvg(key) {
+
 	var l = String.fromCharCode(key);
 	xhr = new XMLHttpRequest()
 	xhr.overrideMimeType("image/svg+xml")
 	xhr.open("GET", "/projects/" + projectName + "/output-svg/" + key + ".svg?random=" + getRandomInt(3000), false)
 	xhr.onreadystatechange = function() {
+			
 		if (xhr.readyState === 4 && xhr.status == "200") {
-		p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a class="link_cadratin" href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '<span class="ref">'+l+' | '+key+'.mp</span></a></span>'
+		
+		 p = '<span data-key="' + key + '" id="i_' + key + '" class="cadratin" ><a class="link_cadratin" href="/type/' + projectName + '/' + key + '#editor_mp" >' + xhr.responseXML.documentElement.outerHTML + '<span class="ref">'+l+' | '+key+'.mp</span></a></span>'
 		}
 	}
 	xhr.send("")	
 	svgContainer.innerHTML += p	
+	delete p
 }
 
 function inputBuild(variablesTable, i) {
@@ -166,6 +178,7 @@ function inputBuild(variablesTable, i) {
 
 function buildNav(data) {
 	var glob = data.variables
+	console.log(glob);
 
 	for (i in glob){
 		inputBuild(glob, i)
@@ -191,6 +204,16 @@ function changeValue(data){
 			writeJson(data, false)
 		});
 	}
+}
+
+function loadJson(editor){
+
+	xhr = new XMLHttpRequest()
+	xhr.open("GET", "/projects/" + projectName + "/global.json?random=" + getRandomInt(3000), false)
+	xhr.send("")
+	// editor.setValue(xhr.responseText)
+	editor.setValue(xhr.responseText)
+
 }
 
 function write_sentence(stn) {
@@ -256,22 +279,104 @@ function loadMp(editor, edi) {
 	editor.setValue(xhr.responseText)
 }
 
-function write(type, editor, key) {
-	var contentMp = editor.getValue()
+
+function loadCss(editor, edi) {
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', "/static/css/metabise.css", true)
+
+
+	xhr.onload = function () {
+		if (xhr.readyState == 4) {
+
+			console.log(xhr.response);
+			//console.log(xhr.responseText);
+
+
+		}
+		editor.setValue(xhr.response)
+};
+
+
+
+xhr.send("")
+
+}
+
+function writeCss(editor){
+	// var contentCss = cssEditor;
+	var contentCss = editor.getValue();
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function()
 	{
 		if (xmlhttp.readyState == 4)
 		{
-			sentence = inputWrite.value
-			write_sentence(sentence)
+		
 		}
 	}
-	xmlhttp.open('POST', '/' + type, true);
-	contentMp = contentMp.replace(/;/g, '#59');
-	contentMp = contentMp.replace(/\+/g, '#45');
-	xmlhttp.send('project=' + projectName + '&mp=' + contentMp + '&key=' + key);
+
+	
+		xmlhttp.open('POST', '/write_css', true);
+	
+		xmlhttp.send('&css=' + contentCss);
+		
+		
+
 }
+
+function write(type, editor, file, key) {
+	
+	var data1, data2
+	//var fileMp = editor.getAttribute('href')
+
+	var contentMp = editor.getValue()
+	//console.log("c moi" + editor.getValue())
+
+	
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function()
+	{
+		if (xmlhttp.readyState == 4 )
+		{
+			console.log('yes')
+		
+		}
+	}
+
+		data1 = 'mp'
+		data2 = 'file'
+		data3 = 'key'
+		contentMp = contentMp.replace(/;/g, '#59');
+		contentMp = contentMp.replace(/\+/g, '#45');
+	
+		
+			console.log(file)
+		xmlhttp.open('POST', '/write_file', true);
+		xmlhttp.send('project=' + projectName + '&mp='+ contentMp + '&file=' + file + '&key=' + key );
+
+		//console.log(fileMp + "," + data2)
+}
+
+// function writejkon(type, editor, key) {
+// 	var contentMp = editor.getValue()
+// 	var xmlhttp = new XMLHttpRequest();
+// 	xmlhttp.onreadystatechange = function()
+// 	{
+// 		if (xmlhttp.readyState == 4)
+// 		{
+// 			sentence = inputWrite.value
+// 			write_sentence(sentence)
+// 		}
+// 	}
+	
+		
+// 	xmlhttp.open('POST', '/write_jkon', true);
+// 	contentMp = contentMp.replace(/;/g, '#59');
+// 	contentMp = contentMp.replace(/\+/g, '#45');
+// 	xmlhttp.send('project=' + projectName + '&json=' + contentMp + '&key=' + key);
+
+	
+// }
 
 /* INTERFACE */
 
@@ -286,7 +391,36 @@ function toogle(elem, classN) {
 			this.classList.add(classN[0])
 		})
 	}
-} 
+}
+
+/* BIDOUILLE */
+var tabs = document.querySelectorAll(".tabs > a");
+for (var i = 0, len = tabs.length; i < len; i++) {
+
+	tabs[i].addEventListener('click', function(){
+		for (var j = 0, len = tabs.length; j < len; j++) {
+			console.log(tabs[j])
+
+		}
+
+		// toogle(".tabs > a", 'active')
+		console.log('coucou')
+		for (var j=0; j<len; j++){
+
+			document.querySelector(tabs[j].getAttribute("href")).style.display='none';
+			
+		}
+		var href= this.getAttribute("href");
+			console.log(href);
+		console.log(document.querySelector(href));
+		document.querySelector(href).style.display='block';
+	});
+}
 
 
-
+// TERMINAL
+function git_action_checkout(new_branch){
+	pingServer('/git/checkout/'+new_branch+'/none', function(cb){
+		alert(cb)
+	})
+}

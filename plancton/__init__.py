@@ -10,19 +10,23 @@ import lxml.etree as ET
 from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
-import fontforge 
+try:
+    import fontforge 
+except ImportError:
+    print('ImportError fontforge')
+
 import math       
 
 class Plancton:
     def __init__(self):
         self.mp_template = '''
         % {char}
-        input ../def;
-        beginchar({keycode}, {width});
-            {cordonates} 
-            {draws}
-        endchar({lenpoints});
-        end;
+input ../def;
+beginchar({keycode}, {width});
+    {cordonates} 
+    {draws}
+endchar({lenpoints});
+end;
         '''
         self.dir_projects = 'projects'
         self.project = ''
@@ -52,6 +56,8 @@ class Plancton:
         project_path = self.dir_projects+'/'+self.project
         mp_path = project_path+'/mpost/mpost-files/'
         svg_path = project_path+'/output-svg/'
+        if not os.path.exists(svg_path):
+            os.makedirs(svg_path)
 
         if key != '-all':
             SET = glob.glob(mp_path + str(key) + '.mp')
@@ -68,20 +74,12 @@ class Plancton:
         for svg in SET_svg:
             Plancton.adjust_viewbox(svg)
         
-        print('--------------------------------------')
-        print('--------------------------------------')
-        print(mp_path)
-        print('--------------------------------------')
-        print('--------------------------------------')
 
     def del_glyph(self, key):
         project_path = self.dir_projects+'/'+self.project
-        insvg = project_path+'/input-svg/'+str(key)+'.svg'
         outsvg = project_path+'/output-svg/'+str(key)+'.svg'
         mp = project_path+'/mpost/mpost-files/'+str(key)+'.mp'
 
-        if os.path.isfile(insvg):
-            os.remove(insvg)
         if os.path.isfile(outsvg):
             os.remove(outsvg)
         if os.path.isfile(mp):
@@ -94,21 +92,13 @@ class Plancton:
         json_path = project_path+'/'+self.current_json
         inputsvg_path = project_path+'/input-svg/'
         
-        if os.path.isfile(inputsvg_path + str(key) + '.svg'):
+        if os.path.isfile(project_path+'/mpost/mpost-files/'+str(key)+'.mp'):
             return str(key)+' already exist ! Use ":delete '+str(key)+'" before.'
         else: 
-            json = Plancton.read_json(json_path)
-            height = json['font_info']['height']
-            width = int(int(height)/2) 
-
-            svg = svgwrite.Drawing(str(key) + '.svg', size=(width, height))
-            svg.viewbox(0, 0, width, height)
-            svg.saveas(project_path+'/input-svg/'+str(key)+'.svg')
-            
             buildFig = self.mp_template.format(
                 char       = chr(int(key)),
                 keycode    = key,
-                width      = width,
+                width      = '5',
                 cordonates = '',
                 draws      = '',
                 lenpoints  = '0' 
@@ -117,7 +107,6 @@ class Plancton:
             f.write(buildFig) 
             f.close()
             self.build_svg(key)
-            
 
             return str(key)+' has been create !'
 
@@ -169,14 +158,16 @@ class Plancton:
     #########################
     def svg_to_font(self):
 
+
         def removeCadra(root, pattern):
             for child in root:
                 if child.tag == '{http://www.w3.org/2000/svg}path':
                     if child.attrib['style'].startswith(pattern):
                         b = child
-            root.remove(b)
+                        root.remove(b)
             ET.dump(root)
             return ET.tostring(root, encoding='utf8', method='xml').decode()
+
         # Build new directory
         project_path = self.dir_projects+'/'+self.project
         json_path = project_path+'/'+self.current_json
@@ -190,17 +181,30 @@ class Plancton:
             os.mkdir(ex_folder_svg)
 
         svg_dir = glob.glob(project_path+'/output-svg/*.svg')
-        # svg_dir = glob.glob(ex_folder_svg+'*.svg')
+        print(svg_dir)
 
         font = fontforge.font()
-        height = 1000 / int(json['font_info']['height'])
-        font.descent = height * int(json['font_info']['descent'])
-        font.ascent = height * int(json['font_info']['ascent'])
+        try: 
+            height = 1000 / int(json['font_info']['height'])
+        except:
+            print('no height define in json')
+
+        try: 
+            font.descent = height * int(json['font_info']['descent'])
+        except:
+            print('no descent define in json')
+
+        try:
+            font.ascent = height * int(json['font_info']['ascent'])
+        except:
+            print('no descent define in json')
+
         font.fontname = json['font_info']['font-id']
         font.familyname = json['font_info']['font-id']
         font.copyright = json['font_info']['author-name']
 
         for g in svg_dir:
+            print(g)
             gkey = os.path.basename(g).replace('.svg', '')
             if gkey.isdigit() == True:
                 with open(g, 'rb') as gp:
@@ -217,17 +221,21 @@ class Plancton:
                 print('\n----------------------\n', gkey, '\n----------------------\n' )
 
                 char = font.createChar(int(gkey))
-                char.width = int(gwidth * 1.9)
+                # char.width = int(gwidth/2)
+                char.width = 200
 
                 try:
                     char.importOutlines(out_svg).simplify().handle_eraser()
                 except:
                     print('glyph failed')
+                    print(char)
                     continue
 
-        font.generate('exports/'+self.project+'.otf')
+        font.generate('static/fonts/exports/'+self.project+'.otf')
+        font.generate('fonts/'+self.project+'.otf')
 
     def build_global_mp(self):
+        
         dirMP = self.dir_projects+'/'+self.project+'/mpost/global.mp' 
         dirFiles = self.dir_projects+'/'+self.project+'/'+self.current_json
         out = []

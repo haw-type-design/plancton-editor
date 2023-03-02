@@ -5,7 +5,6 @@ plancton-env/
 lib/__pycache__/
 Projects/*/
 __pycache__/
-projects/
 bottle.py
 env
 .DS_Store

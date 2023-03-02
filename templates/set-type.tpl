@@ -4,52 +4,58 @@
 	% status = 'free'
 % else:
 	% status = 'trip'
-% end 
+% end
 
 <section id="content" class="{{mode}} {{status}}" data-project="{{ PROJECT }}">
 	<nav>
 		<div class="header">
-			P L A N C T O N
+			<h1>P L A N C T O N</h1>
 			<hr>
 		</div>
+		
 		<div class="global">
+		
 			<div id="interface_nav"></div>
 			<div id="info_nav"></div>
 			<br>
-			<div id="versionning">
-			<!-- <input type="button" value="save"> -->
-					<input type="button" value="new version">
-					<select id="select_version">
-					% for version in versions:
-						<option value="v1">{{ version}}</option>
-					% end
-					</select>
-					<input type="button" value="save" />
-					<input type="button" value="❆" />
-			</div>
 
-			<div id="global_nav"></div>
+			<input onClick="writeGlobal()"type="button" class="btn" title="Ctrl + m" id="run" value="Run >>>> " >
+
+			<div class="editor" id="global_nav" data-key="global"></div>
 		</div>
-
 	</nav>
 	<div id="editorBox">
 		<div class="options">
 			<div class="tabs">
-				<a class="btn_file tab active" data-active="false" href="#editor_mp" >char : {{key[1]}} | key : {{key[0]}}</a>
-				<a class="btn_file tab" data-active="false" href="#editor_def" >def.mp</a>
+				<a class="btn_file tab active" data-active="true" href="#editor_mp" >char : {{key[1]}} | key : {{key[0]}}</a>
+				% for defFile in defFiles:
+				<a class="btn_file tab" data-active="false" href="#editor_{{defFile}}" >{{defFile}}</a>
+				%end
+			
 			</div>
 		</div>
+		
+			<input onClick="saveMP({{key[0]}})"type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run" >
 		<div class="editor" id="editor_mp" data-key="mpost-files/{{key[0]}}"></div>
-		<div class="editor" id="editor_def" data-key="def"></div>
+
+		% for defFile in defFiles:
+		<div class="editor defFiles" id="editor_{{defFile}}" data-key="{{defFile}}"></div>
+		% end
+		
 		<div class="tools_bar"  data-key="{{key[0]}}" >
 			<input type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run Mpost" >
 			<span class="inks" >
-				<span class="btn" id="refresh" >mpost <<< </span>
-				<span id="inkscape" class="btn" > inkscape</span>
+			<span class="btn" id="refresh" >mpost <<< </span>
+			<span id="inkscape" class="btn" > inkscape</span>
 			</span>
 		</div>
 	</div>
 	<div class="typewriter">
+	<!-- <div id="terminal" > -->
+	<!-- 	<pre class="result"> -->
+	<!-- 	</pre> -->
+	<!-- 	<input id="btn_terminal_close"type="button" value="exit"> -->
+	<!-- </div> -->
 		<div class="zoom">
 			<input class="zoom" type="range" step="0.1" value="1" min="0.5" max="5" />
 			<span class="zoom_value"> 1 </span>
@@ -67,7 +73,7 @@
 	<div id="setchart">
 	% for chart in setchart:
 	<a href="/type/{{ PROJECT }}/{{chart}}#editor_mp">
-		<div class="chart">	
+		<div class="chart">
 			<div class="info">
 				<span class="key">
 				% if mode == 'set':
@@ -79,9 +85,9 @@
 				<img class="imgChar" src="/projects/{{PROJECT}}/output-svg/{{chart}}.svg?random={{rand}}" />
 			</div>
 		</div>
+		
 	</a>
 	% end
 	</div>
 	% end
 </section>
-
