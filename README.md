@@ -5,6 +5,7 @@ This is a fork of Luuse’s version over at [GitLab](https://gitlab.com/Luuse/pl
 ## Requirements
 If you do not have a package manager already please install one like [Hombrew](https://brew.sh)
  * [Fontforge](http://fontforge.github.io) 
+ 
 To install:
 ```brew install fontforge```
  * [Inkscape](https://inkscape.org/)
@@ -42,6 +43,6 @@ Proceed with following steps on the command line:
 
 ## License
 
-GNU General Public License - [gpl3](https://www.gnu.org/licenses/gpl-3.0.en.html
+GNU General Public License - [GPL3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 
