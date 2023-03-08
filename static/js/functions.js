@@ -399,16 +399,15 @@ for (var i = 0, len = tabs.length; i < len; i++) {
 
 	tabs[i].addEventListener('click', function(){
 		for (var j = 0, len = tabs.length; j < len; j++) {
-			console.log(tabs[j])
+			console.log(tabs[j]);
 
 		}
 
-		// toogle(".tabs > a", 'active')
-		console.log('coucou')
+		
 		for (var j=0; j<len; j++){
 
 			document.querySelector(tabs[j].getAttribute("href")).style.display='none';
-			
+
 		}
 		var href= this.getAttribute("href");
 			console.log(href);

@@ -7,12 +7,14 @@
 		<p>Plancton est un environnement de développement destiné à réaliser des typographies numériques par le biais du langage de construction de figures <a href="https://fr.wikipedia.org/wiki/MetaPost"> Metapost </a></p>
 
 		
-		<p id='projects'>Projets :
+		<p id='projects' class='projects-grid'>Projets:
 		% for project in projectsjson:
-		<a href="/type/{{ project['font-id'] }}">{{ project['font-name'] }}</a>
+		<a class= 'grid-item' href="/type/{{ project['font-id'] }}">{{ project['font-name'] }}</a>
 			
 		% end
+            
+        <a class= 'grid-item' href="">+ New Project</a>
 
-		<p>Documentation par <a href="">ici</a></p>
+		<p>Documentation <a href="">here</a></p>
 
 </section>
