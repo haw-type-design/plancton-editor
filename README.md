@@ -8,6 +8,7 @@ If you do not have a package manager already please install one like [Hombrew](h
  
 To install:
  * [FontForge](https://fontforge.org/)
+ 
 ```brew install fontforge```
 
  * [Inkscape](https://inkscape.org/)
