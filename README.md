@@ -4,7 +4,6 @@ This is a fork of Luuse’s version over at [GitLab](https://gitlab.com/Luuse/pl
 
 ## Requirements
 If you do not have a package manager already please install one like [Hombrew](https://brew.sh)
- * [Fontforge](http://fontforge.github.io) 
  
 To install:
  * [FontForge](https://fontforge.org/)
