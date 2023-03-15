@@ -7,10 +7,13 @@ If you do not have a package manager already please install one like [Hombrew](h
  * [Fontforge](http://fontforge.github.io) 
  
 To install:
+ * [FontForge](https://fontforge.org/)
 ```brew install fontforge```
+
  * [Inkscape](https://inkscape.org/)
 
-```brew install fontforge```
+```brew install inkscape```
+
  * [TexLive](https://tug.org/texlive/)
 
 ```brew install texlive```
