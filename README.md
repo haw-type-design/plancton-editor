@@ -38,7 +38,7 @@ Proceed with following steps on the command line:
 
 ## Start server
 
-`python plancton-server.py` listening on `http://localhost:8080/`
+`python plancton-server.py` listening on `http://localhost:8088/`
 
 ## Contributors
 * [Luuse](http://www.luuse.io/)
