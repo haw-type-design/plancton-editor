@@ -3,7 +3,7 @@ files/
 sandbox/
 plancton-env/
 lib/__pycache__/
-Projects/*/
+projects/hersheymf
 __pycache__/
 bottle.py
 env
