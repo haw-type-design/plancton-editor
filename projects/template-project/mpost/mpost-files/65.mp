@@ -4,9 +4,9 @@
 beginchar(65,9);
     x1 := 2 * ux;
 	bot y1 := 0 * uy;
-	x2 := 4.5 * ux - (strokeX / 4);
+	x2 := 4.5 * ux - (strokeX);
 	top y2 := capHeight * uy;
-	x3 := 4.5 * ux + (strokeX / 4);
+	x3 := 4.5 * ux + (strokeX);
 	top y3 := capHeight * uy;
 	x4 := 7 * ux;
 	bot y4 := 0 * uy;

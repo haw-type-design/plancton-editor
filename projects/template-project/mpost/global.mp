@@ -1,5 +1,5 @@
 outputformat := "svg";
-outputtemplate := "projects/plancton-blank-project/output-svg/%c.svg";
+outputtemplate := "projects/template-project/output-svg/%c.svg";
 
 % grid
 grid := 0;

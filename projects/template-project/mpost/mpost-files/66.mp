@@ -14,7 +14,7 @@ beginchar(66, 8);
 	bot y5 := baseline * uy;
 	x6 := 6 * ux;
 	y6 := 7.5 * uy;
-	x7 := 6 * ux + (strokeX / 12);
+	x7 := 6 * ux + (strokeX / 2);
 	y7 := 3 * uy;
 	x8 := 2* ux;
 	y8 := 5.5* uy;
@@ -23,6 +23,6 @@ beginchar(66, 8);
 	draw z3{right}..z6..{left}z4--z8 withcolor col;
 	draw z4{right}..z7..{left}z5 withcolor col;
 
-endchar(0);
+endchar(8);
 end;
         
