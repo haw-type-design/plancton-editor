@@ -4,7 +4,7 @@
 	<nav>
 		<h1>P L A N C T O N</h1>
 
-		<p>Plancton est un environnement de développement destiné à réaliser des typographies numériques par le biais du langage de construction de figures <a href="https://fr.wikipedia.org/wiki/MetaPost"> Metapost </a></p>
+		<p>Plancton is a development environment for making digital typography. It’s built on<a href="https://www.tug.org/docs/metapost/mpman.pdf" target="_blank"> Metapost </a></p>
 
 		
 		<p id='projects' class='projects-grid'>Projets:
@@ -15,6 +15,6 @@
             
         <a class= 'grid-item' href="">+ New Project</a>
 
-		<p>Documentation <a href="">here</a></p>
+		<p>Documentation <a href="https://github.com/simonthi/plancton-editor/" target="_blank"> here </a></p>
 
 </section>
