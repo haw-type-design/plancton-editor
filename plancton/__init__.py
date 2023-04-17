@@ -11,7 +11,8 @@ from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
 try:
-    import fontforge 
+    import fontforge
+    
 except ImportError:
     print('ImportError fontforge')
 

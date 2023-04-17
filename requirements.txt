@@ -4,4 +4,4 @@ plancton==0.6.0
 superprocess==0.2.0
 svg.path==6.2
 svgpathtools==1.6.0
-virtualenv==20.21.0
+virtualenv==20.15.1
