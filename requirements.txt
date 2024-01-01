@@ -1,5 +1,5 @@
 bottle==0.12.25
-lxml==4.9.3
+lxml==5.0.0
 plancton==0.6.0
 superprocess==0.2.0
 svg.path==6.3
