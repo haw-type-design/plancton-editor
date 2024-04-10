@@ -9,3 +9,4 @@ bottle.py
 env
 .DS_Store
 projects/*
+*.pyc
