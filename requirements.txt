@@ -1,7 +1,6 @@
 bottle==0.12.25
-lxml==4.9.2
+lxml==5.1.0
 plancton==0.6.0
 superprocess==0.2.0
-svg.path==6.2
-svgpathtools==1.6.0
-virtualenv==20.15.1
+svg.path==6.3
+svgpathtools==1.6.1
