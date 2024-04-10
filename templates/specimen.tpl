@@ -19,7 +19,7 @@
 				<li data-version='{{ item }}'>
 					<span class="delete">X</span>
 					<span class="version"><a href="/specimen/{{item}}">{{item}}</a></span>
-					<span class="compare"><-></span>
+					<span class="compare">&lt;-&rt;</span>
 				</li>
 				% end
 			</ul>

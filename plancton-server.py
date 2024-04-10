@@ -186,6 +186,22 @@ def set(PROJECT):
 #     file.close()
       
     
+    
+    
+##################
+# CREATE PROJECT #
+##################
+@app.route('/create/<project>')
+def createProject(project):
+    pl.newProject(project, "null", "null", "null")
+    projects = glob.glob('projects/*/current.json')
+    projectsjson = []
+    
+    for p in projects:
+        d = load_json(p)
+        projectsjson.append(d['font_info'])
+    return template('templates/index.tpl', projectsjson=projectsjson)
+
 
 
 ##################

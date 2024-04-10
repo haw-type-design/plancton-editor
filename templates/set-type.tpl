@@ -23,7 +23,9 @@
 			<div class="editor" id="global_nav" data-key="global"></div>
             
             <input onClick="writeGlobal()"type="button" class="btn" title="Ctrl + m" id="run" value="Run >>>> " >
+            
 		</div>
+        <a href="/testing/{{PROJECT}}" class="test-it btn"> Test</a>
 	</nav>
 	<div id="editorBox">
 		<div class="options">
@@ -48,8 +50,8 @@
         
         
 		<div class="tools_bar"  data-key="{{key[0]}}" >
-			<input type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run Mpost" >
-			<span class="btn" id="refresh" >mpost <<< </span>
+            <input type="button" class="btn" title="Ctrl + m" id="run" value="<<< Run Mpost" >
+			<span class="btn" id="refresh" > mpost &lt;&lt;&lt; </span>
 			<span id="inkscape" class="btn" > inkscape</span>
 		</div>
 	</div>

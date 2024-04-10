@@ -10,9 +10,11 @@ import lxml.etree as ET
 from svgpathtools import svg2paths, parse_path
 import svgwrite
 import re 
+from pathlib import Path
+
+
 try:
-    import fontforge
-    
+    import fontforge 
 except ImportError:
     print('ImportError fontforge')
 
@@ -183,57 +185,11 @@ end;
 
         svg_dir = glob.glob(project_path+'/output-svg/*.svg')
         print(svg_dir)
-
-        font = fontforge.font()
-        try: 
-            height = 1000 / int(json['font_info']['height'])
-        except:
-            print('no height define in json')
-
-        try: 
-            font.descent = height * int(json['font_info']['descent'])
-        except:
-            print('no descent define in json')
-
-        try:
-            font.ascent = height * int(json['font_info']['ascent'])
-        except:
-            print('no descent define in json')
-
-        font.fontname = json['font_info']['font-id']
-        font.familyname = json['font_info']['font-id']
-        font.copyright = json['font_info']['author-name']
-
-        for g in svg_dir:
-            print(g)
-            gkey = os.path.basename(g).replace('.svg', '')
-            if gkey.isdigit() == True:
-                with open(g, 'rb') as gp:
-                    treeLet = ET.parse(gp)
-                rootLet = treeLet.getroot()
-                gclean = removeCadra(rootLet, 'stroke:rgb(100.000000%,0.000000%,0.000000%);')
-                out_svg = ex_folder_svg+gkey+'.svg' 
-                f = open(ex_folder_svg+gkey+'.svg', 'w')
-                f.write(gclean) 
-                f.close()
-                gwidth = float(rootLet.get('width'))
-                gheight = rootLet.get('height')
-                print(int(gwidth), '\n', gheight)
-                print('\n----------------------\n', gkey, '\n----------------------\n' )
-
-                char = font.createChar(int(gkey))
-                # char.width = int(gwidth/2)
-                char.width = 200
-
-                try:
-                    char.importOutlines(out_svg).simplify().handle_eraser()
-                except:
-                    print('glyph failed')
-                    print(char)
-                    continue
-
-        font.generate('static/fonts/exports/'+self.project+'.otf')
-        font.generate('fonts/'+self.project+'.otf')
+        print(json)
+        
+        run_command = "fontforge -script plancton/font-baker.py \""+ str(svg_dir) + "\" \"" + str(json) + "\" \"" + str(ex_folder_svg) + "\" \"" + str(self.project) + "\""
+        print(run_command)
+        os.system(run_command)
 
     def build_global_mp(self):
         
@@ -304,7 +260,36 @@ end;
 
         versions = self.getVersions()
         
+        
+    #########################
+    #      ADD PROJECT      #
+    #########################
 
 
-
-
+    def newProject(self, new_project_name, new_author, new_author_email, new_license):
+        json_info = '{\n"font_info":\n {\n"font-name": "' +new_project_name.replace(" ", "-")+'",\n "font-id": "' +new_project_name.replace(" ", "-")+'",\n"author-name": "' +new_author+'",\n"author-email": "' +new_author_email+'",\n"licence": "' +new_license+'",\n"height": "",\n"descent": "",\n"ascent": ""\n}\n}'
+        
+        mpost_def = "input ../global;\n\nheight := 13;\nbaseline := 0;\nxHeight := 5;\nascHeight := 11;\ndescHeight := -4;\ncapHeight := 11;\n\nstrokeX := 1u;\nstrokeY := 1u;\nrotation := 45;\n\ngrid = 1;\n\n\ndef beginchar(expr keycode, width)=\n\tbeginfig(keycode);\n\t\tpickup pencircle scaled .2;\n\n\t\tdraw (0 * ux, (descHeight - 2) * uy) -- \n\t\t\t(width * ux, (descHeight - 2) * uy) --\n\t\t\t(width * ux, (ascHeight + 2) * uy) -- \n\t\t\t(0 * ux, (ascHeight + 2) * uy) -- \n\t\t\tcycle scaled 0 withcolor red;\n\n\t\tif grid = 1:\n\t\t\tdefaultscale := .2;\n\t\t\tfor i=0 upto width:\n\t\t\t\tdraw (i*ux, height*uy) -- (i*ux, descHeight*uy) withcolor .3white;\n\t\t\tendfor;\n\t\t\tfor i=descHeight upto (height):\n\t\t\t\tdraw (width*ux, i*uy) -- (0*ux, i*uy) withcolor .3white;\n\t\t\tendfor;\n\t\tfi;\n\t\tpickup pencircle scaled 1;\n\n\t\tif hints = 1:\n\t\t\tdraw (0 * ux, capHeight * uy) -- (width * ux, capHeight * uy)  withcolor (green + blue);\n\t\t\tdraw (0 * ux, ascHeight * uy) -- (width * ux, ascHeight * uy)  withcolor (green + blue);\n\t\t\tdraw (0 * ux, descHeight * uy) -- (width * ux, descHeight * uy)  withcolor (green + blue);\n\t\t\tdraw (0 * ux, baseline * uy) -- (width * ux, baseline * uy)  withcolor green;\n\t\tfi;\n\t\t\n\t\tpickup pencircle xscaled strokeX yscaled strokeY rotated rotation;\n\nenddef;\n\n\ndef endchar(expr lenDots)=\n\tif dot_label = 1:\n\t\tdefaultscale := 3;\n\t\tfor i=1 upto lenDots:\n\t\t\tdotlabels.urt([i]) withcolor blue;\n\t\tendfor;\n\tfi;\nendfig;\nenddef;"
+        mpost_global = 'outputformat := "svg";\noutputtemplate := "projects/'+new_project_name.replace(" ", "-")+'/output-svg/%c.svg";\n\n% grid\ngrid := 1;\n\n% dot label\ndot_label := 0;\n\n% hints\nhints := 0;\n\n% unity\nu = 40pt;\nux = 1u;\nuy = 1u;\n'
+        
+        project_path = self.dir_projects+'/'+new_project_name.replace(" ", "-")
+        Path(project_path).mkdir(parents=True, exist_ok=True)
+        Path(project_path+'/mpost/mpost-files').mkdir(parents=True, exist_ok=True)
+        Path(project_path+'/mpost/def.mp').touch(exist_ok=True)
+        Path(project_path+'/mpost/global.mp').touch(exist_ok=True)
+        ex_folder = project_path+'/fonts/test'
+        Path(ex_folder).mkdir(parents=True, exist_ok=True)
+        ex_folder_svg = self.dir_projects+'/'+new_project_name.replace(" ", "-")+'/fonts/test/svg'
+        Path(ex_folder_svg).mkdir(parents=True, exist_ok=True)
+        json_path = project_path+'/'+self.current_json
+        if not os.path.exists(json_path):
+            Path(json_path).touch()
+            with open(json_path, "w") as file:
+                file.write(json_info)
+                
+        with open(Path(project_path+'/mpost/def.mp'), "w") as file:
+            file.write(mpost_def)
+            
+        with open(Path(project_path+'/mpost/global.mp'), "w") as file:
+            file.write(mpost_global)
+                
