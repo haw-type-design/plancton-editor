@@ -3,31 +3,31 @@
 /* RESET  */
 
 ul {
-	padding: 0;
-	display: block;
+    padding: 0;
+    display: block;
 }
 
 ul > li {
-	display: block;
+    display: block;
 }
 
 a, .ref, input[type='text'] {
-	text-align: center;
-	text-decoration: none;
-	border-bottom: 1px solid grey;
-	border-left: 1px solid grey;
-	border-right: 1px solid grey;
-	border-top: none;
-	background: none;
+    text-align: center;
+    text-decoration: none;
+    border-bottom: 1px solid grey;
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+    border-top: none;
+    background: none;
 }
 
 a:visited{
-	color:blue;
+    color:blue;
 }
 
 .link_cadratin {
-	border: none;
-	color: grey;
+    border: none;
+    color: grey;
 }
 
 
@@ -35,9 +35,9 @@ a:visited{
 
 
 :root {
-	--main-bg-color: oldlace;
-	--main-active-color: blue;
-    
+    --main-bg-color: oldlace;
+    --main-active-color: blue;
+
     /* SPACERS */
     --space-xxs: 8px;
     --space-xs: 16px;
@@ -47,143 +47,150 @@ a:visited{
 
 
 input[type='range'] {
-	-webkit-appearance: none !important;
-	background: white;
-	height:7px;
+    -webkit-appearance: none !important;
+    background: white;
+    height:7px;
 }
 input[type='range']::-webkit-slider-thumb {
-	-webkit-appearance: none !important;
-	background: var(--main-active-color);
-	height: 7px;
-	width: 7px;
+    -webkit-appearance: none !important;
+    background: var(--main-active-color);
+    height: 7px;
+    width: 7px;
 }
 
 body {
-	background: #F0F0F0;
-	display: grid;
-	font-family: 'source-code';
-	font-size: 14px;
-	line-height: 1.3em;
-	margin: 0px;
+    background: #F0F0F0;
+    display: grid;
+    font-family: 'source-code';
+    font-size: 14px;
+    line-height: 1.3em;
+    margin: 0px;
 }
 
 
 /* INDEX */
 
 #projects a{
-	display: inline-block;
+    display: inline-block;
 }
 
 #projects a{
-	border: 1px solid black;
-	border-radius: var(--space-s);
+    border: 1px solid blue;
+    border-radius: var(--space-s);
     width: fit-content;
+    height: fit-content;
     padding: var(--space-xxs) var(--space-xs);
 }
 
 #projects li a{
-	/*border: 0;*/
-	
+    /*border: 0;*/
+
 }
 
 ul#projects li{
 
-	}
+}
 
 .projects-grid {
-    display: grid;
-    row-gap: var(--space-xs);
+    display: flex;
+    gap: var(--space-xxs);
+}
+
+.new-project {
+    border: 1px solid blue;
+    padding: 8px 16px;
+    border-radius: 16px;
 }
 
 nav {
-	/* background: var(--main-bg-color); */
-	grid-area: nav;
-	height: 100%;
-	margin: 0px;
-	padding: 5px;
-	z-index: 2;
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	width: 100%;
+    /* background: var(--main-bg-color); */
+    grid-area: nav;
+    height: auto;
+    margin: 0px;
+    padding: 5px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 
 nav .header {
-	height: 40px;
+    height: 40px;
 }
 
 nav h1 {
-	font-size: inherit;
-	font-weight: normal;
-	text-transform: uppercase;
-	margin: 0px;
-	margin-top: 12px;
+    font-size: inherit;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin: 0px;
+    margin-top: 12px;
 }
 
 nav .global, nav #editor_global {
-	height: calc(93% - 40px);
-	bottom: 0px;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	width: calc(100% - 5px);
+    height: auto;
+    max-height: calc(90vh - 40px);
+    bottom: 0px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: calc(100% - 5px);
 }
 
 /*nav.editing .global, nav #editor_global{
-	display: none;
+display: none;
 }
 
- nav.editing #editor_global{
- 	display: block;
- }
+nav.editing #editor_global{
+display: block;
+}
 */
 
 
 nav .block_input {
-	padding: 3px 0;
+    padding: 3px 0;
 }
 nav .block_input .description {
-	display: inline-block;
-	width: 70px;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+    display: inline-block;
+    width: 70px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 nav .block_input label .unity {
-	display: none;
+    display: none;
 }
 
 a
 nav .block_input label.ligth .description {
-	color: blue;
+    color: blue;
 }
 nav .block_input label.ligth .unity {
-	display: inline-block;
-	color: blue;
+    display: inline-block;
+    color: blue;
 }
 
 span.valueBox {
-	color: var(--main-active-color);
+    color: var(--main-active-color);
 }
 
 #global_nav label {
-	float: left;
-	width: 48%;
+    float: left;
+    width: 48%;
 }
 
 #info_nav label {
-	width: 100%;
-	display: block;
+    width: 100%;
+    display: block;
 }
 
 .tabs {
-	bottom: 0px;
-	left: 0px;
-	margin-bottom: var(--space-s);
-	text-transform: uppercase;
-	min-width: 360px;
-	height: auto;
+    bottom: 0px;
+    left: 0px;
+    margin-bottom: var(--space-s);
+    text-transform: uppercase;
+    min-width: 360px;
+    height: auto;
 }
 
 .tools_bar {
@@ -195,308 +202,330 @@ span.valueBox {
 }
 
 nav #nav_close{
-	position: absolute;
-	right: 0;
-	width: 10%;
-	height: 100%;
-	display: block;
-	
+    position: absolute;
+    right: 0;
+    width: 10%;
+    height: 100%;
+    display: block;
+
 }
 
 
 
 .typewriter {
-	/* border-right: 5px solid var(--main-bg-color); */
-	box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
-	padding: 10px;
-	grid-area: typewriter;
+    /* border-right: 5px solid var(--main-bg-color); */
+    box-shadow: 16px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
+    padding: 10px;
+    margin-left: 10px;
+    grid-area: typewriter;
 }
 
 .typewriter {
-	overflow: scroll;
+    overflow: scroll;
 }
 
 .typewriter #svgContainer {
-	transform-origin: 0 0;
+    transform-origin: 0 0;
 }
 
 .typewriter:not(.set) #svgContainer {
-	display: table;
-	height: calc(100% - 20px);
-	margin: 0 auto;
-	width: auto;
+    display: table;
+    height: calc(100% - 20px);
+    margin: 0 auto;
+    width: auto;
 }
 
 .typewriter.set #svgContainer {
-	display: table-cell;
-	text-align: center;
+    display: table-cell;
+    text-align: center;
 }
 
 .typewriter #svgContainer .cadratin {
-	display: table-cell;
-	vertical-align: middle;
+    display: table-cell;
+    vertical-align: middle;
 }
 .typewriter.set  #svgContainer .cadratin {
-	display: initial;
-	vertical-align: middle;
+    display: initial;
+    vertical-align: middle;
 }
 .typewriter #svgContainer .cadratin a {
-	display: inline-grid;
+    display: inline-grid;
 }
 
 .typewriter .footer {
-	position: fixed;
-	bottom: 10px;
+    position: fixed;
+    bottom: 10px;
 }
 
 .typewriter .footer #log.IN {
-	color: blue;
+    color: blue;
 }
 .typewriter .footer #log.OUT {
-	color: green;
+    color: green;
 }
 .typewriter .footer #log.ERR {
-	color: red;
+    color: red;
 }
 .typewriter .footer #log input {
-	background: none;
-	border: none;
+    background: none;
+    border: none;
 }
 
 .typewriter .footer #log input[value="yes"] {
-	background: none;
-	border: none;
-	outline: 1px solid green;
-	color: green;
-	margin: 0px 10px;
+    background: none;
+    border: none;
+    outline: 1px solid green;
+    color: green;
+    margin: 0px 10px;
 }
 
 .typewriter .footer #log input[value="no"] {
-	background: none;
-	border: none;
-	outline: 1px solid red;
-	color: red;
-	margin: 0px 10px;
+    background: none;
+    border: none;
+    outline: 1px solid red;
+    color: red;
+    margin: 0px 10px;
 }
 
 .typewriter .zoom {
-	position: absolute;
-	z-index: 10;
+    position: absolute;
+    z-index: 10;
 }
 
 .typewriter .zoom input[type=range] {
 
-	box-sizing: border-box;
-	cursor:n-resize;
+    box-sizing: border-box;
+    cursor:n-resize;
 }
 
 #addGlyph {
-	/* background: var(--main-bg-color); */
-	grid-area: addGlyph;
+    /* background: var(--main-bg-color); */
+    grid-area: addGlyph;
 }
 
 section#content #editorBox {
-	background: none;
-	grid-area: edition;
-	/* white-space: pre-wrap!important; */
+    background: none;
+    grid-area: edition;
+    /* white-space: pre-wrap!important; */
 }
 
 
 
 .ace-tm {
-	background: none !important;
+    background: none !important;
 }
 #editorBox .ace_content {
-	background: none;
-	box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
-	padding-left: 3px;
+    background: none;
+    box-shadow: 17px 0 16px -16px rgba(0, 0, 0, 0.4) inset;
+    padding-left: 3px;
 }
 
 #editorBox .options{
-	min-width: 300px;
+    min-width: 300px;
 }
 
 #editorBox .options h1 {
-	font-size: inherit;
-	margin: 0;
+    font-size: inherit;
+    margin: 0;
 }
 
 .editor, #editor_css{
-	bottom: 0px;
-	/*display: none;*/
-	min-height: 50vh;
-	width: 100%;
+    bottom: 0px;
+    /*display: none;*/
+    min-height: 50vh;
+    width: 100%;
     margin-bottom: var(--space-s);
 }
 
 
 
 .editor:target, #editor_css{
-	display: block;
+    display: block;
 }
 
 .set .cadratin {
-	height: 20%;
-	margin-top: 0%;
+    height: 20%;
+    margin-top: 0%;
 
 }
 
 #btn_all {
-	bottom: 20px;
-	display: block;
-	margin-left: 20px;
-	position: absolute;
-	z-index: 2;
+    bottom: 20px;
+    display: block;
+    margin-left: 20px;
+    position: absolute;
+    z-index: 2;
 }
 
 section#content {
-	display: grid;
-	height: 100%;
-	position: fixed;
-	width: 100%;
-	z-index: 1;
+    display: grid;
+    grid-template-rows: auto;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
 
 section#content.type.trip {
-	grid-template-columns: 300px auto 400px;
-	/* grid-template-columns: 200px auto 600px; */
+    grid-template-columns: 300px auto 400px;
+    /* grid-template-columns: 200px auto 600px; */
 
 }
 
 section#content.type.hide_left {
-	grid-template-columns: 20px auto calc(40% - 20px);
+    grid-template-columns: 20px auto calc(40% - 20px);
 }
 
 section#content.type.hide_right {
-	grid-template-columns: 300px auto  60px;
+    grid-template-columns: 300px auto  60px;
 }
 
 section#content.type.hide_right.hide_left {
-	grid-template-columns: 20px auto  60px;
+    grid-template-columns: 20px auto  60px;
 }
 
 section#content.type {
-	grid-template-rows: 100%;
-	grid-template-areas: "nav typewriter edition"
-	"nav typewriter edition";
+    grid-template-rows: 100%;
+    grid-template-areas: "nav typewriter edition"
+        "nav typewriter edition";
 }
 
+section#content.index {
+    grid-template-areas: "nav"
+        "content";
+}
+.project-index {
+    grid-area: content;
+}
 
 .type:not(.add) #addGlyph{
-	display: none;
+    display: none;
 }
 
 section#content.type.free {
-	grid-template-columns: 300px auto;
-	grid-template-rows: 100%;
-	grid-template-areas: "nav typewriter"
-	"nav typewriter";
+    grid-template-columns: 300px auto;
+    grid-template-rows: 100%;
+    grid-template-areas: "nav typewriter"
+        "nav typewriter";
 }
 section#content.type.free #editorBox {
-	display: none;
+    display: none;
 }
 
 section .loading:before {
-	background: var(--main-active-color);
-	color: white;
-	content: 'loading...';
-	left: calc(50% - 25px);
-	padding: 2px;
-	position: absolute;
-	top: calc(50% - 50px);
-	width: 50px;
+    background: var(--main-active-color);
+    color: white;
+    content: 'loading...';
+    left: calc(50% - 25px);
+    padding: 2px;
+    position: absolute;
+    top: calc(50% - 50px);
+    width: 50px;
 }
 
 .set svg{
-	height: 5vw;
-	width: 5vw;
-	padding: 10px;
-	margin: 10px;
+    height: 5vw;
+    width: 5vw;
+    padding: 10px;
+    margin: 10px;
 }
 svg{
-	overflow: visible;
+    overflow: visible;
 }
 
 .chart {
-	box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
-	float: left;
-	text-align: center;
+    box-shadow: 1px 0 0 0 var(--main-bg-color), 0 1px 0 0 var(--main-bg-color), 1px 1px 0 0 var(--main-bg-color), 1px 0 0 0 var(--main-bg-color) inset, 0 1px 0 0 var(--main-bg-color) inset;
+    float: left;
+    text-align: center;
 }
 
 .chart:hover {
-	background: white;
+    background: white;
 }
 
 .chart .info {
-	background: var(--main-bg-color);
-	color: black;
-	position: relative;
-	margin-bottom: 0px;
-	margin-left: 0px;
+    background: var(--main-bg-color);
+    color: black;
+    position: relative;
+    margin-bottom: 0px;
+    margin-left: 0px;
 }
 .chart:hover .info {
-	background: var(--main-active-color);
-	color: white;
+    background: var(--main-active-color);
+    color: white;
 }
 
 .addChart {
-	background: var(--main-bg-color);
+    background: var(--main-bg-color);
 }
 .cadratin:hover svg {
-	background: white;
+    background: white;
 }
 .cadratin:hover [style^="stroke:rgb(0.000000%,0.000000%,0.000000%);"] {
-	stroke-width: 1 !important;
+    stroke-width: 1 !important;
 }
 
 .cadratin [style^="fill: rgb(0.000000%,0.000000%,0.000000%);stroke: none;"]:hover{
-	opacity: .4;
+    opacity: .4;
 }
 
 
 svg text {
-	fill: var(--main-active-color);
+    fill: var(--main-active-color);
 }
 
 .btn {
-	border: 1px solid black;
-	border-radius: 5px;
-	padding: var(--space-xs) var(--space-xxs);
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: var(--space-xs) var(--space-xxs);
+}
+
+.test-it {
+    color: inherit;
+    position: fixed;
+    bottom: 16px;
+}
+
+.button-grid {
+    display: grid;
+    position: fixed;
+    top: 16px;
+    right: 416px;
 }
 
 .btn_file {
-	cursor: pointer;
-	padding: 2px 3px;
-	color: grey
+    cursor: pointer;
+    padding: 2px 3px;
+    color: grey
 }
 .btn_file.active {
-	color: var(--main-active-color);
+    color: var(--main-active-color);
 }
 
 .btn_file[href="#editor_current"]{
-	margin-left: auto;
+    margin-left: auto;
 }
 
 /* TERMINAL */
 
 #terminal {
-	padding: 1em;
-	background: blue;
-	color: white;
-	width: 100%;
-	height: auto;
+    padding: 1em;
+    background: blue;
+    color: white;
+    width: 100%;
+    height: auto;
 }
 
 button#specimen{
-	position: fixed;
-	top: 1rem;
-	left: 1rem;
-	background-color:blue;
-	height: 100px;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background-color:blue;
+    height: 100px;
 }
 #versionning{
-	opacity: 0.2;
+    opacity: 0.2;
 }
 
 .main-logo{
@@ -508,11 +537,11 @@ button#specimen{
 /*SPECIMEN*/
 
 section#specimen{
-	display: grid;
-	grid-template-columns: auto 400px;
+    display: grid;
+    grid-template-columns: auto 400px;
 }
 
 section.hide_right#specimen{
-	
-	grid-template-columns: auto 20px;
+
+    grid-template-columns: auto 20px;
 }
