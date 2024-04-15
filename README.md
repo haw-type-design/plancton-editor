@@ -1,6 +1,6 @@
 # Plancton
 Plancton is a [metapost](https://en.wikipedia.org/wiki/MetaPost) font editor.
-This is a fork of Luuse’s version over at [GitLab](https://gitlab.com/Luuse/plancton/plancton-editor) making this more comprehensible and accessible for a student workshop @ HAW Hamburg.
+This is a fork of Luuse’s version over at [GitLab](https://gitlab.com/Luuse/plancton/plancton-editor) making this more comprehensible and accessible for student workshops @haw-type-design.
 
 ## Requirements
 If you do not have a package manager already please install one like [Hombrew](https://brew.sh)
@@ -34,11 +34,11 @@ Proceed with following steps on the command line:
  * `cd plancton-editor` or navigate to whereever you cloned this repository
  * `virtualenv plancton-env`
  * `source plancton-env/bin/activate`
- * `pip install -r requirements.txt`
+ * `pip3 install -r requirements.txt`
 
 ## Start server
 
-`python plancton-server.py` listening on `http://localhost:8088/`
+`python3 plancton-server.py` listening on `http://localhost:8088/`
 
 ## Contributors
 * [Luuse](http://www.luuse.io/)
