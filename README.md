@@ -18,7 +18,7 @@ To install:
 
 ```brew install texlive```
 
- * Python2 or Python3
+ * Python2 or Python3, the latter is heavily recommended
 
 For example get the latest version [here](https://www.python.org/downloads/)
 
