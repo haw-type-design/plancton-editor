@@ -70,11 +70,7 @@ for g in svg_dir:
             char.width = int(gwidth)
             
         try:
-            char.importOutlines(out_svg).correctdir(True).handle_eraser(True)        
-            scaleMatrix = psMat.scale(1.14)
-            print(scaleMatrix)
-            print(char.foreground())
-            char.foreground().transform(scaleMatrix).round(True)
+            char.importOutlines(out_svg, scale=False)
         except:
             print('glyph ' + str(char.glyphname) + ' failed')
             continue
